@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tidak Peduli</title>
     <link href="styles/fontawesome.min.css" rel="stylesheet">
     <link href="styles/solid.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
@@ -31,13 +31,13 @@
                             <i class="fa-solid fa-location-dot text-dark"></i>
                         </span>
                         <span class="location text-capitalize font-weight-bold">
-                            Central Park Mall
+                            
                         </span>
                     </span>
                     
                     <div class="crowd-wrapper">
                         <span class="text-capitalize">total crowd:</span>
-                        <span class="current-crowd font-weight-bold">198</span><span>/</span><span class="total-crowd">15915</span>
+                        <span class="current-crowd font-weight-bold"></span><span>/</span><span class="total-crowd">15915</span>
                     </div>
                     <div class="time-wrapper">
                         <span class="date-section">
@@ -45,22 +45,21 @@
                                 <i class="fa-solid fa-calendar-alt text-black"></i>
                             </span>
                             <span class="date text-capitalize font-weight-bold">
-                                29 Agu 2022
-                            </span>                                                                                                              <span class="text-capitalize">
-                        </span>
+                                
+                            </span>
                         </span>
                         <span class="time-section">
                             <span >
                                 <i class="fa fa-clock"></i>
                             </span>
                             <span class="time text-capitalize font-weight-bold">
-                                10:00 AM
+                                
                             </span>
                         </span>
                     </div>
                     <div class="name-wrapper font-weight-bold text-white text-capitalize">
                         <div class="name">
-                            Kelvin
+                            
                         </div>
                     </div>
                 </div>
@@ -104,6 +103,7 @@
         html2canvas(document.querySelector("#capture")).then(canvas => {
             let dataURL = canvas.toDataURL("image/jpeg", 1.0);
             downloadImage(dataURL);
+            $(".body-message").addClass("big-shadow");
         });
         
          
