@@ -34,6 +34,7 @@ src/
     projects.ts         project cards
     skills.ts           skills "inventory"
     experience.ts       work history ("quest log")
+    publications.ts     books ("spellbooks"), covers in src/assets/books/
   assets/             Images processed at build time (AVIF/WebP, responsive sizes)
   components/         Reusable UI (PixelButton, ProjectCard, PixelSnow, Navbar…)
   sections/           Page sections (Hero, About, Skills, Projects, Experience, Contact, Footer)

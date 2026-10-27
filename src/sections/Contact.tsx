@@ -31,7 +31,7 @@ export function Contact() {
         <PixelSnowflake className="absolute -bottom-8 -left-8 size-28 -rotate-12 text-pink/10" />
 
         <p className="font-mono text-xs font-semibold tracking-[0.3em] text-pink uppercase">
-          ▶ Stage 05 · Contact
+          ▶ Stage 06 · Contact
         </p>
         <h2 className="mt-4 font-pixel text-xl leading-snug text-ink text-glow sm:text-3xl">
           Continue?

@@ -20,29 +20,54 @@ export type Experience = {
   placeholder?: boolean
 }
 
-const BINUS = { company: 'Bina Nusantara University', companyUrl: 'https://binus.ac.id/' }
+const BINUS = { company: 'BINUS University', companyUrl: 'https://binus.ac.id/' }
 
-// TODO(kelvin): add start/end dates, and confirm the R&D and assistant roles were at BINUS.
 const entries: Experience[] = [
   {
-    role: 'Academic Development Section Head & Lecturer',
+    role: 'Academic Development Section Head',
     ...BINUS,
+    start: 'Oct 2025',
+    location: 'Jakarta, Indonesia',
     highlights: [
-      'Head the Academic Development section while lecturing university students.',
+      'Lead the Academic Development section.',
       'Still a developer at heart: build tools that take manual work off campus teams, like the document automation for the graduation division.',
+    ],
+  },
+  {
+    role: 'College Lecturer',
+    ...BINUS,
+    start: 'Aug 2023',
+    location: 'Jakarta, Indonesia',
+    highlights: [
+      'Teach computer science and software development.',
+      'Co-authored two books with colleagues: Building Better Object-Oriented Software and The Rise of Agentic Intelligence.',
     ],
   },
   {
     role: 'Research & Development Officer',
     ...BINUS,
+    start: 'Apr 2022',
+    end: 'Sep 2025',
+    location: 'Indonesia',
     highlights: [
-      'Promoted from Research & Development Staff to Officer.',
-      'Researched and built software for teaching and lab operations.',
+      'Promoted from R&D Staff; built and maintained software for teaching and lab operations.',
     ],
+    tech: ['.NET', 'Next.js'],
   },
   {
-    role: 'Laboratory Teaching Assistant',
+    role: 'Research & Development Staff',
     ...BINUS,
+    start: 'Sep 2019',
+    end: 'Apr 2022',
+    location: 'Indonesia',
+    highlights: ['Joined the R&D team building software for teaching and lab operations.'],
+  },
+  {
+    role: 'Teaching Assistant',
+    ...BINUS,
+    start: 'Aug 2018',
+    end: 'Sep 2019',
+    location: 'Indonesia',
     highlights: [
       'Taught cyber security, computer science and web development to university students.',
     ],

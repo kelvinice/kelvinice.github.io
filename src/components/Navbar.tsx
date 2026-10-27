@@ -44,7 +44,7 @@ export function Navbar({ items }: { items: NavItem[] }) {
           <span className="font-pixel text-[0.7rem] tracking-wider text-ink">KELVINICE</span>
         </a>
 
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-1 lg:flex">
           {items.map((item) => (
             <li key={item.id}>
               <a
@@ -74,7 +74,7 @@ export function Navbar({ items }: { items: NavItem[] }) {
           <ThemeToggle />
           <button
             type="button"
-            className="flex size-9 items-center justify-center text-ink md:hidden"
+            className="flex size-9 items-center justify-center text-ink lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -86,7 +86,7 @@ export function Navbar({ items }: { items: NavItem[] }) {
       </nav>
 
       {open && (
-        <ul id="mobile-menu" className="border-t-3 border-line px-4 pb-4 md:hidden">
+        <ul id="mobile-menu" className="border-t-3 border-line px-4 pb-4 lg:hidden">
           {items.map((item) => (
             <li key={item.id}>
               <a

@@ -37,17 +37,18 @@ export function Experience() {
                       )}
                     </span>
                   </h3>
-                  {job.start ? (
-                    <p className="font-mono text-sm text-gold">
-                      {job.start} — {job.end ?? 'Present'}
-                      {job.location && <span className="text-muted"> · {job.location}</span>}
+                  {job.start && (
+                    <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-sm text-gold">
+                      <span>
+                        {job.start} — {job.end ?? 'Present'}
+                        {job.location && <span className="text-muted"> · {job.location}</span>}
+                      </span>
+                      {!job.end && (
+                        <span className="bg-lime px-2 py-1 font-pixel text-[0.5rem] text-on-accent uppercase">
+                          Now
+                        </span>
+                      )}
                     </p>
-                  ) : (
-                    index === 0 && (
-                      <p className="bg-lime px-2 py-1 font-pixel text-[0.55rem] text-on-accent uppercase">
-                        Current quest
-                      </p>
-                    )
                   )}
                 </div>
 

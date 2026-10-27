@@ -4,12 +4,14 @@ import { Navbar, type NavItem } from '@/components/Navbar'
 import { PixelSnow } from '@/components/PixelSnow'
 import { useKonamiCode } from '@/hooks/useKonamiCode'
 import { experience } from '@/data/experience'
+import { publications } from '@/data/publications'
 import { About } from '@/sections/About'
 import { Contact } from '@/sections/Contact'
 import { Experience } from '@/sections/Experience'
 import { Footer } from '@/sections/Footer'
 import { Hero } from '@/sections/Hero'
 import { Projects } from '@/sections/Projects'
+import { Publications } from '@/sections/Publications'
 import { Skills } from '@/sections/Skills'
 
 const navItems: NavItem[] = [
@@ -17,6 +19,7 @@ const navItems: NavItem[] = [
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
   ...(experience.length > 0 ? [{ id: 'experience', label: 'Experience' }] : []),
+  ...(publications.length > 0 ? [{ id: 'books', label: 'Books' }] : []),
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -53,6 +56,7 @@ export default function App() {
           <Skills />
           <Projects />
           <Experience />
+          <Publications />
           <Contact />
         </main>
 

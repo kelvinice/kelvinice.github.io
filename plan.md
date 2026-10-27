@@ -256,9 +256,10 @@ This app generates a fake PeduliLindungi check-in screen. PeduliLindungi is the 
 ### Still to do (needs Kelvin)
 
 1. **Settings → Pages → Source → GitHub Actions**, then push.
-2. Experience **dates**, and confirm that the R&D and assistant roles were at BINUS (`src/data/experience.ts`).
+2. ~~Experience dates~~ Done from LinkedIn: 5 BINUS roles, Aug 2018 → now. A Books section was added for the 2 co-authored books.
 3. Read the drafted bio and highlights in `src/data/profile.ts` and `experience.ts`.
 4. Optional: `public/resume.pdf` + `resumeUrl`.
 5. Optional: real screenshots for cover-art projects (Plagion, DocFlow, Celestview, SATU-GIZI, Wyn Fin, OnlyArts, Wyn Reel…).
-6. Can Plagion and Celestview name BINUS SLC? They currently say "a university software lab".
-7. Wyn Fin: the frontend is live at winfin.vercel.app, but the Railway backend is down, so the card links the source only.
+6. ~~Plagion/Celestview naming~~ Done: both credit BINUS SLC.
+7. ~~Wyn Fin link~~ Done: links winfin.vercel.app plus the source (the backend is still down).
+8. ~~LinkedIn details~~ Done (from a pasted screenshot).
