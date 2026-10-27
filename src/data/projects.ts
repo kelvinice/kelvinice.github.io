@@ -125,8 +125,9 @@ export const projects: Project[] = [
     slug: 'plagion',
     title: 'Plagion',
     category: 'tool',
+    badge: 'BINUS SLC',
     description:
-      'An AI-powered plagiarism and AI-content checker for a university software lab. A winnowing prefilter narrows the candidate pairs, then AST, control-flow and embedding analysis scores code in Java, Python, JavaScript, C/C++, HTML, CSS and Jupyter notebooks, and a DetectGPT-style detector flags AI-written text. Batch runs, highlighted evidence and PDF reports; the method is written up as a paper.',
+      'An AI-powered plagiarism and AI-content checker built for BINUS University’s Software Laboratory Center (SLC). A winnowing prefilter narrows the candidate pairs, then AST, control-flow and embedding analysis scores code in Java, Python, JavaScript, C/C++, HTML, CSS and Jupyter notebooks, and a DetectGPT-style detector flags AI-written text. Batch runs, highlighted evidence and PDF reports; the method is written up as a paper.',
     tech: ['SvelteKit', 'Spring Boot', 'Python', 'PyTorch', 'tree-sitter', 'PostgreSQL'],
     cover: { tone: 'pink', icon: ScanSearch },
     links: [],
@@ -146,8 +147,9 @@ export const projects: Project[] = [
     slug: 'celestview',
     title: 'Celestview',
     category: 'app',
+    badge: 'BINUS SLC',
     description:
-      '360° performance reviews and promotion scheduling for lab assistants. It syncs assistants and semesters from the lab’s systems, collects review notes, and summarises each person’s KPIs with Gemini or OpenAI so leads can compare candidates side by side.',
+      '360° performance reviews and promotion scheduling for the lab assistants of BINUS SLC. It syncs assistants and semesters from the lab’s systems, collects review notes, and summarises each person’s KPIs with Gemini or OpenAI so leads can compare candidates side by side.',
     tech: ['React Router', 'TanStack Query', 'NestJS', 'Prisma', 'Gemini', 'OpenAI'],
     cover: { tone: 'ice', icon: Telescope },
     links: [],
@@ -160,7 +162,10 @@ export const projects: Project[] = [
       'A personal finance tracker: budgets, expenses, categories and period-based reports behind JWT auth, with a rate-limited NestJS API.',
     tech: ['React Router', 'Tailwind CSS', 'NestJS', 'Prisma', 'PostgreSQL'],
     cover: { tone: 'lime', icon: Wallet },
-    links: [{ kind: 'source', href: 'https://github.com/kelvinice/wyn-fin-frontend' }],
+    links: [
+      { kind: 'demo', href: 'https://winfin.vercel.app/' },
+      { kind: 'source', href: 'https://github.com/kelvinice/wyn-fin-frontend' },
+    ],
   },
   {
     slug: 'only-arts',
