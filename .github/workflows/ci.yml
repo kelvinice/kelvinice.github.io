@@ -1,0 +1,27 @@
+# Checks pull requests (lint, formatting, types, build) without deploying anything.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [master] # master is covered by deploy.yml
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check # lint + format check + typecheck + build

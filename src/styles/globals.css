@@ -1,0 +1,186 @@
+@import 'tailwindcss';
+
+/* Don't scan the prebuilt games in apps/ for class names (reference/ is already gitignored). */
+@source not '../../apps';
+
+@import '@fontsource/press-start-2p/400.css';
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/jetbrains-mono';
+
+/* Theme switching is driven by <html data-theme="dark|light"> (see index.html + useTheme). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* Dark = "0 Kelvin arcade" (night sky, ice + neon pink).              */
+/* Light = "snow day".                                                 */
+/* ------------------------------------------------------------------ */
+:root,
+[data-theme='dark'] {
+  --bg: #0b1020;
+  --bg-2: #0f1630;
+  --surface: #131c38;
+  --surface-2: #1b2750;
+  --ink: #e8f1ff;
+  --muted: #93a6cc;
+  --line: #2b3c6e;
+  --shadow: #04070f;
+  --ice: #5ee7ff;
+  --pink: #ff7ac6;
+  --gold: #ffd166;
+  --lime: #8cf28c;
+  --on-accent: #0b1020;
+  --grid: rgb(94 231 255 / 0.16);
+  --snow: 232 241 255;
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --bg: #eef5ff;
+  --bg-2: #e2edfc;
+  --surface: #ffffff;
+  --surface-2: #dde9fb;
+  --ink: #0f1a33;
+  --muted: #4a5c80;
+  --line: #a9bfe3;
+  --shadow: #0f1a33;
+  --ice: #0072a3;
+  --pink: #c2187a;
+  --gold: #9a6200;
+  --lime: #2c7a30;
+  --on-accent: #ffffff;
+  --grid: rgb(0 114 163 / 0.14);
+  --snow: 122 160 214;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-shadow: var(--shadow);
+  --color-ice: var(--ice);
+  --color-pink: var(--pink);
+  --color-gold: var(--gold);
+  --color-lime: var(--lime);
+  --color-on-accent: var(--on-accent);
+}
+
+@theme {
+  --font-pixel: 'Press Start 2P', ui-monospace, monospace;
+  --font-sans: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  --animate-blink: blink 1.1s steps(1) infinite;
+  --animate-float: float 4s ease-in-out infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+
+  ::selection {
+    @apply bg-pink text-on-accent;
+  }
+
+  :focus-visible {
+    @apply outline-3 outline-offset-3 outline-ice;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Pixel-UI building blocks                                            */
+/* ------------------------------------------------------------------ */
+@utility pixel-box {
+  border: 3px solid var(--line);
+  background-color: var(--surface);
+  box-shadow: 6px 6px 0 0 var(--shadow);
+}
+
+/* Chunky stepped corners, like an 8-bit dialog box. */
+@utility pixel-corners {
+  clip-path: polygon(
+    0 6px,
+    6px 6px,
+    6px 0,
+    calc(100% - 6px) 0,
+    calc(100% - 6px) 6px,
+    100% 6px,
+    100% calc(100% - 6px),
+    calc(100% - 6px) calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    6px 100%,
+    6px calc(100% - 6px),
+    0 calc(100% - 6px)
+  );
+}
+
+/* Faint scanlines for CRT flavour; purely decorative. */
+@utility scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgb(0 0 0 / 0.12) 2px 3px
+  );
+}
+
+/* Synthwave-style perspective grid used on the hero floor. */
+@utility grid-floor {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: perspective(320px) rotateX(60deg);
+  transform-origin: center top;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+@utility text-glow {
+  text-shadow:
+    0 0 12px color-mix(in oklab, currentColor 55%, transparent),
+    3px 3px 0 var(--shadow);
+}

@@ -1,15 +1,71 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kelvinice</title>
-    <script type="module" crossorigin src="/assets/index-50a39daf.js"></script>
-    <link rel="stylesheet" href="/assets/index-2b9d4940.css">
+
+    <title>Kelvinice · Kelvin's portfolio: web apps & browser games</title>
+    <meta
+      name="description"
+      content="Kelvin (Kelvinice), Academic Development Section Head & Lecturer at BINUS University and software developer. Web apps, browser games and automation tools like Wyndoku, Wyn State, Plagion and DocFlow."
+    />
+    <meta name="author" content="Kelvin" />
+    <link rel="canonical" href="https://kelvinice.github.io/" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0b1020" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Open Graph / social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kelvinice" />
+    <meta property="og:url" content="https://kelvinice.github.io/" />
+    <meta property="og:title" content="Kelvinice · web apps & browser games" />
+    <meta
+      property="og:description"
+      content="Lecturer at BINUS University and software developer. Projects, games and tools by Kelvin. Press start to play."
+    />
+    <meta property="og:image" content="https://kelvinice.github.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Kelvin",
+        "alternateName": "Kelvinice",
+        "jobTitle": "Academic Development Section Head & Lecturer",
+        "worksFor": { "@type": "CollegeOrUniversity", "name": "Bina Nusantara University" },
+        "url": "https://kelvinice.github.io/",
+        "sameAs": ["https://github.com/kelvinice", "https://www.linkedin.com/in/kelvin-b012a48a/"]
+      }
+    </script>
+
+    <!-- Apply the saved / system theme before first paint to avoid a flash. -->
+    <script>
+      try {
+        const saved = localStorage.getItem('theme')
+        const theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark'
+        document.documentElement.dataset.theme = theme
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    
+    <noscript>
+      <p style="padding: 2rem; font-family: sans-serif">
+        This site needs JavaScript. You can still find me on
+        <a href="https://github.com/kelvinice">GitHub</a>.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
