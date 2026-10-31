@@ -1,69 +1,90 @@
-import { AnimatePresence, m } from 'motion/react'
-import { useState } from 'react'
-import { ProjectCard } from '@/components/ProjectCard'
-import { SectionHeading } from '@/components/SectionHeading'
-import { categoryLabels, projects, type ProjectCategory } from '@/data/projects'
-import { cn } from '@/lib/cn'
+import { ArrowUpRight } from 'lucide-react'
+import { TbBrandGithub } from 'react-icons/tb'
+import { Picture } from '@/components/Picture'
+import { Reveal } from '@/components/Reveal'
+import { Section } from '@/components/Section'
+import { Tag } from '@/components/Tag'
+import { projects, type Project } from '@/data/projects'
 
-type Filter = 'all' | ProjectCategory
-
-const filters: { value: Filter; label: string }[] = [
-  { value: 'all', label: 'All' },
-  ...(Object.keys(categoryLabels) as ProjectCategory[]).map((value) => ({
-    value,
-    label: categoryLabels[value],
-  })),
-]
-
-export function Projects() {
-  const [filter, setFilter] = useState<Filter>('all')
-  const visible = filter === 'all' ? projects : projects.filter((p) => p.category === filter)
+function ProjectCard({ project }: { project: Project }) {
+  const Icon = project.icon
 
   return (
-    <section id="projects" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-      <SectionHeading kicker="Stage 03 · Projects" title="Level select">
-        Games you can play right now, apps I use myself, and a few tools. Pick a level.
-      </SectionHeading>
-
-      <div role="group" aria-label="Filter projects" className="mb-8 flex flex-wrap gap-2">
-        {filters.map(({ value, label }) => {
-          const total =
-            value === 'all' ? projects.length : projects.filter((p) => p.category === value).length
-          return (
-            <button
-              key={value}
-              type="button"
-              aria-pressed={filter === value}
-              onClick={() => setFilter(value)}
-              className={cn(
-                'flex items-center gap-2 border-2 px-3 py-2 font-pixel text-[0.6rem] uppercase transition-colors',
-                filter === value
-                  ? 'border-ice bg-ice text-on-accent shadow-[3px_3px_0_0_var(--shadow)]'
-                  : 'border-line bg-surface text-muted hover:border-ice hover:text-ink',
-              )}
-            >
-              {label}
-              <span className={filter === value ? 'opacity-70' : 'text-gold'}>{total}</span>
-            </button>
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-muted/50">
+      <div className="aspect-[16/9] overflow-hidden border-b border-line bg-bg-2">
+        {project.image ? (
+          <Picture
+            picture={project.image}
+            alt={`Screenshot of ${project.title}`}
+            sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
+            className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          Icon && (
+            <div className="flex size-full items-center justify-center bg-grid">
+              <span className="flex size-16 items-center justify-center rounded-2xl border border-line bg-surface text-accent shadow-sm">
+                <Icon aria-hidden className="size-7" />
+              </span>
+            </div>
           )
-        })}
+        )}
       </div>
-
-      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout" initial={false}>
-          {visible.map((project) => (
-            <m.li
-              key={project.slug}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.25 }}
-            >
-              <ProjectCard project={project} />
-            </m.li>
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-baseline justify-between gap-3">
+          <h3 className="font-semibold text-ink">{project.title}</h3>
+          <span className="shrink-0 font-mono text-[0.7rem] text-muted">{project.context}</span>
+        </div>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{project.description}</p>
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {project.tech.map((tech) => (
+            <Tag key={tech}>{tech}</Tag>
           ))}
-        </AnimatePresence>
-      </ul>
-    </section>
+        </div>
+        {project.links.length > 0 && (
+          <div className="mt-4 flex gap-4 border-t border-line pt-4 text-sm">
+            {project.links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${link.kind === 'live' ? 'Open' : 'Source code of'} ${project.title}`}
+                className="inline-flex items-center gap-1.5 font-medium text-ink hover:text-accent"
+              >
+                {link.kind === 'live' ? (
+                  <>
+                    Open <ArrowUpRight aria-hidden className="size-4" />
+                  </>
+                ) : (
+                  <>
+                    <TbBrandGithub aria-hidden className="size-4" /> Source
+                  </>
+                )}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+  )
+}
+
+export function Projects() {
+  return (
+    <Section
+      id="projects"
+      eyebrow="Products & side projects"
+      title="Beyond client work"
+      intro="Internal tools for BINUS labs and divisions, a hackathon platform, and apps I design, build and run end to end."
+      tinted
+    >
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project, index) => (
+          <Reveal key={project.slug} delay={(index % 3) * 0.06} className="h-full">
+            <ProjectCard project={project} />
+          </Reveal>
+        ))}
+      </div>
+    </Section>
   )
 }

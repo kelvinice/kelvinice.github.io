@@ -47,7 +47,7 @@ export function useTheme() {
   useEffect(() => {
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === 'light' ? '#eef5ff' : '#0b1020')
+      ?.setAttribute('content', theme === 'light' ? '#fafbfc' : '#0a0d12')
   }, [theme])
 
   return { theme, setTheme, toggle: () => setTheme(theme === 'dark' ? 'light' : 'dark') }

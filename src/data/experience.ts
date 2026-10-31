@@ -1,9 +1,8 @@
 /**
- * The "quest log" (work history), newest first.
+ * Work history, newest first.
  *
- * Entries with `placeholder: true` only show up in `pnpm dev` (with a PLACEHOLDER badge)
- * and are dropped from production builds, so nothing fake can go live by accident.
- * If no real entries remain, the whole section and its nav link are hidden.
+ * Freelance and contract work deliberately has no dates or contracting entity; clients are
+ * described with the same codename-safe labels as src/data/work.ts.
  */
 
 export type Experience = {
@@ -17,30 +16,48 @@ export type Experience = {
   location?: string
   highlights: string[]
   tech?: string[]
-  placeholder?: boolean
 }
 
 const BINUS = { company: 'BINUS University', companyUrl: 'https://binus.ac.id/' }
 
-const entries: Experience[] = [
+export const experience: Experience[] = [
+  {
+    role: 'Freelance Software Engineer',
+    company: 'Independent',
+    location: 'Remote · Jakarta',
+    highlights: [
+      'ERP, HRIS, e-tender, CMS and KPI-dashboard projects for clients in automotive, energy, manufacturing and the public sector.',
+      'Took over and extended existing systems, from legacy CodeIgniter to Laravel and NestJS codebases.',
+      'Delivered in Scrum teams: sprint planning, reviews and retros with client product owners.',
+    ],
+    tech: ['Laravel', 'NestJS', 'Next.js', 'CodeIgniter', 'Jest'],
+  },
+  {
+    role: 'Backend Engineer',
+    company: 'MidHub.id',
+    companyUrl: 'https://midhub.id/',
+    highlights: [
+      'Built the core modules of a heavy-equipment marketplace: product listings, premium membership and payments.',
+    ],
+  },
   {
     role: 'Academic Development Section Head',
     ...BINUS,
     start: 'Oct 2025',
-    location: 'Jakarta, Indonesia',
+    location: 'Jakarta',
     highlights: [
-      'Lead the Academic Development section.',
-      'Still a developer at heart: build tools that take manual work off campus teams, like the document automation for the graduation division.',
+      'Set code-quality and testing standards for internal projects: required unit-test coverage and automated regression checks before release.',
+      'Build and maintain Plagion, an AI plagiarism checker for programming assignments, guarded by a regression suite.',
     ],
   },
   {
-    role: 'College Lecturer',
+    role: 'Lecturer, Computer Science',
     ...BINUS,
     start: 'Aug 2023',
-    location: 'Jakarta, Indonesia',
+    location: 'Jakarta',
     highlights: [
-      'Teach computer science and software development.',
-      'Co-authored two books with colleagues: Building Better Object-Oriented Software and The Rise of Agentic Intelligence.',
+      'Teach software engineering, Scrum & Agile, software testing and secure development.',
+      'Co-authored two books: Building Better Object-Oriented Software and The Rise of Agentic Intelligence.',
     ],
   },
   {
@@ -48,30 +65,45 @@ const entries: Experience[] = [
     ...BINUS,
     start: 'Apr 2022',
     end: 'Sep 2025',
-    location: 'Indonesia',
+    location: 'Jakarta',
     highlights: [
-      'Promoted from R&D Staff; built and maintained software for teaching and lab operations.',
+      'Load- and stress-tested high-traffic university systems with JMeter ahead of peak enrolment.',
+      'Built Jest unit and integration suites for Node.js/NestJS microservices, and a secure service-to-service data transfer layer.',
+      'Built a 360° virtual-tour web app with images, video and multimedia hotspots.',
     ],
-    tech: ['.NET', 'Next.js'],
+    tech: ['NestJS', 'Node.js', '.NET', 'Next.js', 'Jest', 'JMeter'],
   },
   {
     role: 'Research & Development Staff',
     ...BINUS,
     start: 'Sep 2019',
     end: 'Apr 2022',
-    location: 'Indonesia',
-    highlights: ['Joined the R&D team building software for teaching and lab operations.'],
+    location: 'Jakarta',
+    highlights: [
+      'Built encrypted data transfer and a monitoring dashboard for a national pandemic hospital.',
+      'Built and stress-tested a national competition website and a DISC personality assessment platform.',
+    ],
   },
   {
     role: 'Teaching Assistant',
     ...BINUS,
     start: 'Aug 2018',
     end: 'Sep 2019',
-    location: 'Indonesia',
-    highlights: [
-      'Taught cyber security, computer science and web development to university students.',
-    ],
+    location: 'Jakarta',
+    highlights: ['Taught cyber security, software testing and web development.'],
   },
 ]
 
-export const experience = import.meta.env.PROD ? entries.filter((e) => !e.placeholder) : entries
+export const education = [
+  {
+    degree: 'Master of Computer Science (M.Kom.)',
+    school: 'BINUS University',
+    years: '2020 – 2022',
+  },
+  {
+    degree: 'Bachelor of Computer Science (S.Kom.)',
+    school: 'BINUS University',
+    years: '2016 – 2020',
+    note: 'Thesis: an automated web-testing framework with Selenium WebDriver.',
+  },
+]

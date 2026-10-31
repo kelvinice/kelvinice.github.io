@@ -1,83 +1,105 @@
-import { Check, Copy, FileDown, Mail } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { PixelButton, PixelLink } from '@/components/PixelButton'
-import { PixelSnowflake } from '@/components/PixelSnowflake'
+import { ArrowUpRight, Check, Copy, Mail } from 'lucide-react'
+import { useState } from 'react'
 import { Reveal } from '@/components/Reveal'
 import { SocialIcon } from '@/components/SocialIcon'
 import { profile } from '@/data/profile'
+import { buttonClass } from '@/lib/button'
+
+const briefChecklist = [
+  'What the system should do, and for whom',
+  'What exists today (spreadsheets, an old app, nothing)',
+  'Your timeline and a rough budget range',
+]
 
 export function Contact() {
   const [copied, setCopied] = useState(false)
-
-  useEffect(() => {
-    if (!copied) return
-    const timer = setTimeout(() => setCopied(false), 2000)
-    return () => clearTimeout(timer)
-  }, [copied])
+  const links = profile.socials.filter((social) => social.icon !== 'email')
 
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(profile.email)
       setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
     } catch {
-      window.location.href = `mailto:${profile.email}`
+      // Clipboard can be blocked; the mailto link still works.
     }
   }
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-      <Reveal className="relative mx-auto max-w-3xl overflow-hidden pixel-box px-6 py-14 text-center sm:px-12">
-        <PixelSnowflake className="absolute -top-6 -right-6 size-32 rotate-12 text-ice/10" />
-        <PixelSnowflake className="absolute -bottom-8 -left-8 size-28 -rotate-12 text-pink/10" />
+    <section id="contact" aria-labelledby="contact-title" className="border-t border-line">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-6 md:py-28">
+        <Reveal className="relative overflow-hidden rounded-3xl border border-line bg-surface p-8 sm:p-12 md:p-16">
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid opacity-70" />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-24 -bottom-32 size-96 rounded-full bg-accent/10 blur-3xl"
+          />
 
-        <p className="font-mono text-xs font-semibold tracking-[0.3em] text-pink uppercase">
-          ▶ Stage 06 · Contact
-        </p>
-        <h2 className="mt-4 font-pixel text-xl leading-snug text-ink text-glow sm:text-3xl">
-          Continue?
-        </h2>
-        <p className="mx-auto mt-5 max-w-lg text-lg text-muted">
-          Have a project, a role, or just want to talk games? My inbox is open, so insert coin
-          below.
-        </p>
+          <div className="relative grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+            <div>
+              <p className="mb-3 font-mono text-xs font-medium tracking-[0.18em] text-accent uppercase">
+                Contact
+              </p>
+              <h2
+                id="contact-title"
+                className="text-3xl font-semibold tracking-tight text-balance text-ink md:text-5xl"
+              >
+                Have a project in mind?
+              </h2>
+              <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">
+                I take on freelance projects, from a new business system to rescuing an existing
+                one. Tell me what you’re building and I’ll get back to you.
+              </p>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <PixelLink href={`mailto:${profile.email}`} size="lg">
-            <Mail aria-hidden />
-            Say hello
-          </PixelLink>
-          <PixelButton variant="secondary" size="lg" onClick={copyEmail}>
-            {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
-            <span aria-live="polite">{copied ? 'Copied!' : 'Copy email'}</span>
-          </PixelButton>
-          {profile.resumeUrl && (
-            <PixelLink href={profile.resumeUrl} size="lg" variant="secondary" download>
-              <FileDown aria-hidden />
-              Download CV
-            </PixelLink>
-          )}
-        </div>
-
-        <p className="mt-6 font-mono text-sm text-ice">{profile.email}</p>
-
-        <ul className="mt-8 flex justify-center gap-3" aria-label="Elsewhere">
-          {profile.socials
-            .filter((social) => social.icon !== 'email')
-            .map((social) => (
-              <li key={social.label}>
-                <a
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 border-2 border-line px-3 py-2 font-mono text-sm text-muted transition-colors hover:border-ice hover:text-ice"
-                >
-                  <SocialIcon icon={social.icon} className="size-4" />
-                  {social.label}
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a href={`mailto:${profile.email}`} className={buttonClass({ size: 'lg' })}>
+                  <Mail aria-hidden />
+                  {profile.email}
                 </a>
-              </li>
-            ))}
-        </ul>
-      </Reveal>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className={buttonClass({ variant: 'secondary', size: 'lg' })}
+                >
+                  {copied ? <Check aria-hidden className="text-ok" /> : <Copy aria-hidden />}
+                  {copied ? 'Copied' : 'Copy email'}
+                </button>
+                <span role="status" className="sr-only">
+                  {copied ? 'Email address copied' : ''}
+                </span>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-5 text-sm">
+                {links.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 font-medium text-muted hover:text-ink"
+                  >
+                    <SocialIcon icon={social.icon} className="size-4.5" />
+                    {social.label}
+                    <ArrowUpRight aria-hidden className="size-3.5" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-line bg-bg-2 p-6">
+              <p className="text-sm font-medium text-ink">A good first message includes</p>
+              <ul className="mt-4 space-y-3 text-sm text-muted">
+                {briefChecklist.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Reveal>
+      </div>
     </section>
   )
 }

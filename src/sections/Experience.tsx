@@ -1,91 +1,93 @@
+import { GraduationCap } from 'lucide-react'
 import { Reveal } from '@/components/Reveal'
-import { SectionHeading } from '@/components/SectionHeading'
-import { experience } from '@/data/experience'
+import { Section } from '@/components/Section'
+import { Tag } from '@/components/Tag'
+import { education, experience } from '@/data/experience'
+
+function dateRange(start?: string, end?: string) {
+  if (!start) return null
+  return `${start} – ${end ?? 'Present'}`
+}
 
 export function Experience() {
-  if (experience.length === 0) return null
-
   return (
-    <section id="experience" className="border-y-3 border-line bg-bg-2">
-      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-        <SectionHeading kicker="Stage 04 · Experience" title="Quest log" />
-
-        <ol className="relative space-y-8 border-l-3 border-dashed border-line pl-8 sm:pl-10">
-          {experience.map((job, index) => (
-            <li key={job.role} className="relative">
+    <Section
+      id="experience"
+      eyebrow="Experience"
+      title="Eight years of shipping software"
+      intro="Client projects alongside a long run at BINUS University, from teaching assistant to Section Head."
+      tinted
+    >
+      <ol className="relative space-y-10 border-l border-line pl-8 md:pl-10">
+        {experience.map((job, index) => {
+          const dates = dateRange(job.start, job.end)
+          return (
+            <Reveal as="li" key={`${job.role}-${job.company}`} className="relative">
               <span
                 aria-hidden
-                className="absolute top-6 -left-[calc(2rem+9px)] size-4 rotate-45 border-3 border-bg-2 bg-pink sm:-left-[calc(2.5rem+9px)]"
+                className={
+                  index === 0
+                    ? 'absolute top-1.5 -left-[2.3rem] size-3 rounded-full bg-accent ring-4 ring-bg-2 md:-left-[2.8rem]'
+                    : 'absolute top-1.5 -left-[2.3rem] size-3 rounded-full border-2 border-line bg-bg-2 md:-left-[2.8rem]'
+                }
               />
-              <Reveal delay={index * 0.05} className="pixel-box p-5 sm:p-6">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-                  <h3 className="text-xl font-semibold text-ink">
-                    {job.role}{' '}
-                    <span className="text-muted">
-                      @{' '}
-                      {job.companyUrl ? (
-                        <a
-                          href={job.companyUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-ice underline-offset-4 hover:underline"
-                        >
-                          {job.company}
-                        </a>
-                      ) : (
-                        <span className="text-ice">{job.company}</span>
-                      )}
-                    </span>
-                  </h3>
-                  {job.start && (
-                    <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-sm text-gold">
-                      <span>
-                        {job.start} — {job.end ?? 'Present'}
-                        {job.location && <span className="text-muted"> · {job.location}</span>}
-                      </span>
-                      {!job.end && (
-                        <span className="bg-lime px-2 py-1 font-pixel text-[0.5rem] text-on-accent uppercase">
-                          Now
-                        </span>
-                      )}
-                    </p>
+              <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between md:gap-6">
+                <h3 className="font-semibold text-ink">
+                  {job.role}
+                  <span className="font-normal text-muted"> · </span>
+                  {job.companyUrl ? (
+                    <a
+                      href={job.companyUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-normal text-muted underline-offset-4 hover:text-accent hover:underline"
+                    >
+                      {job.company}
+                    </a>
+                  ) : (
+                    <span className="font-normal text-muted">{job.company}</span>
                   )}
-                </div>
-
-                {job.placeholder && (
-                  <p className="mt-3 inline-block bg-gold px-2 py-1 font-pixel text-[0.5rem] text-on-accent">
-                    PLACEHOLDER · edit src/data/experience.ts (hidden in production)
+                </h3>
+                {(dates || job.location) && (
+                  <p className="shrink-0 font-mono text-xs text-muted">
+                    {[dates, job.location].filter(Boolean).join(' · ')}
                   </p>
                 )}
-
-                <ul className="mt-4 space-y-2 text-muted">
-                  {job.highlights.map((line) => (
-                    <li key={line} className="flex gap-3">
-                      <span aria-hidden className="text-pink">
-                        ▸
-                      </span>
-                      {line}
-                    </li>
+              </div>
+              <ul className="mt-3 max-w-3xl space-y-1.5 text-sm leading-relaxed text-muted">
+                {job.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+              {job.tech && (
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {job.tech.map((tech) => (
+                    <Tag key={tech}>{tech}</Tag>
                   ))}
-                </ul>
+                </div>
+              )}
+            </Reveal>
+          )
+        })}
+      </ol>
 
-                {job.tech && (
-                  <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Tech used">
-                    {job.tech.map((tech) => (
-                      <li
-                        key={tech}
-                        className="border border-line bg-bg-2 px-2 py-0.5 font-mono text-xs text-ink/80"
-                      >
-                        {tech}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
+      <Reveal className="mt-14 grid gap-4 sm:grid-cols-2">
+        {education.map((item) => (
+          <div
+            key={item.degree}
+            className="flex gap-4 rounded-2xl border border-line bg-surface p-5"
+          >
+            <GraduationCap aria-hidden className="mt-0.5 size-5 shrink-0 text-accent" />
+            <div>
+              <p className="font-medium text-ink">{item.degree}</p>
+              <p className="mt-0.5 text-sm text-muted">
+                {item.school} · {item.years}
+              </p>
+              {item.note && <p className="mt-2 text-sm text-muted">{item.note}</p>}
+            </div>
+          </div>
+        ))}
+      </Reveal>
+    </Section>
   )
 }
