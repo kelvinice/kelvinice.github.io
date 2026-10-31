@@ -1,4 +1,5 @@
 import bersamaJaya from '@/assets/projects/bersama-jaya.jpg?picture'
+import midhub from '@/assets/projects/midhub.jpg?picture'
 
 /**
  * Client and contract work, shown in the "Selected work" section.
@@ -114,7 +115,7 @@ export const caseStudies: CaseStudy[] = [
       'Payment flow',
     ],
     link: { href: 'https://midhub.id/', label: 'Visit site' },
-    visual: { illustration: 'marketplace' },
+    visual: { image: midhub, alt: 'MidHub.id home page' },
   },
   {
     slug: 'kpi-dashboard',

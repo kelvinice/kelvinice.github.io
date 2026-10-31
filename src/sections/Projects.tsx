@@ -10,7 +10,7 @@ function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-muted/50">
+    <article className="group spotlight flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-[border-color,translate,box-shadow] duration-300 hover:-translate-y-1 hover:border-muted/50 hover:shadow-xl hover:shadow-black/10">
       <div className="aspect-[16/9] overflow-hidden border-b border-line bg-bg-2">
         {project.image ? (
           <Picture

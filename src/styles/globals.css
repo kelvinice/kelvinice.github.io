@@ -129,3 +129,141 @@
     transform: none;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Motion & delight (all of it is switched off by prefers-reduced-motion */
+/* through the base-layer rule above).                                 */
+/* ------------------------------------------------------------------ */
+@theme {
+  --animate-caret: caret 1s steps(1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-drift: drift 18s ease-in-out infinite alternate;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes caret {
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes drift {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      transform: translate(60px, 40px) scale(1.15);
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Used by the illustration classes below (plain CSS, so they live outside @theme). */
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes rise {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Cursor-following glow on cards. useSpotlight() feeds --mx / --my. */
+@utility spotlight {
+  position: relative;
+  isolation: isolate;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in oklab, var(--accent) 12%, transparent),
+      transparent 60%
+    );
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+/* SVG illustration pieces animate once their card scrolls into view ([data-shown] from Reveal). */
+@layer components {
+  .ill-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .ill-rise,
+  .ill-pop {
+    transform-box: fill-box;
+  }
+  .ill-rise {
+    transform-origin: bottom;
+    transform: scaleY(0);
+  }
+  .ill-pop {
+    transform-origin: center;
+    opacity: 0;
+  }
+  [data-shown] .ill-draw {
+    animation: draw 1.6s 0.3s ease-out forwards;
+  }
+  [data-shown] .ill-rise {
+    animation: rise 0.7s ease-out forwards;
+    animation-delay: calc(0.3s + var(--i, 0) * 0.08s);
+  }
+  [data-shown] .ill-pop {
+    animation: pop 0.5s ease-out forwards;
+    animation-delay: calc(0.5s + var(--i, 0) * 0.12s);
+  }
+
+  /* Process stepper: the connecting line fills in when the list scrolls into view. */
+  .step-line {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.4s ease-out 0.2s;
+  }
+  [data-shown] .step-line {
+    transform: scaleX(1);
+  }
+}

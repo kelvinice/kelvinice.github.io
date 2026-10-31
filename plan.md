@@ -2,12 +2,18 @@
 
 Status: **Phases 0–6 implemented on branch `v3-rework` (2026-10-31); phase 7 (merge to `master`) is Kelvin's call.** All blocking questions are answered (§9). The items left in §10 are optional details with defaults.
 
-Deviations from the plan while building:
+Changes after Kelvin's first review (2026-11-01):
 
-- MidHub uses the `marketplace` illustration rather than a screenshot: its home page opens behind a promo pop-up, and the work was backend.
-- Initial JS is 89 KB gzipped (budget ≤ 90 KB); CSS 9.5 KB.
-- The navbar shows Work · Services · Process · Experience · Projects · Writing; "Stack" is reachable by scrolling.
-  The previous plan (v2, the arcade site) is in [docs/plan-v2-arcade.md](docs/plan-v2-arcade.md).
+- No "Available for freelance projects" label anywhere (hero, OG image, meta). No Books/Writing section.
+- Experience lists only the BINUS roles; MidHub (a past role) appears as a case study with a real screenshot.
+- Hero intro and meta descriptions are general ("web developer & software engineer, 8+ years"), not a list of past systems.
+- Favicon and logo are a snowflake.
+- More playful UI: typing headline, floating "dev" chips around the photo, tech-stack marquee, cursor spotlight on cards,
+  illustrations that animate in, a connected Scrum stepper, scroll progress bar, and a ⌘K / Ctrl K command menu.
+  All motion respects `prefers-reduced-motion`.
+- Initial JS is 91.5 KB gzipped (slightly over the 90 KB target, for the command menu); CSS 11 KB.
+
+The previous plan (v2, the arcade site) is in [docs/plan-v2-arcade.md](docs/plan-v2-arcade.md).
 
 > **Confidentiality rule for this repo.** This repository is public: GitHub Pages user sites have to be.
 > Real names of confidential clients must **never** appear in any committed file, commit message, branch name,

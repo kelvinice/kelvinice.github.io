@@ -1,8 +1,6 @@
 /**
- * Work history, newest first.
- *
- * Freelance and contract work deliberately has no dates or contracting entity; clients are
- * described with the same codename-safe labels as src/data/work.ts.
+ * Work history, newest first. Client and contract work is not listed here on purpose:
+ * it lives in src/data/work.ts as case studies.
  */
 
 export type Experience = {
@@ -21,25 +19,6 @@ export type Experience = {
 const BINUS = { company: 'BINUS University', companyUrl: 'https://binus.ac.id/' }
 
 export const experience: Experience[] = [
-  {
-    role: 'Freelance Software Engineer',
-    company: 'Independent',
-    location: 'Remote · Jakarta',
-    highlights: [
-      'ERP, HRIS, e-tender, CMS and KPI-dashboard projects for clients in automotive, energy, manufacturing and the public sector.',
-      'Took over and extended existing systems, from legacy CodeIgniter to Laravel and NestJS codebases.',
-      'Delivered in Scrum teams: sprint planning, reviews and retros with client product owners.',
-    ],
-    tech: ['Laravel', 'NestJS', 'Next.js', 'CodeIgniter', 'Jest'],
-  },
-  {
-    role: 'Backend Engineer',
-    company: 'MidHub.id',
-    companyUrl: 'https://midhub.id/',
-    highlights: [
-      'Built the core modules of a heavy-equipment marketplace: product listings, premium membership and payments.',
-    ],
-  },
   {
     role: 'Academic Development Section Head',
     ...BINUS,

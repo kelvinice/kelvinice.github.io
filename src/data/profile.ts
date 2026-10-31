@@ -21,15 +21,15 @@ export const profile = {
   email: 'kelvinices@gmail.com',
   photo: headshot,
 
-  headline: 'I build business systems for the web, and test them properly before they ship.',
+  /** Hero headline: "I build <word> that teams rely on." The words cycle with a typing effect. */
+  buildWords: ['web apps', 'business systems', 'dashboards', 'APIs', 'internal tools'],
   intro:
-    'ERP and CMS platforms, HR and procurement systems, KPI dashboards and marketplace backends for companies in automotive, energy, healthcare and heavy equipment. From database schema to deployed UI, delivered in sprints.',
-  availability: 'Available for freelance projects',
+    'Web developer and software engineer with 8+ years of experience designing, building and testing production systems, from database schema to deployed UI. I work in sprints, ship in small steps, and make sure things hold up under real use.',
 
   stats: [
     { value: '8+', label: 'years building software' },
     { value: '10+', label: 'production systems shipped' },
-    { value: '2', label: 'published books' },
+    { value: '6', label: 'years in R&D engineering' },
   ],
 
   socials: [

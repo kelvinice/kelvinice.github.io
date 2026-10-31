@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import type { Illustration } from '@/data/work'
 import { cn } from '@/lib/cn'
 
@@ -33,6 +33,15 @@ function Bar({
   o?: number
 }) {
   return <rect x={x} y={y} width={w} height={h} rx={h / 2} fill={fill} opacity={o} />
+}
+
+/** Pops its children in once the card scrolls into view; `i` staggers siblings. */
+function Pop({ i = 0, children }: { i?: number; children: ReactNode }) {
+  return (
+    <g className="ill-pop" style={{ '--i': i } as CSSProperties}>
+      {children}
+    </g>
+  )
 }
 
 function Box({
@@ -78,7 +87,9 @@ function Erp() {
           <Bar x={X0 + 8} y={0} w={18} />
           <Bar x={X0 + 36} y={0} w={60 + ((r * 23) % 40)} />
           <Bar x={X0 + 140} y={0} w={34} />
-          <Bar x={X0 + 190} y={-1} w={30} h={8} fill={r % 3 === 1 ? ACCENT : OK} o={0.75} />
+          <Pop i={r}>
+            <Bar x={X0 + 190} y={-1} w={30} h={8} fill={r % 3 === 1 ? ACCENT : OK} o={0.75} />
+          </Pop>
         </g>
       ))}
     </>
@@ -118,7 +129,9 @@ function Hris() {
           <g key={r} transform={`translate(0 ${200 + r * 18})`}>
             <Bar x={X0} y={0} w={70} />
             <Bar x={X0 + 90} y={0} w={110} o={0.6} />
-            <Bar x={X1 - 40} y={-1} w={40} h={8} fill={r ? OK : ACCENT} o={0.75} />
+            <Pop i={r}>
+              <Bar x={X1 - 40} y={-1} w={40} h={8} fill={r ? OK : ACCENT} o={0.75} />
+            </Pop>
           </g>
         ))}
       </g>
@@ -155,6 +168,8 @@ function Dashboard() {
         transform="translate(5 0)"
       />
       <polyline
+        className="ill-draw"
+        pathLength={1}
         points={line}
         fill="none"
         stroke={ACCENT}
@@ -172,11 +187,15 @@ function Dashboard() {
           height={h}
           rx={2}
           fill={i === 3 ? ACCENT : LINE}
+          className="ill-rise"
+          style={{ '--i': i } as CSSProperties}
         />
       ))}
       <Box x={X0} y={210} w={X1 - X0} h={30} />
       <Bar x={X0 + 10} y={222} w={120} />
-      <Bar x={X1 - 70} y={221} w={60} h={8} fill={OK} o={0.75} />
+      <Pop>
+        <Bar x={X1 - 70} y={221} w={60} h={8} fill={OK} o={0.75} />
+      </Pop>
     </>
   )
 }
@@ -195,7 +214,9 @@ function Cms() {
           fill={i === 2 ? ACCENT : LINE}
         />
       ))}
-      <Bar x={X1 - 50} y={59} w={50} h={10} fill={ACCENT} />
+      <Pop>
+        <Bar x={X1 - 50} y={59} w={50} h={10} fill={ACCENT} />
+      </Pop>
       <Box x={X0} y={80} w={168} h={160} fill="none" stroke={LINE} />
       <Box x={X0 + 10} y={90} w={148} h={46} fill={ACCENT} />
       <Bar x={X0 + 20} y={104} w={80} h={7} fill="var(--on-accent)" o={0.85} />
@@ -234,7 +255,11 @@ function Marketplace() {
               <path d={`M${x + 20} ${y + 34} h30 l-6 -10 h-14 z`} fill={LINE} />
               <Bar x={x + 6} y={y + 50} w={50} h={5} />
               <Bar x={x + 6} y={y + 61} w={34} h={6} fill={ACCENT} o={(r + c) % 2 ? 0.6 : 1} />
-              {r === 0 && c === 1 && <Bar x={x + 48} y={y + 10} w={24} h={8} fill={OK} />}
+              {r === 0 && c === 1 && (
+                <Pop i={1}>
+                  <Bar x={x + 48} y={y + 10} w={24} h={8} fill={OK} />
+                </Pop>
+              )}
             </g>
           )
         }),
@@ -266,7 +291,8 @@ function Assets() {
             height={18}
             rx={4}
             fill={marked[`${r}-${c}`] ?? SOFT}
-            opacity={marked[`${r}-${c}`] ? 0.8 : 1}
+            className={marked[`${r}-${c}`] ? 'ill-pop' : undefined}
+            style={{ '--i': r + c / 2 } as CSSProperties}
           />
         )),
       )}
@@ -284,7 +310,9 @@ function Assets() {
       {[0, 1, 2].map((i) => (
         <g key={i}>
           <Bar x={X0 + 10} y={188 + i * 16} w={70 - i * 12} />
-          <Bar x={X0 + 112} y={187 + i * 16} w={30} h={8} fill={i === 1 ? OK : ACCENT} o={0.75} />
+          <Pop i={i + 2}>
+            <Bar x={X0 + 112} y={187 + i * 16} w={30} h={8} fill={i === 1 ? OK : ACCENT} o={0.75} />
+          </Pop>
         </g>
       ))}
     </>

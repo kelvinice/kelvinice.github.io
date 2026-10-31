@@ -47,8 +47,8 @@ export function Contact() {
                 Have a project in mind?
               </h2>
               <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">
-                I take on freelance projects, from a new business system to rescuing an existing
-                one. Tell me what you’re building and I’ll get back to you.
+                From a new business system to rescuing an existing one: tell me what you’re building
+                and I’ll get back to you.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">

@@ -1,4 +1,4 @@
-import { Check, GraduationCap } from 'lucide-react'
+import { Check, GraduationCap, RefreshCw } from 'lucide-react'
 import { Reveal } from '@/components/Reveal'
 import { Section } from '@/components/Section'
 import { practices, processSteps } from '@/data/process'
@@ -11,22 +11,36 @@ export function Process() {
       title="Scrum, sprint by sprint"
       intro="You see working software every two weeks, and every release is tested before it reaches your users."
     >
-      <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal as="ol" className="relative grid gap-8 lg:grid-cols-6 lg:gap-x-0">
+        {/* Connecting line: horizontal between node centres on desktop, vertical on mobile. */}
+        <span
+          aria-hidden
+          className="absolute top-5 right-[8.33%] left-[8.33%] hidden h-px bg-line lg:block"
+        >
+          <span className="step-line absolute inset-0 bg-accent" />
+        </span>
+        <span aria-hidden className="absolute top-5 bottom-5 left-5 w-px bg-line lg:hidden" />
+
         {processSteps.map((step, index) => (
-          <Reveal
-            as="li"
+          <li
             key={step.title}
-            delay={(index % 3) * 0.06}
-            className="relative rounded-2xl border border-line bg-surface p-6"
+            className="group relative flex gap-5 lg:flex-col lg:items-center lg:gap-0 lg:px-3 lg:text-center"
           >
-            <span className="font-mono text-xs text-accent">
+            <span className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface font-mono text-sm text-accent transition-colors duration-200 group-hover:border-accent group-hover:bg-accent group-hover:text-on-accent">
               {String(index + 1).padStart(2, '0')}
             </span>
-            <h3 className="mt-3 font-semibold text-ink">{step.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted">{step.description}</p>
-          </Reveal>
+            <div className="pt-1.5 lg:pt-5">
+              <h3 className="font-semibold text-ink">{step.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{step.description}</p>
+            </div>
+          </li>
         ))}
-      </ol>
+      </Reveal>
+
+      <p className="mt-8 flex items-center gap-2 font-mono text-xs text-muted lg:justify-center">
+        <RefreshCw aria-hidden className="size-3.5 text-accent" />
+        Steps 03–05 repeat every sprint until it’s done.
+      </p>
 
       <Reveal className="mt-10 grid gap-8 rounded-2xl border border-line bg-bg-2 p-7 md:grid-cols-[1fr_auto] md:items-center">
         <ul className="grid gap-x-6 gap-y-3 text-sm text-ink sm:grid-cols-2">

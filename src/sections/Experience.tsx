@@ -15,7 +15,7 @@ export function Experience() {
       id="experience"
       eyebrow="Experience"
       title="Eight years of shipping software"
-      intro="Client projects alongside a long run at BINUS University, from teaching assistant to Section Head."
+      intro="A long run at BINUS University, from teaching assistant to Section Head, alongside the client work above."
       tinted
     >
       <ol className="relative space-y-10 border-l border-line pl-8 md:pl-10">
