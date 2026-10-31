@@ -41,6 +41,7 @@ src/
     experience.ts       work history + education
     skills.ts           tech stack groups
     projects.ts         products & side projects
+    publications.ts     books + Google Play links (section hidden; set showPublications = true)
   assets/             Images processed at build time (AVIF/WebP, responsive sizes)
   components/         Reusable UI (Navbar, CaseStudyCard, UiIllustration, Section, Reveal…)
   sections/           Page sections (Hero, Work, Services, Process, Experience, Stack, Projects,

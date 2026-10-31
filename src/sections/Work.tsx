@@ -8,6 +8,9 @@ export function Work() {
   return (
     <Section
       id="work"
+      index={1}
+      backdrop="dots"
+      glow="right"
       eyebrow="Selected work"
       title="Systems businesses run on"
       intro="ERP, HR, procurement, content and reporting platforms for real companies. Much of it is under NDA, so those projects are described without names and shown as illustrations."

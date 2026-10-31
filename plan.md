@@ -1,17 +1,20 @@
 # kelvinice.github.io: v3 "Professional" Rework Plan
 
-Status: **Phases 0–6 implemented on branch `v3-rework` (2026-10-31); phase 7 (merge to `master`) is Kelvin's call.** All blocking questions are answered (§9). The items left in §10 are optional details with defaults.
+Status: **Complete (2026-11-01).** All phases are done (§11), including the merge to `master` that deploys v3. Decisions are in §9; §10 lists the details that shipped with defaults and can be changed any time.
 
 Changes after Kelvin's first review (2026-11-01):
 
-- No "Available for freelance projects" label anywhere (hero, OG image, meta). No Books/Writing section.
+- No "Available for freelance projects" label anywhere (hero, OG image, meta).
+- The Books section is hidden, not deleted: covers, Google Play links and the section component are kept; set `showPublications = true` in `src/data/publications.ts` to bring it back with its nav item.
 - Experience lists only the BINUS roles; MidHub (a past role) appears as a case study with a real screenshot.
 - Hero intro and meta descriptions are general ("web developer & software engineer, 8+ years"), not a list of past systems.
 - Favicon and logo are a snowflake.
+- Hospital asset management: full-stack, leading the backend.
+- Every section below the hero has texture: dotted or grid paper, a soft accent glow, a gradient divider and a big outlined section number.
 - More playful UI: typing headline, floating "dev" chips around the photo, tech-stack marquee, cursor spotlight on cards,
   illustrations that animate in, a connected Scrum stepper, scroll progress bar, and a ⌘K / Ctrl K command menu.
   All motion respects `prefers-reduced-motion`.
-- Initial JS is 91.5 KB gzipped (slightly over the 90 KB target, for the command menu); CSS 11 KB.
+- Initial JS is 91.8 KB gzipped (slightly over the 90 KB target, for the command menu); CSS 11.5 KB.
 
 The previous plan (v2, the arcade site) is in [docs/plan-v2-arcade.md](docs/plan-v2-arcade.md).
 
@@ -223,15 +226,15 @@ scripts/
 
 ### Budgets
 
-- Initial JS **≤ 90 KB gzipped** (v2: 135 KB).
+- Initial JS **≤ 90 KB gzipped** (v2: 135 KB). Shipped: 91.8 KB, accepted for the command menu.
 - Lighthouse ≥ 95 in all four categories; LCP < 1.5 s on desktop.
 - `/game/` costs 0 bytes on the main page.
 
 ### SEO / meta
 
 - Title: "Kelvin, Software Engineer · Full-stack Web Developer (Jakarta)".
-- Description aimed at clients: "Freelance full-stack developer in Jakarta building ERP, CMS, HRIS and dashboards…".
-- New OG image; JSON-LD `Person` with `jobTitle: "Software Engineer"`, `knowsAbout` [ERP, CMS, HRIS, Scrum, Laravel, NestJS, React, Test automation], plus `alumniOf` BINUS.
+- Description kept general: "Kelvin is a web developer and software engineer in Jakarta with 8+ years of experience…".
+- New OG image (snowflake mark, no availability label); JSON-LD `Person` with `jobTitle: "Software Engineer"`, general `knowsAbout` (web development, software engineering, Scrum, Laravel, NestJS, React, Next.js, test automation), plus `alumniOf` BINUS.
 - `sitemap.xml`: root only.
 
 ---
@@ -266,10 +269,16 @@ scripts/
 | Contact channels         | Email, LinkedIn, GitHub only; **no WhatsApp or phone number**                                  |
 | Headshot                 | `src/assets/images/headshot.jpg` (done, §6)                                                    |
 | Canvas games             | Stay hosted, linked only from the archive (default; easy to change)                            |
+| Availability label       | **None**: no "Available for freelance" badge or wording                                        |
+| Books                    | Hidden but kept (covers + Google Play links), behind `showPublications`                        |
+| Experience timeline      | BINUS roles only; MidHub (finished) and client work appear as case studies                     |
+| Hospital asset role      | Full-stack developer, leading the backend                                                      |
+| Descriptions             | General ("web developer & software engineer, 8+ years"), not a list of past systems            |
+| Logo / favicon           | Snowflake                                                                                      |
 
 ---
 
-## 10. Optional details (defaults apply if unanswered)
+## 10. Details shipped with defaults (change any time in `src/data/`)
 
 | #   | Item                                                               | Default if no answer                                                                                                               |
 | --- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -278,3 +287,21 @@ scripts/
 | 3   | MidHub: backend stack and rough period                             | Stack line omitted; no dates (consistent with "keep it flexible")                                                                  |
 | 4   | Hospital asset management: same client as v2's A-care Launcher?    | Treated as separate, both anonymous                                                                                                |
 | 5   | Headline "Software Engineer · Full-stack Web Developer"            | Used as written                                                                                                                    |
+
+---
+
+## 11. Phases
+
+| Phase                   | Work                                                                                 | Status  |
+| ----------------------- | ------------------------------------------------------------------------------------ | ------- |
+| **0. Safety**           | Tags `arcade-v2` + `legacy-v1`; `reference/` map; leak guard + pre-push hook         | ✅ Done |
+| **1. Archive snapshot** | `snapshot-archive.mjs` → `apps/game/` (noindex, no OG), games out of the sitemap     | ✅ Done |
+| **2. Foundation**       | Slate + ice tokens, Inter/JetBrains Mono, Motion and pixel UI removed                | ✅ Done |
+| **3. Content**          | `profile`, `work`, `services`, `process`, `experience`, `skills`, `projects` data    | ✅ Done |
+| **4. Sections**         | Hero, Work, Services, Process, Experience, Stack, Projects, Contact (+ hidden Books) | ✅ Done |
+| **5. Archive trigger**  | Dropped by decision: `/game/` is URL-only                                            | ✅ N/A  |
+| **6. Polish**           | SEO/OG/JSON-LD, favicon, 404, a11y, reduced motion, playful UI, textured sections    | ✅ Done |
+| **7. Ship**             | Merge `v3-rework` → `master`; the Deploy workflow publishes to GitHub Pages          | ✅ Done |
+
+Verified before shipping: lint, Prettier, typecheck, production build, `check-confidential` (files, `dist/` and every pushed commit),
+no `/game` reference in the main page, dark/light/mobile screenshots, command menu (shortcut, filter, Enter → section).

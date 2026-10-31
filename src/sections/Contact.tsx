@@ -26,8 +26,13 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="border-t border-line">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-6 md:py-28">
+    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,var(--line)_15%,var(--accent)_50%,var(--line)_85%,transparent)] opacity-70"
+      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-dots" />
+      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-6 md:py-28">
         <Reveal className="relative overflow-hidden rounded-3xl border border-line bg-surface p-8 sm:p-12 md:p-16">
           <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid opacity-70" />
           <div

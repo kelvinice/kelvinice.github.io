@@ -6,6 +6,9 @@ export function Services() {
   return (
     <Section
       id="services"
+      index={2}
+      backdrop="grid"
+      glow="left"
       eyebrow="Services"
       title="What I can build for you"
       intro="Full-stack, from database schema to deployed UI, or just the part you need."

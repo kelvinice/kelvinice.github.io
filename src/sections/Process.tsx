@@ -7,6 +7,9 @@ export function Process() {
   return (
     <Section
       id="process"
+      index={3}
+      backdrop="dots"
+      glow="right"
       eyebrow="How I work"
       title="Scrum, sprint by sprint"
       intro="You see working software every two weeks, and every release is tested before it reaches your users."

@@ -26,6 +26,7 @@
   --on-accent: #06141c;
   --ok: #4ade80;
   --grid: rgb(148 156 173 / 0.07);
+  --dot: rgb(148 156 173 / 0.18);
   color-scheme: dark;
 }
 
@@ -42,6 +43,7 @@
   --on-accent: #ffffff;
   --ok: #15803d;
   --grid: rgb(14 19 27 / 0.05);
+  --dot: rgb(14 19 27 / 0.12);
   color-scheme: light;
 }
 
@@ -114,6 +116,19 @@
     linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 100%);
+}
+
+/* Dotted paper, faded towards the edges. */
+@utility bg-dots {
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.3px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, black 25%, transparent 100%);
+}
+
+/* Big outlined numerals behind section headings. */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--line);
 }
 
 /* Fade + lift when a [data-reveal] element first scrolls into view (see Reveal.tsx). */

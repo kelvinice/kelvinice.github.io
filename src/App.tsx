@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { CommandPalette } from '@/components/CommandPalette'
 import { Navbar, type NavItem } from '@/components/Navbar'
+import { showPublications } from '@/data/publications'
 import { useSpotlight } from '@/hooks/useSpotlight'
 import { Contact } from '@/sections/Contact'
 import { Experience } from '@/sections/Experience'
@@ -8,6 +9,7 @@ import { Footer } from '@/sections/Footer'
 import { Hero } from '@/sections/Hero'
 import { Process } from '@/sections/Process'
 import { Projects } from '@/sections/Projects'
+import { Publications } from '@/sections/Publications'
 import { Services } from '@/sections/Services'
 import { Stack } from '@/sections/Stack'
 import { Work } from '@/sections/Work'
@@ -19,6 +21,7 @@ const navItems: NavItem[] = [
   { id: 'experience', label: 'Experience' },
   { id: 'stack', label: 'Stack' },
   { id: 'projects', label: 'Projects' },
+  ...(showPublications ? [{ id: 'writing', label: 'Writing' }] : []),
 ]
 
 export default function App() {
@@ -60,6 +63,7 @@ export default function App() {
         <Experience />
         <Stack />
         <Projects />
+        {showPublications && <Publications />}
         <Contact />
       </main>
 

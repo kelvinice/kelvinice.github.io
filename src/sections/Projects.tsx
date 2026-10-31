@@ -73,6 +73,9 @@ export function Projects() {
   return (
     <Section
       id="projects"
+      index={6}
+      backdrop="grid"
+      glow="left"
       eyebrow="Products & side projects"
       title="Beyond client work"
       intro="Internal tools for BINUS labs and divisions, a hackathon platform, and apps I design, build and run end to end."

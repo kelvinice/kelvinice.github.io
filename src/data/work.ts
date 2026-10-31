@@ -88,8 +88,8 @@ export const caseStudies: CaseStudy[] = [
     client: 'Multi-hospital asset management platform',
     confidential: true,
     industry: 'Healthcare',
-    scope: 'Led backend development',
-    role: 'Backend lead',
+    scope: 'Built the platform full-stack, leading the backend',
+    role: 'Full-stack developer',
     summary:
       'Keeps medical equipment across several hospitals calibrated, maintained and inspected on time.',
     built: [

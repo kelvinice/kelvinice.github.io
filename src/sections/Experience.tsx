@@ -13,6 +13,9 @@ export function Experience() {
   return (
     <Section
       id="experience"
+      index={4}
+      backdrop="grid"
+      glow="left"
       eyebrow="Experience"
       title="Eight years of shipping software"
       intro="A long run at BINUS University, from teaching assistant to Section Head, alongside the client work above."

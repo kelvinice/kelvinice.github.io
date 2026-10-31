@@ -6,6 +6,9 @@ export function Stack() {
   return (
     <Section
       id="stack"
+      index={5}
+      backdrop="dots"
+      glow="right"
       eyebrow="Tech stack"
       title="Tools I ship with"
       intro="Comfortable picking up whatever a project already runs on, and at home with these."
