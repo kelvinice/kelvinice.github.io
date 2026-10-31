@@ -41,11 +41,10 @@ src/
     experience.ts       work history + education
     skills.ts           tech stack groups
     projects.ts         products & side projects
-    publications.ts     books, covers in src/assets/books/
   assets/             Images processed at build time (AVIF/WebP, responsive sizes)
   components/         Reusable UI (Navbar, CaseStudyCard, UiIllustration, Section, Reveal…)
   sections/           Page sections (Hero, Work, Services, Process, Experience, Stack, Projects,
-                      Publications, Contact, Footer)
+                      Contact, Footer)
   hooks/ lib/ styles/ Helpers and the Tailwind theme (globals.css)
 .github/workflows/    deploy.yml (master → Pages), ci.yml (PR checks)
 reference/            Local notes only; gitignored, never published
