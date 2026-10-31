@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Kelvinice · arcade archive</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="description"
+      content="Kelvin (Kelvinice), Academic Development Section Head & Lecturer at BINUS University and software developer. Web apps, browser games and automation tools like Wyndoku, Wyn State, Plagion and DocFlow."
+    />
+    <meta name="author" content="Kelvin" />
+    <link rel="icon" type="image/svg+xml" href="/game/favicon.svg" />
+    <link rel="apple-touch-icon" href="/game/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0b1020" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Apply the saved / system theme before first paint to avoid a flash. -->
+    <script>
+      try {
+        const saved = localStorage.getItem('theme')
+        const theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark'
+        document.documentElement.dataset.theme = theme
+      } catch {}
+    </script>
+    <script type="module" crossorigin src="/game/assets/index-CcEEpMGT.js"></script>
+    <link rel="stylesheet" crossorigin href="/game/assets/index-BOhc7J4p.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding: 2rem; font-family: sans-serif">
+        This site needs JavaScript. You can still find me on
+        <a href="https://github.com/kelvinice">GitHub</a>.
+      </p>
+    </noscript>
+  </body>
+</html>
