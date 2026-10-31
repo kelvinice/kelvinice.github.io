@@ -1,7 +1,13 @@
 # kelvinice.github.io: v3 "Professional" Rework Plan
 
-Status: **Ready to implement (2026-10-31).** All blocking questions are answered (§9). The items left in §10 are optional details with defaults.
-The previous plan (v2, the arcade site) is in [docs/plan-v2-arcade.md](docs/plan-v2-arcade.md).
+Status: **Phases 0–6 implemented on branch `v3-rework` (2026-10-31); phase 7 (merge to `master`) is Kelvin's call.** All blocking questions are answered (§9). The items left in §10 are optional details with defaults.
+
+Deviations from the plan while building:
+
+- MidHub uses the `marketplace` illustration rather than a screenshot: its home page opens behind a promo pop-up, and the work was backend.
+- Initial JS is 89 KB gzipped (budget ≤ 90 KB); CSS 9.5 KB.
+- The navbar shows Work · Services · Process · Experience · Projects · Writing; "Stack" is reachable by scrolling.
+  The previous plan (v2, the arcade site) is in [docs/plan-v2-arcade.md](docs/plan-v2-arcade.md).
 
 > **Confidentiality rule for this repo.** This repository is public: GitHub Pages user sites have to be.
 > Real names of confidential clients must **never** appear in any committed file, commit message, branch name,
