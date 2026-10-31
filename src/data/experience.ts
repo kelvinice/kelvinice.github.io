@@ -25,7 +25,10 @@ export const experience: Experience[] = [
     start: 'Oct 2025',
     location: 'Jakarta',
     highlights: [
-      'Set code-quality and testing standards for internal projects: required unit-test coverage and automated regression checks before release.',
+      'Lead the team that runs the university’s laboratory courses.',
+      'Oversee the development of new course materials.',
+      'Make sure courses, and the software and tools they use, meet campus standards.',
+      'Oversee skill development for lab assistants.',
       'Build and maintain Plagion, an AI plagiarism checker for programming assignments, guarded by a regression suite.',
     ],
   },
