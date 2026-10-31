@@ -13,20 +13,24 @@ pnpm install
 pnpm dev          # http://localhost:5173 (games are served too, e.g. /bluejackpunk/)
 ```
 
-| Script         | What it does                                              |
-| -------------- | --------------------------------------------------------- |
-| `pnpm dev`     | Dev server with hot reload                                |
-| `pnpm build`   | Typecheck + production build into `dist/`                 |
-| `pnpm preview` | Serve `dist/` locally, exactly what GitHub Pages will get |
-| `pnpm lint`    | ESLint                                                    |
-| `pnpm format`  | Prettier (also sorts Tailwind classes)                    |
-| `pnpm check`   | lint + format check + typecheck + build (what CI runs)    |
+| Script                    | What it does                                                           |
+| ------------------------- | ---------------------------------------------------------------------- |
+| `pnpm dev`                | Dev server with hot reload                                             |
+| `pnpm build`              | Typecheck + production build into `dist/`                              |
+| `pnpm preview`            | Serve `dist/` locally, exactly what GitHub Pages will get              |
+| `pnpm lint`               | ESLint                                                                 |
+| `pnpm format`             | Prettier (also sorts Tailwind classes)                                 |
+| `pnpm check`              | lint + format check + typecheck + build (what CI runs)                 |
+| `pnpm check:confidential` | Scan for confidential client names (also runs on every `git push`)     |
+| `pnpm snapshot:archive`   | Rebuild the frozen arcade archive in `apps/game/` from tag `arcade-v2` |
 
 ## Project structure
 
 ```
-apps/                 Prebuilt static games, copied as-is to /<name>/ (bluejackpunk, kelabyrinth, spyfamily)
+apps/                 Prebuilt static apps, copied as-is to /<name>/ (bluejackpunk, kelabyrinth, spyfamily,
+                      game = frozen v2 arcade portfolio)
 plugins/              Vite plugins (legacy-apps: serves/copies apps/)
+scripts/              check-confidential (leak guard), snapshot-archive (builds apps/game/)
 public/               Files served at the site root: favicon, og-image, 404.html, robots, sitemap
 src/
   data/               ← all site content lives here
@@ -67,6 +71,10 @@ master ──▶ Deploy workflow: pnpm build → upload dist/ → GitHub Pages (
 You can also redeploy from **Actions → Deploy → Run workflow**. Build output (`dist/`) is never committed.
 
 **One-time setup:** in GitHub, go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
+
+## Confidentiality
+
+Some client work is under NDA and is described on the site with codenames only. The real names are kept in `reference/` (gitignored). `reference/forbidden.txt` lists the banned terms, and a pre-push hook (`.githooks/pre-push`, enabled by `pnpm install`) blocks any push whose files, diffs or commit messages contain one.
 
 ## Easter egg
 

@@ -15,7 +15,10 @@
     "typecheck": "tsc -b",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "pnpm lint && pnpm format:check && pnpm build"
+    "check": "pnpm lint && pnpm format:check && pnpm build",
+    "check:confidential": "node scripts/check-confidential.mjs",
+    "snapshot:archive": "node scripts/snapshot-archive.mjs",
+    "prepare": "git config core.hooksPath .githooks || exit 0"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "5.3.0",
