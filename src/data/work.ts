@@ -128,7 +128,7 @@ export const moreWork: MoreWork[] = [
   {
     slug: 'automotive-erp',
     title: 'ERP backend',
-    context: 'Automotive retail & distribution group · NDA',
+    context: 'Cakra Motor 11 · Automotive retail & distribution',
     role: 'Backend developer',
     description:
       'Developed and maintained core backend features of the ERP, with automated regression tests run before every release.',

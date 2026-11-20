@@ -108,16 +108,16 @@ Tone rules: first person, short sentences, concrete nouns (modules, users, endpo
 
 ### Client & contract work
 
-| Key      | Public label (draft)                                         | What Kelvin did                                                                                                             | Stack (known)        | Named?                            |
-| -------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- | -------------------- | --------------------------------- |
-| BJ       | **Bersama Jaya Bordir Studio**, embroidery workshop, Jakarta | Company website **+ CMS + ERP**; public site has a price calculator and lead form                                           | Next.js (+ ?)        | Yes, links bersamajaya.vercel.app |
-| MidHub   | **MidHub.id**, heavy-equipment marketplace                   | **Backend engineer** on the core modules: **product listings**, **premium** (membership/promoted listings) and **payments** | ? (frontend Next.js) | Yes, links midhub.id              |
-| Client A | "A multinational automotive manufacturer in Indonesia" ✔     | **HRIS** + **e-Tender / procurement system**                                                                                | ?                    | No                                |
-| Client B | "An automotive retail & distribution group"                  | **ERP**: developed and maintained core backend features                                                                     | Laravel              | No                                |
-| Client C | "An energy company"                                          | **Maintained & enhanced** their corporate website/CMS, including statistical reporting                                      | CodeIgniter          | No                                |
-| Client D | "A large state-owned enterprise" ✔                           | **KPI dashboard**: real-time performance and job monitoring                                                                 | Laravel              | No                                |
-| HAM      | "Multi-hospital asset management platform"                   | **Led backend**: dynamic RBAC; calibration, maintenance, inspection and lifecycle workflows; Jest suites                    | NestJS, Jest         | Generic already                   |
-| IoT      | "Hospital tool monitoring & RFID infant tracking"            | Real-time tracking systems                                                                                                  | ?                    | Generic already                   |
+| Key      | Public label (draft)                                         | What Kelvin did                                                                                                             | Stack (known)        | Named?                             |
+| -------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- | -------------------- | ---------------------------------- |
+| BJ       | **Bersama Jaya Bordir Studio**, embroidery workshop, Jakarta | Company website **+ CMS + ERP**; public site has a price calculator and lead form                                           | Next.js (+ ?)        | Yes, links bersamajaya.vercel.app  |
+| MidHub   | **MidHub.id**, heavy-equipment marketplace                   | **Backend engineer** on the core modules: **product listings**, **premium** (membership/promoted listings) and **payments** | ? (frontend Next.js) | Yes, links midhub.id               |
+| Client A | "A multinational automotive manufacturer in Indonesia" ✔     | **HRIS** + **e-Tender / procurement system**                                                                                | ?                    | No                                 |
+| Client B | **Cakra Motor 11**, automotive retail & distribution         | **ERP**: developed and maintained core backend features                                                                     | Laravel              | Yes (approved 2026-11-20), no link |
+| Client C | "An energy company"                                          | **Maintained & enhanced** their corporate website/CMS, including statistical reporting                                      | CodeIgniter          | No                                 |
+| Client D | "A large state-owned enterprise" ✔                           | **KPI dashboard**: real-time performance and job monitoring                                                                 | Laravel              | No                                 |
+| HAM      | "Multi-hospital asset management platform"                   | **Led backend**: dynamic RBAC; calibration, maintenance, inspection and lifecycle workflows; Jest suites                    | NestJS, Jest         | Generic already                    |
+| IoT      | "Hospital tool monitoring & RFID infant tracking"            | Real-time tracking systems                                                                                                  | ?                    | Generic already                    |
 
 **Wording rules:**
 
@@ -286,6 +286,7 @@ scripts/
 | Hospital asset role      | Full-stack developer, leading the backend                                                      |
 | Descriptions             | General ("web developer & software engineer, 8+ years"), not a list of past systems            |
 | Logo / favicon           | Snowflake                                                                                      |
+| Client B                 | **Public** (2026-11-20): may be named as Cakra Motor 11; no longer under NDA                   |
 
 ---
 
