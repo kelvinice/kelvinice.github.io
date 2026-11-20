@@ -77,3 +77,5 @@ You can also redeploy from **Actions → Deploy → Run workflow**. Build output
 ## Confidentiality
 
 Some client work is under NDA and is described on the site with codenames only. The real names are kept in `reference/` (gitignored). `reference/forbidden.txt` lists the banned terms, and a pre-push hook (`.githooks/pre-push`, enabled by `pnpm install`) blocks any push whose files, diffs or commit messages contain one.
+
+The check fails closed: if `forbidden.txt` is missing or empty, it stops with an error instead of passing. It only skips in CI, which can't see the list. If `git config core.hooksPath` doesn't print `.githooks`, the hook isn't active; run `pnpm install` or `git config core.hooksPath .githooks`.
