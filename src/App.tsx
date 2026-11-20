@@ -1,27 +1,34 @@
+import { useEffect } from 'react'
 import { Navbar, type NavItem } from '@/components/Navbar'
 import { showPublications } from '@/data/publications'
 import { Contact } from '@/sections/Contact'
 import { Experience } from '@/sections/Experience'
 import { Footer } from '@/sections/Footer'
 import { Hero } from '@/sections/Hero'
-import { Process } from '@/sections/Process'
 import { Projects } from '@/sections/Projects'
 import { Publications } from '@/sections/Publications'
 import { Services } from '@/sections/Services'
-import { Stack } from '@/sections/Stack'
 import { Work } from '@/sections/Work'
 
 const navItems: NavItem[] = [
   { id: 'work', label: 'Work' },
   { id: 'services', label: 'Services' },
-  { id: 'process', label: 'Process' },
   { id: 'experience', label: 'Experience' },
-  { id: 'stack', label: 'Stack' },
   { id: 'projects', label: 'Projects' },
-  ...(showPublications ? [{ id: 'writing', label: 'Writing' }] : []),
 ]
 
+// Sections after the nav items without a link of their own: tracked so no link stays lit there.
+const trailingSections = [...(showPublications ? ['writing'] : []), 'contact']
+
 export default function App() {
+  // The browser looks for #anchor targets before React renders them, so shared links like
+  // /#work-docflow would stay at the top. Jump to the target once the page exists.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1))
+    const target = id ? document.getElementById(id) : null
+    if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant' }))
+  }, [])
+
   return (
     <>
       <a
@@ -31,15 +38,13 @@ export default function App() {
         Skip to content
       </a>
 
-      <Navbar items={navItems} trailingSections={['contact']} />
+      <Navbar items={navItems} trailingSections={trailingSections} />
 
       <main id="main">
         <Hero />
         <Work />
         <Services />
-        <Process />
         <Experience />
-        <Stack />
         <Projects />
         {showPublications && <Publications />}
         <Contact />

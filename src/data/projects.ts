@@ -1,14 +1,14 @@
 import { Soup, Telescope, Wallet, type LucideIcon } from 'lucide-react'
 import maker360 from '@/assets/projects/360-maker.jpg?picture'
 import discPersonalityTest from '@/assets/projects/disc-personality-test.png?picture'
-import docflow from '@/assets/projects/docflow.png?picture'
 import plagion from '@/assets/projects/plagion.png?picture'
 import wynState from '@/assets/projects/wyn-state.png?picture'
 import wyndoku from '@/assets/projects/wyndoku.png?picture'
 import wyntabi from '@/assets/projects/wyntabi.png?picture'
 
 /**
- * Side projects and internal tools (the "Projects" section). Client work lives in work.ts.
+ * Side projects and internal tools (the "Projects" section). Client work, and DocFlow as a
+ * featured case study, live in work.ts.
  * Give each project a 16:10 screenshot imported with `?picture`, or an `icon` instead.
  */
 
@@ -35,16 +35,6 @@ export const projects: Project[] = [
       'AI plagiarism and AI-content checker for programming assignments: AST, control-flow and embedding analysis for Java, Python, JavaScript, C/C++ and more, with PDF evidence reports.',
     tech: ['SvelteKit', 'Spring Boot', 'PyTorch', 'PostgreSQL'],
     image: plagion,
-    links: [],
-  },
-  {
-    slug: 'docflow',
-    title: 'DocFlow',
-    context: 'BINUS graduation division',
-    description:
-      'OCRs, sorts and files graduation documents by itself, then tracks bundles through approvals with QR codes. 48 of 48 scans filed correctly in 95 seconds.',
-    tech: ['Python', 'Tesseract', 'NestJS', 'Prisma'],
-    image: docflow,
     links: [],
   },
   {

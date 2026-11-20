@@ -3,6 +3,7 @@ import { Reveal } from '@/components/Reveal'
 import { Section } from '@/components/Section'
 import { Tag } from '@/components/Tag'
 import { education, experience } from '@/data/experience'
+import { StackList } from './Stack'
 
 function dateRange(start?: string, end?: string) {
   if (!start) return null
@@ -16,7 +17,6 @@ export function Experience() {
       eyebrow="Experience"
       title="Eight years of shipping software"
       intro="A long run at BINUS University, from teaching assistant to Section Head, alongside the client work above."
-      tinted
     >
       <ol className="relative space-y-10 border-l border-line pl-8 md:pl-10">
         {experience.map((job, index) => {
@@ -27,8 +27,8 @@ export function Experience() {
                 aria-hidden
                 className={
                   index === 0
-                    ? 'absolute top-1.5 -left-[2.3rem] size-3 rounded-full bg-accent ring-4 ring-bg-2 md:-left-[2.8rem]'
-                    : 'absolute top-1.5 -left-[2.3rem] size-3 rounded-full border-2 border-line bg-bg-2 md:-left-[2.8rem]'
+                    ? 'absolute top-1.5 -left-[2.3rem] size-3 rounded-full bg-accent ring-4 ring-bg md:-left-[2.8rem]'
+                    : 'absolute top-1.5 -left-[2.3rem] size-3 rounded-full border-2 border-line bg-bg md:-left-[2.8rem]'
                 }
               />
               <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between md:gap-6">
@@ -88,6 +88,8 @@ export function Experience() {
           </div>
         ))}
       </Reveal>
+
+      <StackList />
     </Section>
   )
 }
