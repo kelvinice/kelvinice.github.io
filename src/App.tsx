@@ -1,8 +1,5 @@
-import { useEffect, useState } from 'react'
-import { CommandPalette } from '@/components/CommandPalette'
 import { Navbar, type NavItem } from '@/components/Navbar'
 import { showPublications } from '@/data/publications'
-import { useSpotlight } from '@/hooks/useSpotlight'
 import { Contact } from '@/sections/Contact'
 import { Experience } from '@/sections/Experience'
 import { Footer } from '@/sections/Footer'
@@ -25,20 +22,6 @@ const navItems: NavItem[] = [
 ]
 
 export default function App() {
-  const [commandsOpen, setCommandsOpen] = useState(false)
-  useSpotlight()
-
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-        event.preventDefault()
-        setCommandsOpen((value) => !value)
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
-
   return (
     <>
       <a
@@ -48,16 +31,7 @@ export default function App() {
         Skip to content
       </a>
 
-      <Navbar
-        items={navItems}
-        trailingSections={['contact']}
-        onOpenCommands={() => setCommandsOpen(true)}
-      />
-      <CommandPalette
-        open={commandsOpen}
-        onClose={() => setCommandsOpen(false)}
-        sections={navItems}
-      />
+      <Navbar items={navItems} trailingSections={['contact']} />
 
       <main id="main">
         <Hero />

@@ -18,7 +18,7 @@ function ProjectCard({ project, onPreview }: CardProps) {
   const image = project.image
 
   return (
-    <article className="group spotlight flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-[border-color,translate,box-shadow] duration-300 hover:-translate-y-1 hover:border-line-strong hover:shadow-xl hover:shadow-black/10">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-300 hover:border-line-strong">
       {image ? (
         <Screenshot
           image={image}
@@ -88,9 +88,6 @@ export function Projects() {
   return (
     <Section
       id="projects"
-      index={6}
-      backdrop="grid"
-      glow="left"
       eyebrow="Products & side projects"
       title="Beyond client work"
       intro="Internal tools for BINUS labs and divisions, a hackathon platform, and apps I design, build and run end to end."

@@ -12,7 +12,7 @@ export function CaseStudyCard({ study, onPreview }: Props) {
   const { visual } = study
 
   return (
-    <article className="group spotlight flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-[border-color,translate,box-shadow] duration-300 hover:-translate-y-1 hover:border-muted/50 hover:shadow-xl hover:shadow-black/10">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-300 hover:border-muted/50">
       <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-bg-2">
         {'image' in visual ? (
           <Screenshot

@@ -21,8 +21,8 @@ export const profile = {
   email: 'kelvinices@gmail.com',
   photo: headshot,
 
-  /** Hero headline: "I build <word> that teams rely on." The words cycle with a typing effect. */
-  buildWords: ['web apps', 'business systems', 'dashboards', 'APIs', 'internal tools'],
+  /** The one fixed hero headline. */
+  headline: 'I build business systems that teams rely on.',
   intro:
     'Web developer and software engineer with 8+ years of experience designing, building and testing production systems, from database schema to deployed UI. I work in sprints, ship in small steps, and make sure things hold up under real use.',
 

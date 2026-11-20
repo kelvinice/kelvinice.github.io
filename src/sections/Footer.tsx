@@ -1,7 +1,6 @@
 import { ArrowUp } from 'lucide-react'
 import { LogoMark } from '@/components/Logo'
 import { profile } from '@/data/profile'
-import { commandShortcut } from '@/lib/platform'
 
 export function Footer() {
   return (
@@ -12,9 +11,6 @@ export function Footer() {
           {profile.location}
         </p>
         <p className="flex items-center gap-4">
-          <span className="hidden font-mono text-xs md:inline">
-            Tip: press <kbd className="rounded border border-line px-1">{commandShortcut}</kbd>
-          </span>
           <a
             href="https://github.com/kelvinice/kelvinice.github.io"
             target="_blank"

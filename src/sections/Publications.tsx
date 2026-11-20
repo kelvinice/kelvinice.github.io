@@ -11,9 +11,6 @@ export function Publications() {
   return (
     <Section
       id="writing"
-      index={7}
-      backdrop="dots"
-      glow="right"
       eyebrow="Writing"
       title="Books"
       intro="Co-written with colleagues at BINUS University."
