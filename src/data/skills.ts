@@ -38,54 +38,49 @@ import {
 } from 'react-icons/tb'
 
 /**
- * The "inventory" in the skills section. Grouped into slots.
- * TODO(kelvin): add or remove anything; icons come from react-icons (https://react-icons.github.io/react-icons/).
+ * Capability matrix rendered in the Background / Technical Stack section.
+ * Highlighted (`primary: true`) entries represent daily drivers.
  */
 
-export type Skill = { name: string; icon: IconType }
+export type Skill = { name: string; icon: IconType; primary?: boolean }
 export type SkillGroup = { title: string; skills: Skill[] }
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: 'Frontend',
+    title: 'Frontend & Interfaces',
     skills: [
-      { name: 'React', icon: SiReact },
-      { name: 'TypeScript', icon: SiTypescript },
+      { name: 'React', icon: SiReact, primary: true },
+      { name: 'TypeScript', icon: SiTypescript, primary: true },
+      { name: 'Tailwind CSS', icon: SiTailwindcss, primary: true },
       { name: 'JavaScript', icon: SiJavascript },
       { name: 'Next.js', icon: SiNextdotjs },
       { name: 'React Router', icon: SiReactrouter },
       { name: 'SvelteKit', icon: SiSvelte },
       { name: 'TanStack Query', icon: SiReactquery },
-      { name: 'Tailwind CSS', icon: SiTailwindcss },
     ],
   },
   {
-    title: 'Backend & data',
+    title: 'Backend & Data',
     skills: [
-      { name: 'NestJS', icon: SiNestjs },
-      { name: 'Prisma', icon: SiPrisma },
-      { name: 'PostgreSQL', icon: SiPostgresql },
-      { name: 'Supabase', icon: SiSupabase },
+      { name: 'NestJS', icon: SiNestjs, primary: true },
+      { name: 'Prisma', icon: SiPrisma, primary: true },
+      { name: 'PostgreSQL', icon: SiPostgresql, primary: true },
+      { name: 'Supabase', icon: SiSupabase, primary: true },
+      { name: 'Python', icon: SiPython, primary: true },
       { name: 'Spring Boot', icon: SiSpringboot },
       { name: '.NET', icon: SiDotnet },
       { name: 'Java', icon: SiOpenjdk },
-      { name: 'Python', icon: SiPython },
       { name: 'Flask', icon: SiFlask },
       { name: 'PHP', icon: SiPhp },
     ],
   },
   {
-    title: 'AI & automation',
+    title: 'AI, Automation & Games',
     skills: [
       { name: 'PyTorch', icon: SiPytorch },
       { name: 'OpenAI API', icon: TbBrandOpenai },
       { name: 'Gemini API', icon: SiGooglegemini },
       { name: 'OCR (Tesseract)', icon: TbScanEye },
-    ],
-  },
-  {
-    title: 'Games, graphics & web3',
-    skills: [
       { name: 'HTML Canvas', icon: TbSquaresFilled },
       { name: 'PixiJS', icon: TbDeviceGamepad2 },
       { name: 'Motion', icon: TbBrandFramerMotion },
@@ -94,12 +89,12 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: 'Tooling & shipping',
+    title: 'Tooling & Delivery',
     skills: [
-      { name: 'Vite', icon: SiVite },
+      { name: 'Vite', icon: SiVite, primary: true },
+      { name: 'Git', icon: SiGit, primary: true },
       { name: 'Vitest', icon: SiVitest },
       { name: 'Docker', icon: SiDocker },
-      { name: 'Git', icon: SiGit },
       { name: 'GitHub Actions', icon: SiGithubactions },
       { name: 'Vercel', icon: SiVercel },
     ],

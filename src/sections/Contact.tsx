@@ -1,8 +1,7 @@
-import { Check, Copy, FileDown, Mail } from 'lucide-react'
+import { ArrowUpRight, Check, Copy, FileDown, Mail } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { PixelButton, PixelLink } from '@/components/PixelButton'
-import { PixelSnowflake } from '@/components/PixelSnowflake'
-import { Reveal } from '@/components/Reveal'
+import { Button, ButtonLink } from '@/components/Button'
+import { SectionHeader } from '@/components/SectionHeader'
 import { SocialIcon } from '@/components/SocialIcon'
 import { profile } from '@/data/profile'
 
@@ -25,59 +24,70 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-      <Reveal className="relative mx-auto max-w-3xl overflow-hidden pixel-box px-6 py-14 text-center sm:px-12">
-        <PixelSnowflake className="absolute -top-6 -right-6 size-32 rotate-12 text-ice/10" />
-        <PixelSnowflake className="absolute -bottom-8 -left-8 size-28 -rotate-12 text-pink/10" />
+    <section id="contact" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <SectionHeader index="05" kicker="Contact" title="Get in touch" />
 
-        <p className="font-mono text-xs font-semibold tracking-[0.3em] text-pink uppercase">
-          ▶ Stage 06 · Contact
-        </p>
-        <h2 className="mt-4 font-pixel text-xl leading-snug text-ink text-glow sm:text-3xl">
-          Continue?
-        </h2>
-        <p className="mx-auto mt-5 max-w-lg text-lg text-muted">
-          Have a project, a role, or just want to talk games? My inbox is open, so insert coin
-          below.
-        </p>
+      <div className="grid items-start gap-10 lg:grid-cols-12">
+        <div className="space-y-6 lg:col-span-7">
+          <p className="max-w-xl font-display text-xl leading-snug font-medium text-ink sm:text-2xl">
+            Have a software problem, research idea, teaching question, or game to talk over?
+          </p>
+          <p className="max-w-lg text-base leading-relaxed text-muted">
+            My inbox is always open. Reach out directly by email or connect on GitHub and LinkedIn.
+          </p>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <PixelLink href={`mailto:${profile.email}`} size="lg">
-            <Mail aria-hidden />
-            Say hello
-          </PixelLink>
-          <PixelButton variant="secondary" size="lg" onClick={copyEmail}>
-            {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
-            <span aria-live="polite">{copied ? 'Copied!' : 'Copy email'}</span>
-          </PixelButton>
-          {profile.resumeUrl && (
-            <PixelLink href={profile.resumeUrl} size="lg" variant="secondary" download>
-              <FileDown aria-hidden />
-              Download CV
-            </PixelLink>
-          )}
+          <div className="flex flex-wrap gap-3 pt-1">
+            <ButtonLink href={`mailto:${profile.email}`} size="lg">
+              <Mail aria-hidden />
+              Say hello
+            </ButtonLink>
+            <Button variant="secondary" size="lg" onClick={copyEmail}>
+              {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
+              <span aria-live="polite">{copied ? 'Copied' : 'Copy email'}</span>
+            </Button>
+            {profile.resumeUrl && (
+              <ButtonLink href={profile.resumeUrl} size="lg" variant="secondary" download>
+                <FileDown aria-hidden />
+                Download CV
+              </ButtonLink>
+            )}
+          </div>
         </div>
 
-        <p className="mt-6 font-mono text-sm text-ice">{profile.email}</p>
-
-        <ul className="mt-8 flex justify-center gap-3" aria-label="Elsewhere">
-          {profile.socials
-            .filter((social) => social.icon !== 'email')
-            .map((social) => (
+        <ul
+          aria-label="Direct channels"
+          className="divide-y divide-line rounded-sm border border-line bg-surface lg:col-span-5"
+        >
+          {profile.socials.map((social) => {
+            const external = social.href.startsWith('http')
+            const detail =
+              social.icon === 'email'
+                ? profile.email
+                : social.href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+            return (
               <li key={social.label}>
                 <a
                   href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 border-2 border-line px-3 py-2 font-mono text-sm text-muted transition-colors hover:border-ice hover:text-ice"
+                  {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                  className="group flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-bg-2"
                 >
-                  <SocialIcon icon={social.icon} className="size-4" />
-                  {social.label}
+                  <span className="flex items-center gap-3 text-sm font-medium text-ink">
+                    <SocialIcon
+                      icon={social.icon}
+                      className="size-4 text-muted group-hover:text-accent"
+                    />
+                    {social.label}
+                  </span>
+                  <span className="flex min-w-0 items-center gap-1.5 font-mono text-xs text-muted group-hover:text-ink">
+                    <span className="truncate">{detail}</span>
+                    <ArrowUpRight className="size-3.5 shrink-0 text-subtle" aria-hidden />
+                  </span>
                 </a>
               </li>
-            ))}
+            )
+          })}
         </ul>
-      </Reveal>
+      </div>
     </section>
   )
 }

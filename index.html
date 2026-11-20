@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,8 +14,8 @@
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#0b1020" />
-    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#f6f7f9" />
+    <meta name="color-scheme" content="light dark" />
 
     <!-- Open Graph / social previews -->
     <meta property="og:type" content="website" />
@@ -24,7 +24,7 @@
     <meta property="og:title" content="Kelvinice · web apps & browser games" />
     <meta
       property="og:description"
-      content="Lecturer at BINUS University and software developer. Projects, games and tools by Kelvin. Press start to play."
+      content="Academic Development Section Head & Lecturer at BINUS University, co-author, and software developer building web apps, campus automation tools, and browser games."
     />
     <meta property="og:image" content="https://kelvinice.github.io/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -39,22 +39,23 @@
         "alternateName": "Kelvinice",
         "jobTitle": "Academic Development Section Head & Lecturer",
         "worksFor": { "@type": "CollegeOrUniversity", "name": "Bina Nusantara University" },
+        "knowsAbout": [
+          "Software Engineering",
+          "Web Development",
+          "Agentic AI",
+          "Object-Oriented Design",
+          "Browser Games"
+        ],
         "url": "https://kelvinice.github.io/",
         "sameAs": ["https://github.com/kelvinice", "https://www.linkedin.com/in/kelvin-007-/"]
       }
     </script>
 
-    <!-- Apply the saved / system theme before first paint to avoid a flash. -->
+    <!-- Default to Frost Paper (light) unless the visitor saved dark mode. -->
     <script>
       try {
-        const saved = localStorage.getItem('theme')
-        const theme =
-          saved === 'light' || saved === 'dark'
-            ? saved
-            : matchMedia('(prefers-color-scheme: light)').matches
-              ? 'light'
-              : 'dark'
-        document.documentElement.dataset.theme = theme
+        const saved = localStorage.getItem('kelvinice-theme')
+        document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light'
       } catch {}
     </script>
   </head>

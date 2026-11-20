@@ -1,34 +1,42 @@
-import { Reveal } from '@/components/Reveal'
-import { SectionHeading } from '@/components/SectionHeading'
 import { skillGroups } from '@/data/skills'
+import { cn } from '@/lib/cn'
 
 export function Skills() {
   return (
-    <section id="skills" className="border-y-3 border-line bg-bg-2">
-      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-        <SectionHeading kicker="Stage 02 · Skills" title="Inventory">
-          The gear I reach for most often.
-        </SectionHeading>
+    <section id="skills" className="border-b border-line bg-bg-2">
+      <div className="mx-auto max-w-6xl px-4 pt-2 pb-20 sm:px-6">
+        <div className="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-t border-line pt-12">
+          <h3 className="font-display text-xl font-semibold text-ink">Technical Stack</h3>
+          <p className="font-mono text-xs text-subtle">Highlighted items are daily drivers.</p>
+        </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
-          {skillGroups.map((group, index) => (
-            <Reveal key={group.title} delay={index * 0.05} className="pixel-box p-5">
-              <h3 className="mb-4 font-pixel text-[0.65rem] text-gold uppercase">{group.title}</h3>
-              <ul className="grid grid-cols-[repeat(auto-fill,minmax(5.5rem,1fr))] gap-2">
-                {group.skills.map(({ name, icon: Icon }) => (
+        <div className="grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2">
+          {skillGroups.map((group) => (
+            <div key={group.title} className="bg-surface p-5 sm:p-6">
+              <h4 className="mb-4 font-mono text-xs tracking-wider text-subtle uppercase">
+                {group.title}
+              </h4>
+
+              <ul className="flex flex-wrap gap-2">
+                {group.skills.map(({ name, icon: Icon, primary }) => (
                   <li
                     key={name}
-                    className="group flex aspect-square flex-col items-center justify-center gap-2 border-2 border-line bg-bg-2 p-2 text-center transition-colors hover:border-ice hover:bg-surface-2"
+                    className={cn(
+                      'inline-flex items-center gap-2 rounded-sm border px-2.5 py-1.5 text-xs transition-colors',
+                      primary
+                        ? 'border-accent/35 bg-accent-soft/75 font-medium text-ink'
+                        : 'border-line bg-bg text-muted',
+                    )}
                   >
                     <Icon
                       aria-hidden
-                      className="size-7 text-muted transition-[color,transform] group-hover:scale-110 group-hover:text-ice"
+                      className={cn('size-3.5 shrink-0', primary ? 'text-accent' : 'text-subtle')}
                     />
-                    <span className="font-mono text-[0.7rem] leading-tight text-ink">{name}</span>
+                    <span>{name}</span>
                   </li>
                 ))}
               </ul>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

@@ -1,5 +1,5 @@
 /**
- * Who you are. Everything on the hero, about and contact sections reads from here.
+ * Biographical copy and links rendered across Hero, About, and Contact.
  * Lines marked TODO(kelvin) are drafts — rewrite them in your own voice.
  */
 
@@ -13,8 +13,9 @@ export const profile = {
   name: 'Kelvin',
   handle: 'Kelvinice',
   role: 'Lecturer & software developer',
+  location: 'Jakarta, Indonesia',
   tagline: 'I teach, lead academic development at BINUS, and build web apps & browser games.',
-  // First year of public code on GitHub, shown as "SINCE" in the hero HUD.
+  // First year of public code on GitHub.
   codingSince: 2018,
   email: 'kelvinices@gmail.com',
   // Drop a PDF in public/ and point this at it (e.g. '/resume.pdf') to show the CV button.
@@ -27,13 +28,12 @@ export const profile = {
     'On the full-stack side I build NestJS and Spring Boot systems that take busywork off people’s plates: document automation for BINUS University’s graduation division that OCRs, sorts and files scanned documents by itself, an AI plagiarism checker and a review tool for lab assistants at BINUS SLC, and a hackathon platform for Indonesia’s free school-meals programme. And before all that, canvas games written from scratch.',
   ],
 
-  // Shown on the "character card" in the about section.
   stats: [
-    { label: 'Class', value: 'Section Head & Lecturer' },
-    { label: 'Guild', value: 'BINUS University' },
+    { label: 'Role', value: 'Section Head & Lecturer' },
+    { label: 'Institution', value: 'BINUS University' },
     { label: 'Degrees', value: 'S.Kom., M.Kom.' },
-    { label: 'Main quest', value: 'Web apps, browser games & automation' },
-    { label: 'Favourite stack', value: 'React · TypeScript · NestJS · Supabase' },
+    { label: 'Focus', value: 'Web apps, browser games & automation' },
+    { label: 'Primary stack', value: 'React · TypeScript · NestJS · Supabase' },
   ],
 
   socials: [

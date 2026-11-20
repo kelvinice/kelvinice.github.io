@@ -1,20 +1,20 @@
-import { Snowflake, Sun } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/hooks/useTheme'
-import { pixelButtonClass } from '@/lib/pixelButton'
+import { buttonClass } from '@/lib/button'
 
 export function ThemeToggle() {
   const { theme, toggle } = useTheme()
-  const next = theme === 'dark' ? 'light' : 'dark'
+  const next = theme === 'light' ? 'dark' : 'light'
 
   return (
     <button
       type="button"
       onClick={toggle}
-      className={pixelButtonClass({ variant: 'secondary', size: 'icon' })}
+      className={buttonClass({ variant: 'secondary', size: 'icon' })}
       aria-label={`Switch to ${next} theme`}
       title={`Switch to ${next} theme`}
     >
-      {theme === 'dark' ? <Sun aria-hidden /> : <Snowflake aria-hidden />}
+      {theme === 'dark' ? <Sun aria-hidden /> : <Moon aria-hidden />}
     </button>
   )
 }

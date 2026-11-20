@@ -1,17 +1,16 @@
 import { useCallback, useEffect, useState } from 'react'
 
-export type Theme = 'dark' | 'light'
+export type Theme = 'light' | 'dark'
 
-const STORAGE_KEY = 'theme'
+const STORAGE_KEY = 'kelvinice-theme'
 
 function readTheme(): Theme {
-  return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark'
+  return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
 }
 
 /**
- * The initial theme is applied by the inline script in index.html (no flash).
- * This hook keeps React in sync, persists manual choices, and follows the
- * system setting until the visitor picks a theme themselves.
+ * Defaults to Frost Paper (light) via the inline script in index.html, and
+ * persists explicit dark/light choices without being overridden by OS settings.
  */
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>(readTheme)
@@ -27,28 +26,10 @@ export function useTheme() {
   }, [])
 
   useEffect(() => {
-    const media = matchMedia('(prefers-color-scheme: light)')
-    const onChange = (event: MediaQueryListEvent) => {
-      let saved: string | null = null
-      try {
-        saved = localStorage.getItem(STORAGE_KEY)
-      } catch {
-        // ignore
-      }
-      if (saved) return
-      const next: Theme = event.matches ? 'light' : 'dark'
-      document.documentElement.dataset.theme = next
-      setThemeState(next)
-    }
-    media.addEventListener('change', onChange)
-    return () => media.removeEventListener('change', onChange)
-  }, [])
-
-  useEffect(() => {
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === 'light' ? '#eef5ff' : '#0b1020')
+      ?.setAttribute('content', theme === 'dark' ? '#0e1116' : '#f6f7f9')
   }, [theme])
 
-  return { theme, setTheme, toggle: () => setTheme(theme === 'dark' ? 'light' : 'dark') }
+  return { theme, setTheme, toggle: () => setTheme(theme === 'light' ? 'dark' : 'light') }
 }
