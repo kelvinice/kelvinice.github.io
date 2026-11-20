@@ -19,7 +19,8 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 pt-32 pb-16 sm:px-6 md:pt-40 md:pb-24 lg:grid-cols-[1fr_auto]">
-        <div className="max-w-2xl">
+        {/* min-w-0: let this grid column shrink below its content on narrow screens. */}
+        <div className="max-w-2xl min-w-0">
           <p aria-hidden className="mb-5 font-mono text-sm text-muted">
             <span className="text-accent">~/jakarta</span> $ whoami
           </p>
@@ -37,7 +38,7 @@ export function Hero() {
             </span>
             <span aria-hidden>
               I build
-              <span className="block min-h-[1.1em] whitespace-nowrap text-accent">
+              <span className="block min-h-[1.1em] text-accent">
                 {typed}
                 <span className="ml-1 inline-block h-[0.85em] w-[0.08em] translate-y-[0.1em] animate-caret bg-accent" />
               </span>
@@ -114,7 +115,7 @@ export function Hero() {
           </span>
           <span
             aria-hidden
-            className="absolute -right-4 bottom-8 animate-float rounded-lg border border-line bg-surface px-3 py-2 font-mono text-[0.7rem] leading-relaxed whitespace-nowrap text-muted shadow-lg shadow-black/10 [animation-delay:-3s] sm:-right-6 sm:-right-12 sm:bottom-20"
+            className="absolute -right-4 bottom-8 animate-float rounded-lg border border-line bg-surface px-3 py-2 font-mono text-[0.7rem] leading-relaxed whitespace-nowrap text-muted shadow-lg shadow-black/10 [animation-delay:-3s] sm:-right-12 sm:bottom-20"
           >
             <span className="text-accent">const</span> stack = [<br />
             &nbsp;&nbsp;<span className="text-ok">'laravel'</span>,{' '}

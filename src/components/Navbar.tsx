@@ -10,10 +10,15 @@ import { ThemeToggle } from './ThemeToggle'
 
 export type NavItem = { id: string; label: string }
 
-type Props = { items: NavItem[]; onOpenCommands: () => void }
+type Props = {
+  items: NavItem[]
+  /** Sections after the nav items that have no link, so their highlight clears (e.g. Contact). */
+  trailingSections?: string[]
+  onOpenCommands: () => void
+}
 
-export function Navbar({ items, onOpenCommands }: Props) {
-  const active = useActiveSection(items.map((item) => item.id))
+export function Navbar({ items, trailingSections = [], onOpenCommands }: Props) {
+  const active = useActiveSection([...items.map((item) => item.id), ...trailingSections])
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const progressRef = useRef<HTMLDivElement>(null)

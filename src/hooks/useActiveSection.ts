@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 
-/** Returns the id of the section currently in view, including top and bottom-of-page edges. */
+/**
+ * Returns the id of the section currently in view, including top and bottom-of-page edges.
+ * Pass sections that have no nav link too (e.g. "contact"): when one of them is in view the
+ * result is its id, which matches no link, so the previous link's highlight clears.
+ */
 export function useActiveSection(ids: string[]) {
   const [active, setActive] = useState<string | null>(null)
   const key = ids.join('|')
@@ -31,9 +35,8 @@ export function useActiveSection(ids: string[]) {
       }
       const atBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 48
-      if (atBottom) {
-        setActive(elements[elements.length - 1].id)
-      }
+      // The last observed section, which can be a non-nav one such as Contact.
+      if (atBottom) setActive(elements[elements.length - 1].id)
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })

@@ -1,22 +1,27 @@
 import { ArrowUpRight, ChevronDown, FlaskConical, Lock } from 'lucide-react'
 import type { CaseStudy } from '@/data/work'
 import { buttonClass } from '@/lib/button'
-import { Picture } from './Picture'
+import type { LightboxItem } from './Lightbox'
+import { Screenshot } from './Screenshot'
 import { Tag } from './Tag'
 import { UiIllustration } from './UiIllustration'
 
-export function CaseStudyCard({ study }: { study: CaseStudy }) {
+type Props = { study: CaseStudy; onPreview: (item: LightboxItem) => void }
+
+export function CaseStudyCard({ study, onPreview }: Props) {
   const { visual } = study
 
   return (
     <article className="group spotlight flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-[border-color,translate,box-shadow] duration-300 hover:-translate-y-1 hover:border-muted/50 hover:shadow-xl hover:shadow-black/10">
       <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-bg-2">
         {'image' in visual ? (
-          <Picture
-            picture={visual.image}
+          <Screenshot
+            image={visual.image}
+            title={study.client}
             alt={visual.alt}
+            badge={study.industry}
             sizes="(min-width: 1024px) 560px, 100vw"
-            className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+            onPreview={onPreview}
           />
         ) : (
           <UiIllustration
@@ -26,7 +31,7 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
         )}
         {study.confidential && (
           <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full border border-line bg-surface/90 px-2.5 py-1 text-[0.7rem] font-medium text-muted backdrop-blur">
-            <Lock aria-hidden className="size-3" />
+            <Lock aria-hidden className="size-3 text-signal" />
             Under NDA
           </span>
         )}

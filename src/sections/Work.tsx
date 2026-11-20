@@ -1,10 +1,15 @@
+import { useCallback, useState } from 'react'
 import { CaseStudyCard } from '@/components/CaseStudyCard'
+import { Lightbox, type LightboxItem } from '@/components/Lightbox'
 import { Reveal } from '@/components/Reveal'
 import { Section } from '@/components/Section'
 import { Tag } from '@/components/Tag'
 import { caseStudies, moreWork } from '@/data/work'
 
 export function Work() {
+  const [preview, setPreview] = useState<LightboxItem | null>(null)
+  const closePreview = useCallback(() => setPreview(null), [])
+
   return (
     <Section
       id="work"
@@ -18,7 +23,7 @@ export function Work() {
       <div className="grid gap-6 md:grid-cols-2">
         {caseStudies.map((study, index) => (
           <Reveal key={study.slug} delay={(index % 2) * 0.08} className="h-full">
-            <CaseStudyCard study={study} />
+            <CaseStudyCard study={study} onPreview={setPreview} />
           </Reveal>
         ))}
       </div>
@@ -42,6 +47,8 @@ export function Work() {
           ))}
         </ul>
       </Reveal>
+
+      <Lightbox item={preview} onClose={closePreview} />
     </Section>
   )
 }

@@ -48,7 +48,11 @@ export default function App() {
         Skip to content
       </a>
 
-      <Navbar items={navItems} onOpenCommands={() => setCommandsOpen(true)} />
+      <Navbar
+        items={navItems}
+        trailingSections={['contact']}
+        onOpenCommands={() => setCommandsOpen(true)}
+      />
       <CommandPalette
         open={commandsOpen}
         onClose={() => setCommandsOpen(false)}
