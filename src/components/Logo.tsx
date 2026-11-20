@@ -13,3 +13,28 @@ export function LogoMark({ className }: { className?: string }) {
     </svg>
   )
 }
+
+/**
+ * The bare snowflake in the current text colour: the site's one signature motif
+ * (section labels, behind the portrait). Decorative.
+ */
+export function Snowflake({
+  className,
+  strokeWidth = 2,
+}: {
+  className?: string
+  strokeWidth?: number
+}) {
+  return (
+    <svg viewBox="5 4.5 22 23" aria-hidden className={cn('shrink-0', className)}>
+      <path
+        d={SNOWFLAKE_PATH}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        vectorEffect="non-scaling-stroke"
+      />
+    </svg>
+  )
+}

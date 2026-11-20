@@ -1,4 +1,4 @@
-/** "How I work": Scrum/Agile delivery, step by step, plus the habits behind it. */
+/** How a project runs: Scrum delivery, step by step, plus the habits behind it. */
 
 export type ProcessStep = { title: string; description: string }
 
@@ -13,15 +13,13 @@ export const processSteps: ProcessStep[] = [
   },
   {
     title: 'Two-week sprints',
-    description: 'Small, reviewed increments. You always know what is being built and why.',
-  },
-  {
-    title: 'Demo every sprint',
-    description: 'Working software on a staging link, not slides. Feedback goes straight back in.',
+    description:
+      'Small, reviewed increments. Each sprint ends with a demo on a staging link you can try yourself.',
   },
   {
     title: 'Release',
-    description: 'Automated checks, load testing where it matters, then a calm deploy.',
+    description:
+      'Automated tests on every change, and load tests before launch when traffic matters.',
   },
   {
     title: 'Support & retro',
@@ -31,11 +29,11 @@ export const processSteps: ProcessStep[] = [
 
 export const practices = [
   'User stories & acceptance criteria',
-  'Git flow with pull-request review',
+  'Pull-request review',
   'CI/CD pipelines',
-  'Unit & integration tests (Jest, PHPUnit)',
-  'End-to-end tests (Selenium)',
-  'Load & stress tests (JMeter)',
+  'Jest & PHPUnit',
+  'Selenium end-to-end tests',
+  'JMeter load tests',
   'Role-based access by default',
-  'Documentation & hand-over',
+  'Hand-over documentation',
 ]

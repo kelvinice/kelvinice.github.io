@@ -1,5 +1,6 @@
 import { ArrowUpRight, Check, Copy, Mail } from 'lucide-react'
 import { useState } from 'react'
+import { Snowflake } from '@/components/Logo'
 import { Reveal } from '@/components/Reveal'
 import { SocialIcon } from '@/components/SocialIcon'
 import { profile } from '@/data/profile'
@@ -26,23 +27,14 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden">
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,var(--line)_15%,var(--accent)_50%,var(--line)_85%,transparent)] opacity-70"
-      />
+    <section id="contact" aria-labelledby="contact-title" className="relative border-t border-line">
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-dots" />
       <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-6 md:py-28">
         <Reveal className="relative overflow-hidden rounded-3xl border border-line bg-surface p-8 sm:p-12 md:p-16">
-          <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid opacity-70" />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-24 -bottom-32 size-96 rounded-full bg-accent/10 blur-3xl"
-          />
-
           <div className="relative grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-end">
             <div>
-              <p className="mb-3 font-mono text-xs font-medium tracking-[0.18em] text-accent uppercase">
+              <p className="mb-3 flex items-center gap-2 font-mono text-xs font-medium tracking-[0.18em] text-accent uppercase">
+                <Snowflake className="size-3.5" />
                 Contact
               </p>
               <h2
@@ -52,8 +44,8 @@ export function Contact() {
                 Have a project in mind?
               </h2>
               <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">
-                From a new business system to rescuing an existing one: tell me what you’re building
-                and I’ll get back to you.
+                A new system, or one that already exists and needs work: tell me what you’re
+                building and I’ll get back to you.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">

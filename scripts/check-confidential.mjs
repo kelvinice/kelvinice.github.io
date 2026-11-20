@@ -2,7 +2,8 @@
  * Leak guard: fails if a confidential client name shows up anywhere that could be published.
  *
  * The banned terms live in reference/forbidden.txt (gitignored, one term per line, # for comments),
- * so the list itself is never published. Without that file (e.g. in CI) the check is skipped.
+ * so the list itself is never published. CI can't see that file, so the check is skipped there
+ * (CI=true). Anywhere else a missing or empty list is an error: the guard fails closed.
  *
  *   node scripts/check-confidential.mjs          scan every committable file, plus dist/ if built
  *   node scripts/check-confidential.mjs --push   pre-push hook: also scan the commits and tags being pushed
@@ -28,17 +29,27 @@ const ZERO = /^0+$/
 const BINARY_EXT =
   /\.(png|jpe?g|gif|webp|avif|ico|cur|bmp|mp3|mpeg|ogg|wav|mp4|webm|woff2?|ttf|otf|eot|zip|gz|pdf)$/i
 
-if (!existsSync(listFile)) {
-  console.log('check-confidential: reference/forbidden.txt not found, skipping.')
-  process.exit(0)
+/** Without the list nothing is checked: fail locally, skip only in CI (which can't see the list). */
+function noList(reason) {
+  if (process.env.CI) {
+    console.log(`check-confidential: ${reason}; skipped in CI.`)
+    process.exit(0)
+  }
+  console.error(
+    `check-confidential: ${reason}, so nothing can be checked. Stopping.\n` +
+      'Restore reference/forbidden.txt (one banned term per line, # for comments) and try again.',
+  )
+  process.exit(1)
 }
+
+if (!existsSync(listFile)) noList('reference/forbidden.txt not found')
 
 const terms = readFileSync(listFile, 'utf8')
   .split(/\r?\n/)
   .map((line) => line.trim())
   .filter((line) => line && !line.startsWith('#'))
 
-if (terms.length === 0) process.exit(0)
+if (terms.length === 0) noList('reference/forbidden.txt has no terms')
 
 // Whole-word, case-insensitive; a space in a term matches any run of whitespace.
 const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+')

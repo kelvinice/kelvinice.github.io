@@ -1,19 +1,22 @@
-import { ArrowUpRight, Menu, Search, X } from 'lucide-react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useActiveSection } from '@/hooks/useActiveSection'
 import { buttonClass } from '@/lib/button'
 import { cn } from '@/lib/cn'
-import { commandShortcut, isMac } from '@/lib/platform'
 import { profile } from '@/data/profile'
 import { LogoMark } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
 
 export type NavItem = { id: string; label: string }
 
-type Props = { items: NavItem[]; onOpenCommands: () => void }
+type Props = {
+  items: NavItem[]
+  /** Sections after the nav items that have no link, so their highlight clears (e.g. Contact). */
+  trailingSections?: string[]
+}
 
-export function Navbar({ items, onOpenCommands }: Props) {
-  const active = useActiveSection(items.map((item) => item.id))
+export function Navbar({ items, trailingSections = [] }: Props) {
+  const active = useActiveSection([...items.map((item) => item.id), ...trailingSections])
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const progressRef = useRef<HTMLDivElement>(null)
@@ -87,23 +90,10 @@ export function Navbar({ items, onOpenCommands }: Props) {
         </ul>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={onOpenCommands}
-            aria-label="Open command menu"
-            aria-keyshortcuts={isMac ? 'Meta+K' : 'Control+K'}
-            className={buttonClass({
-              variant: 'ghost',
-              size: 'sm',
-              className: 'border-line px-2.5 text-muted',
-            })}
-          >
-            <Search aria-hidden />
-            <kbd className="hidden font-mono text-[0.7rem] sm:inline">{commandShortcut}</kbd>
-          </button>
           <ThemeToggle />
-          <a href="#contact" className={buttonClass({ size: 'sm', className: 'max-sm:hidden' })}>
-            Start a project
+          <a href="#contact" className={buttonClass({ size: 'sm' })}>
+            <span className="sm:hidden">Contact</span>
+            <span className="max-sm:hidden">Start a project</span>
             <ArrowUpRight aria-hidden />
           </a>
           <button

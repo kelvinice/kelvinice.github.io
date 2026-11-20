@@ -1,6 +1,6 @@
 # kelvinice.github.io: v3 "Professional" Rework Plan
 
-Status: **Complete (2026-11-01), restyled 2026-11-20.** All phases are done (§11), including the merge to `master` that deploys v3. Decisions are in §9; §10 lists the details that shipped with defaults and can be changed any time; §12 is the open backlog; §13 is the "de-template" review. Its fixes were settled in a three-way review (§13.6) and are waiting for Kelvin's approvals. Nothing in `src/` has been changed for it yet.
+Status: **Complete (2026-11-01), restyled 2026-11-20.** All phases are done (§11), including the merge to `master` that deploys v3. Decisions are in §9; §10 lists the details that shipped with defaults and can be changed any time; §12 is the open backlog; §13 is the "de-template" review. Its fixes were settled in a three-way review (§13.6), approved by Kelvin, and implemented on branch `v3.1-de-template` (not merged yet).
 
 Changes in the 2026-11-20 merge (a parallel "editorial notebook" redesign of v2 was folded into v3):
 
@@ -108,16 +108,16 @@ Tone rules: first person, short sentences, concrete nouns (modules, users, endpo
 
 ### Client & contract work
 
-| Key      | Public label (draft)                                         | What Kelvin did                                                                                                             | Stack (known)        | Named?                            |
-| -------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- | -------------------- | --------------------------------- |
-| BJ       | **Bersama Jaya Bordir Studio**, embroidery workshop, Jakarta | Company website **+ CMS + ERP**; public site has a price calculator and lead form                                           | Next.js (+ ?)        | Yes, links bersamajaya.vercel.app |
-| MidHub   | **MidHub.id**, heavy-equipment marketplace                   | **Backend engineer** on the core modules: **product listings**, **premium** (membership/promoted listings) and **payments** | ? (frontend Next.js) | Yes, links midhub.id              |
-| Client A | "A multinational automotive manufacturer in Indonesia" ✔     | **HRIS** + **e-Tender / procurement system**                                                                                | ?                    | No                                |
-| Client B | "An automotive retail & distribution group"                  | **ERP**: developed and maintained core backend features                                                                     | Laravel              | No                                |
-| Client C | "An energy company"                                          | **Maintained & enhanced** their corporate website/CMS, including statistical reporting                                      | CodeIgniter          | No                                |
-| Client D | "A large state-owned enterprise" ✔                           | **KPI dashboard**: real-time performance and job monitoring                                                                 | Laravel              | No                                |
-| HAM      | "Multi-hospital asset management platform"                   | **Led backend**: dynamic RBAC; calibration, maintenance, inspection and lifecycle workflows; Jest suites                    | NestJS, Jest         | Generic already                   |
-| IoT      | "Hospital tool monitoring & RFID infant tracking"            | Real-time tracking systems                                                                                                  | ?                    | Generic already                   |
+| Key      | Public label (draft)                                         | What Kelvin did                                                                                                             | Stack (known)        | Named?                             |
+| -------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- | -------------------- | ---------------------------------- |
+| BJ       | **Bersama Jaya Bordir Studio**, embroidery workshop, Jakarta | Company website **+ CMS + ERP**; public site has a price calculator and lead form                                           | Next.js (+ ?)        | Yes, links bersamajaya.vercel.app  |
+| MidHub   | **MidHub.id**, heavy-equipment marketplace                   | **Backend engineer** on the core modules: **product listings**, **premium** (membership/promoted listings) and **payments** | ? (frontend Next.js) | Yes, links midhub.id               |
+| Client A | "A multinational automotive manufacturer in Indonesia" ✔     | **HRIS** + **e-Tender / procurement system**                                                                                | ?                    | No                                 |
+| Client B | **Cakra Motor 11**, automotive retail & distribution         | **ERP**: developed and maintained core backend features                                                                     | Laravel              | Yes (approved 2026-11-20), no link |
+| Client C | "An energy company"                                          | **Maintained & enhanced** their corporate website/CMS, including statistical reporting                                      | CodeIgniter          | No                                 |
+| Client D | "A large state-owned enterprise" ✔                           | **KPI dashboard**: real-time performance and job monitoring                                                                 | Laravel              | No                                 |
+| HAM      | "Multi-hospital asset management platform"                   | **Led backend**: dynamic RBAC; calibration, maintenance, inspection and lifecycle workflows; Jest suites                    | NestJS, Jest         | Generic already                    |
+| IoT      | "Hospital tool monitoring & RFID infant tracking"            | Real-time tracking systems                                                                                                  | ?                    | Generic already                    |
 
 **Wording rules:**
 
@@ -286,6 +286,7 @@ scripts/
 | Hospital asset role      | Full-stack developer, leading the backend                                                      |
 | Descriptions             | General ("web developer & software engineer, 8+ years"), not a list of past systems            |
 | Logo / favicon           | Snowflake                                                                                      |
+| Client B                 | **Public** (2026-11-20): may be named as Cakra Motor 11; no longer under NDA                   |
 
 ---
 
@@ -438,4 +439,4 @@ Claude, Gemini and Codex discussed §13 and [docs/portfolio-improvement-proposal
 - **PR 3, copy:** fixed headline ("I build and test business software." draft), "8+ years" plus the teaching line, copy pass, JSON-LD `Book` entries.
 - **PR 4, work and structure:** three featured cases (Bersama Jaya, hospital asset management, DocFlow), text-led NDA cards with evidence on the face, anchors, Services + Process merged, compact Stack, the books as a slim band before Contact with no nav item.
 
-Kelvin's approvals needed first are listed as K1–K7 in that document's §7.3.
+Kelvin approved K1–K5 and K7 on 2026-11-20. All five PRs are implemented as separate commits on branch `v3.1-de-template`. Initial JS went from 94.10 KB to 87.72 KB gzipped. Still open: K6, restoring `reference/forbidden.txt` and `reference/clients.md`. The leak guard now refuses to pass without them, so nothing can be pushed until they're back.

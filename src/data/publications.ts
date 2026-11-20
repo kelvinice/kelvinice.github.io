@@ -4,7 +4,7 @@ import riseOfAgenticIntelligence from '@/assets/books/rise-of-agentic-intelligen
 /**
  * Books and papers, newest first. Covers go in src/assets/books/ (imported with `?picture`).
  *
- * The Books section is hidden for now; flip `showPublications` to bring it (and its nav item) back.
+ * Shown as a slim band above Contact (no nav item). Set `showPublications` to false to hide it.
  */
 export const showPublications = true
 

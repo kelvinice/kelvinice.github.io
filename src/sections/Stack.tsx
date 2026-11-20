@@ -1,41 +1,27 @@
 import { Reveal } from '@/components/Reveal'
-import { Section } from '@/components/Section'
 import { skillGroups } from '@/data/skills'
 
-export function Stack() {
+/**
+ * The tech stack as a compact list, shown at the end of Experience. Keeps the #stack anchor
+ * so older links still land here.
+ */
+export function StackList() {
   return (
-    <Section
-      id="stack"
-      index={5}
-      backdrop="dots"
-      glow="right"
-      eyebrow="Tech stack"
-      title="Tools I ship with"
-      intro="Comfortable picking up whatever a project already runs on, and at home with these."
-    >
-      <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-        {skillGroups.map((group, index) => (
-          <Reveal
+    <Reveal id="stack" className="mt-16">
+      <h3 className="text-xl font-semibold tracking-tight text-ink">Tools I use most</h3>
+      <dl className="mt-6 grid gap-x-10 border-t border-line sm:grid-cols-2">
+        {skillGroups.map((group) => (
+          <div
             key={group.title}
-            delay={(index % 3) * 0.06}
-            className="border-t border-line pt-5"
+            className="grid grid-cols-[7.5rem_1fr] gap-4 border-b border-line py-3.5 text-sm"
           >
-            <dt className="font-mono text-xs tracking-[0.14em] text-muted uppercase">
+            <dt className="pt-px font-mono text-xs tracking-[0.12em] text-muted uppercase">
               {group.title}
             </dt>
-            <dd className="mt-3 flex flex-wrap gap-2">
-              {group.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-lg border border-line bg-surface px-3 py-1.5 text-sm text-ink"
-                >
-                  {skill}
-                </span>
-              ))}
-            </dd>
-          </Reveal>
+            <dd className="leading-relaxed text-ink">{group.skills.join(', ')}</dd>
+          </div>
         ))}
       </dl>
-    </Section>
+    </Reveal>
   )
 }

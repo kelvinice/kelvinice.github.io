@@ -30,22 +30,23 @@ pnpm dev          # http://localhost:5173 (games are served too, e.g. /bluejackp
 apps/                 Prebuilt static apps, copied as-is to /<name>/ (bluejackpunk, kelabyrinth, spyfamily,
                       game = frozen v2 arcade portfolio)
 plugins/              Vite plugins (legacy-apps: serves/copies apps/)
-scripts/              check-confidential (leak guard), snapshot-archive (builds apps/game/)
+scripts/              check-confidential (leak guard), smoke-live (post-deploy browser check),
+                      snapshot-archive (builds apps/game/)
 public/               Files served at the site root: favicon, og-image, 404.html, robots, sitemap
 src/
   data/               ← all site content lives here
-    profile.ts          name, role, headline, stats, socials, headshot
-    work.ts             client case studies (NDA work: generic labels only) + "more work"
+    profile.ts          name, role, headline, intro, socials, headshot
+    work.ts             3 featured case studies + the "more work" list (NDA: generic labels only)
     services.ts         what clients can hire me for
-    process.ts          Scrum steps + engineering practices
+    process.ts          how a project runs (Scrum steps) + engineering practices
     experience.ts       work history + education
-    skills.ts           tech stack groups
+    skills.ts           tech stack groups (the compact list at the end of Experience)
     projects.ts         products & side projects
-    publications.ts     books + Google Play links (section hidden; set showPublications = true)
+    publications.ts     books + Google Play links (slim band above Contact; showPublications)
   assets/             Images processed at build time (AVIF/WebP, responsive sizes)
-  components/         Reusable UI (Navbar, CaseStudyCard, UiIllustration, Section, Reveal…)
-  sections/           Page sections (Hero, Work, Services, Process, Experience, Stack, Projects,
-                      Contact, Footer)
+  components/         Reusable UI (Navbar, CaseStudyCard, Screenshot, Lightbox, Section, Reveal…)
+  sections/           Page sections (Hero, Work, Services, Experience + Stack, Projects,
+                      Publications, Contact, Footer)
   hooks/ lib/ styles/ Helpers and the Tailwind theme (globals.css)
 .github/workflows/    deploy.yml (master → Pages), ci.yml (PR checks)
 reference/            Local notes only; gitignored, never published
@@ -53,8 +54,8 @@ reference/            Local notes only; gitignored, never published
 
 ## Updating content
 
-- **Headline, stats, socials:** edit `src/data/profile.ts`. There is deliberately no CV download or phone number on the site.
-- **A client case study:** add it to `src/data/work.ts`. Public clients can have a screenshot (`?picture` import) and a link. NDA work gets `confidential: true`, a generic `client` label and an `illustration`, never a real name, logo or screenshot. Run `pnpm check:confidential` afterwards.
+- **Headline, intro, socials:** edit `src/data/profile.ts`. There is deliberately no CV download or phone number on the site.
+- **A client case study:** add it to `src/data/work.ts`, as a featured case (keep it to three) or a `moreWork` entry. Each gets an anchor, `#work-<slug>`, so keep slugs stable. Public work can have a screenshot (`shot`, a `?picture` import) and a link. NDA work gets `confidential: true` and a generic `client` label, and is text-led: never a real name, logo or screenshot. Run `pnpm check:confidential` afterwards.
 - **A side project:** save a 16:10 screenshot to `src/assets/projects/<slug>.png`, import it in `src/data/projects.ts` with `?picture` and add an entry (or give it a lucide `icon` instead of a screenshot).
 - **Experience:** edit `src/data/experience.ts`. Freelance entries have no dates on purpose.
 - **A new hosted game or demo:** drop its built folder into `apps/<slug>/`. It goes live at `/<slug>/` on the next deploy. Use relative asset paths (`./assets/…`), not `/assets/…`.
@@ -77,3 +78,5 @@ You can also redeploy from **Actions → Deploy → Run workflow**. Build output
 ## Confidentiality
 
 Some client work is under NDA and is described on the site with codenames only. The real names are kept in `reference/` (gitignored). `reference/forbidden.txt` lists the banned terms, and a pre-push hook (`.githooks/pre-push`, enabled by `pnpm install`) blocks any push whose files, diffs or commit messages contain one.
+
+The check fails closed: if `forbidden.txt` is missing or empty, it stops with an error instead of passing. It only skips in CI, which can't see the list. If `git config core.hooksPath` doesn't print `.githooks`, the hook isn't active; run `pnpm install` or `git config core.hooksPath .githooks`.
