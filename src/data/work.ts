@@ -1,4 +1,5 @@
 import bersamaJaya from '@/assets/projects/bersama-jaya.jpg?picture'
+import cakraMotor11 from '@/assets/projects/cakra-motor-11.jpg?picture'
 import docflow from '@/assets/projects/docflow.png?picture'
 import midhub from '@/assets/projects/midhub.jpg?picture'
 
@@ -13,7 +14,12 @@ import midhub from '@/assets/projects/midhub.jpg?picture'
  * No dates or contracting entities on purpose: engagement details stay flexible.
  */
 
-export type Shot = { image: ImagePicture; alt: string }
+export type Shot = {
+  image: ImagePicture
+  alt: string
+  /** Shown under the thumbnail and in the Lightbox, e.g. when the image isn't my own work. */
+  note?: string
+}
 
 export type CaseStudy = {
   slug: string
@@ -118,14 +124,7 @@ export const moreWork: MoreWork[] = [
     shot: { image: midhub, alt: 'MidHub.id home page' },
   },
   {
-    slug: 'automotive-hris-etender',
-    title: 'HRIS and e-Tender system',
-    context: 'Multinational automotive manufacturer · NDA',
-    role: 'Full-stack developer',
-    description:
-      'Employee data, leave and attendance, plus vendor registration, tender bidding and evaluation, with role-based access for HR, procurement and vendors.',
-  },
-  {
+    // Slug kept from the NDA days so existing #work-automotive-erp links still work.
     slug: 'automotive-erp',
     title: 'ERP backend',
     context: 'Cakra Motor 11 · Automotive retail & distribution',
@@ -133,6 +132,19 @@ export const moreWork: MoreWork[] = [
     description:
       'Developed and maintained core backend features of the ERP, with automated regression tests run before every release.',
     stack: ['Laravel', 'PHP'],
+    shot: {
+      image: cakraMotor11,
+      alt: 'Cakra Motor 11 public website',
+      note: 'Their public site, for context. My work was the ERP backend behind the business.',
+    },
+  },
+  {
+    slug: 'automotive-hris-etender',
+    title: 'HRIS and e-Tender system',
+    context: 'Multinational automotive manufacturer · NDA',
+    role: 'Full-stack developer',
+    description:
+      'Employee data, leave and attendance, plus vendor registration, tender bidding and evaluation, with role-based access for HR, procurement and vendors.',
   },
   {
     slug: 'kpi-dashboard',

@@ -8,18 +8,29 @@ type Props = {
   title: string
   alt: string
   badge?: string
+  /** Footnote shown in the Lightbox under the full image. */
+  highlight?: string
   sizes: string
   onPreview: (item: LightboxItem) => void
   className?: string
 }
 
 /** A 16:10 screenshot thumbnail that opens the full image in the Lightbox. */
-export function Screenshot({ image, title, alt, badge, sizes, onPreview, className }: Props) {
+export function Screenshot({
+  image,
+  title,
+  alt,
+  badge,
+  highlight,
+  sizes,
+  onPreview,
+  className,
+}: Props) {
   return (
     <div className={cn('relative aspect-[16/10] overflow-hidden bg-bg-2', className)}>
       <button
         type="button"
-        onClick={() => onPreview({ title, image, badge })}
+        onClick={() => onPreview({ title, image, badge, highlight })}
         aria-label={`Enlarge screenshot of ${title}`}
         className="group/shot relative block size-full cursor-zoom-in"
       >

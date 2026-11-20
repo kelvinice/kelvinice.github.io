@@ -44,10 +44,20 @@ export function Work() {
                   title={item.title}
                   alt={item.shot.alt}
                   badge={item.context}
+                  highlight={item.shot.note}
                   sizes="(min-width: 1024px) 370px, (min-width: 768px) 700px, 100vw"
                   onPreview={setPreview}
-                  className="mb-5 rounded-xl border border-line"
+                  className={
+                    item.shot.note
+                      ? 'rounded-xl border border-line'
+                      : 'mb-5 rounded-xl border border-line'
+                  }
                 />
+              )}
+              {item.shot?.note && (
+                <p className="mt-2 mb-5 text-xs leading-relaxed text-muted italic">
+                  {item.shot.note}
+                </p>
               )}
               <p className="font-mono text-xs text-muted">{item.context}</p>
               <h4 className="mt-1 font-semibold text-ink">{item.title}</h4>
