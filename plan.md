@@ -1,6 +1,6 @@
 # kelvinice.github.io: v3 "Professional" Rework Plan
 
-Status: **Complete (2026-11-01), restyled 2026-11-20.** All phases are done (§11), including the merge to `master` that deploys v3. Decisions are in §9; §10 lists the details that shipped with defaults and can be changed any time; §12 is the open backlog.
+Status: **Complete (2026-11-01), restyled 2026-11-20.** All phases are done (§11), including the merge to `master` that deploys v3. Decisions are in §9; §10 lists the details that shipped with defaults and can be changed any time; §12 is the open backlog; §13 is the "de-template" review and its planned fixes (not started).
 
 Changes in the 2026-11-20 merge (a parallel "editorial notebook" redesign of v2 was folded into v3):
 
@@ -354,3 +354,78 @@ no Books nav item while `showPublications` is off.
 **Later**
 
 - [ ] Privacy-friendly analytics (GoatCounter / Cloudflare Web Analytics), Playwright smoke test in CI, custom domain.
+
+---
+
+## 13. De-template review (2026-11-20)
+
+**Question:** does the site still feel like AI slop or a template?
+**Verdict:** not slop (nothing broken or fake), but **template-y**. The layout is the recognisable 2025 dev-portfolio kit and the copy has LLM cadence,
+so it reads as generic within ~5 seconds even though the underlying work is real. Reviewed from production-build screenshots (light, dark, mobile) and the copy in `src/data/`.
+
+> **Tension to resolve first.** Several of the tells below (typing headline, floating chips, marquee, cursor spotlight, ⌘K menu) were added because
+> Kelvin asked for a "more playful UI" after the first review (see the top of this file). The proposal is to keep the playfulness but make it
+> _personal_ (snowflake, Wyn games, teaching) instead of generic developer UI. Kelvin decides which pieces go.
+
+### 13.1 What reads as template
+
+| #   | Where                                | Tell                                                                                                                                                                                                               |
+| --- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| T1  | Hero                                 | `~/jakarta $ whoami` prompt + typing headline ("I build … that teams rely on") + floating "tests passing" / `const stack` chips + 3 vanity stats + tech marquee. Each is fine; all five together are the template. |
+| T2  | Every section                        | Same frame six times: eyebrow line, short heading, intro, giant outlined `01–06`, dotted/grid backdrop, glow, grid of rounded cards. The uniform rhythm is the main "generated" signal.                            |
+| T3  | Selected work                        | 4 of 6 featured cards show near-identical grey wireframe illustrations that look like loading skeletons. The most important section has the weakest visuals.                                                       |
+| T4  | Services + Process                   | Six-icon services grid and a numbered Discovery → Support stepper with a green-tick checklist: agency boilerplate that could sit on any site.                                                                      |
+| T5  | ⌘K menu + footer "Tip: press Ctrl K" | Gimmick on a single-page site.                                                                                                                                                                                     |
+| T6  | Cards everywhere                     | Same rounded-2xl card, hover lift and cursor spotlight on every grid.                                                                                                                                              |
+
+### 13.2 What sounds AI-written (copy)
+
+| #   | Example                                                                                                                                                                                                                | Where                                        |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| C1  | "X, not Y" constructions: "on a staging link, not slides", "before launch day, not after", "the process isn't a buzzword here"                                                                                         | `process.ts`, `services.ts`, Process section |
+| C2  | Stock phrases: "Inherited a system nobody wants to touch?", "a calm deploy", "that teams rely on"                                                                                                                      | `services.ts`, `process.ts`, Hero            |
+| C3  | Repeated phrase "from database schema to deployed UI" in both the hero intro and the Services intro                                                                                                                    | `profile.ts`, Services section               |
+| C4  | Vague case-study bullets with no numbers: "Core backend features across the ERP modules", "New features shipped without breaking existing flows", "Data routing between modules, tuned for stability under daily load" | `work.ts`                                    |
+| C5  | Hero intro could describe any developer                                                                                                                                                                                | `profile.ts` `intro`                         |
+| C6  | Unverifiable vanity stats ("10+ production systems shipped", "6 years in R&D engineering")                                                                                                                             | `profile.ts` `stats`                         |
+
+### 13.3 What already feels genuine (keep and build on)
+
+- Concrete numbers: DocFlow "48 of 48 scans filed correctly in 95 seconds", SATU-GIZI "171 API endpoints".
+- Honest scope wording ("Developed & maintained", "leading the backend") and the plain NDA explanation.
+- Real headshot and the real BINUS screenshots.
+- Contact panel "A good first message includes…" (useful, not decorative).
+- Bricolage Grotesque headings give the type some character.
+- **The buried differentiator:** Kelvin ships production systems _and_ teaches software testing and Scrum at university, wrote a Selenium testing-framework thesis,
+  and co-authored two books. Today that is one line inside the Process box; it should be the hook.
+
+### 13.4 Planned fixes (ordered by impact ÷ effort)
+
+Copy changes are drafted first and approved by Kelvin before anything is changed in `src/`.
+
+- [ ] **F1 · Hero (T1, C5, C6).** Remove the prompt, typing effect, floating chips and marquee. One fixed headline only Kelvin can say,
+      e.g. _"I build business systems and test them properly. I also teach software testing at BINUS."_ Replace the vanity stats with checkable ones
+      (e.g. "8+ years", "2 books", students taught).
+- [ ] **F2 · Copy pass (C1–C3).** Remove "X, not Y" lines, clichés and the repeated phrase across `profile.ts`, `services.ts`, `process.ts` and section intros.
+- [ ] **F3 · Case studies (T3, C4).** One hard number per case study (users, modules, records, concurrent load tested). Make NDA cards text-led instead of fake UI,
+      or give each one a distinctive illustration of its actual flow (still anonymised, §8). Consider an ERP screenshot with dummy data for Bersama Jaya (§10 #1).
+- [ ] **F4 · Fewer, less uniform sections (T2, T4).** Merge Services + Process into one section; turn Stack into a compact line list.
+      Vary the section frames (not every section needs eyebrow + numeral + backdrop + glow).
+- [ ] **F5 · Remove generic decoration (T2, T5, T6).** Drop the outlined numerals, cursor spotlight and ⌘K menu (also frees ~JS budget, §7).
+      Keep at most one signature visual element.
+- [ ] **F6 · Personal playfulness.** Replace the removed "dev UI" playfulness with something only this site has (snowflake motif, a Wyn pet, a nod to teaching).
+- [ ] **F7 · Credibility strip.** Reconsider showing the two books (`showPublications`) as a small credibility strip rather than a full section (§9 currently: hidden).
+- [ ] **F8 · Expose case-study deliverables by default (`CaseStudyCard.tsx`).** Show key deliverables and testing proof without hiding them behind a collapsed `<details>` toggle—especially on NDA cards where the visual is abstract and collapsing leaves only a one-line summary visible on first scan.
+- [ ] **F9 · Unify screenshot Lightbox & aspect ratios (`CaseStudyCard.tsx`, `Projects.tsx`).** Wire `Lightbox` click-to-zoom onto public case-study screenshots (_Bersama Jaya_, _MidHub.id_) to match `Projects`, and align `ProjectCard` (`16:9`) with `CaseStudyCard` (`16:10`) so taller screenshots like `disc-personality-test.png` are not over-cropped.
+- [ ] **F10 · Fix nav active-state & mobile Hero overflow (`useActiveSection.ts`, `App.tsx`, `Hero.tsx`).** Observe `#contact` (or stop triggering `atBottom` for `projects`) so scrolling to Contact doesn't highlight **Projects** as active in the navbar. Also add `min-w-0` on the Hero grid text column and remove `whitespace-nowrap` on the headline (which currently forces the grid track past 390 px, causing `<section className="overflow-hidden">` to clip the right edge of the hero intro, buttons, and stats on mobile), and remove the duplicate `sm:-right-6 sm:-right-12` class on `Hero.tsx`.
+- [ ] **F11 · Post-merge cleanup (`globals.css`, `TODO.md`).** Either use `--signal` / `--signal-soft` intentionally for one restrained emphasis or remove the unused tokens from `globals.css`; delete or archive the stale root `TODO.md` (its pre-merge items like `resume.pdf`, `About.tsx`, and availability wording conflict with §9 and are already reconciled into §12).
+- [ ] **F8 · Expose case-study deliverables by default (`CaseStudyCard.tsx`).** Show key deliverables and testing proof without hiding them behind a collapsed `<details>` toggle—especially on NDA cards where the visual is abstract and collapsing leaves only a one-line summary visible on first scan.
+- [ ] **F9 · Unify screenshot Lightbox & aspect ratios (`CaseStudyCard.tsx`, `Projects.tsx`).** Wire `Lightbox` click-to-zoom onto public case-study screenshots (_Bersama Jaya_, _MidHub.id_) to match `Projects`, and align `ProjectCard` (`16:9`) with `CaseStudyCard` (`16:10`) so taller screenshots like `disc-personality-test.png` are not over-cropped.
+- [ ] **F10 · Fix nav active-state & mobile Hero overflow (`useActiveSection.ts`, `App.tsx`, `Hero.tsx`).** Observe `#contact` (or stop triggering `atBottom` for `projects`) so scrolling to Contact doesn't highlight **Projects** as active in the navbar. Also add `min-w-0` on the Hero grid text column and remove `whitespace-nowrap` on the headline (which currently forces the grid track past 390 px, causing `<section className="overflow-hidden">` to clip the right edge of the hero intro, buttons, and stats on mobile), and remove the duplicate `sm:-right-6 sm:-right-12` class on `Hero.tsx`.
+- [ ] **F11 · Post-merge cleanup (`globals.css`, `TODO.md`).** Either use `--signal` / `--signal-soft` intentionally for one restrained emphasis or remove the unused tokens from `globals.css`; delete or archive the stale root `TODO.md` (its pre-merge items like `resume.pdf`, `About.tsx`, and availability wording conflict with §9 and are already reconciled into §12).
+
+### 13.5 Second-opinion comparison (2026-11-20)
+
+- **Convergence:** Both reviews independently identified the same core template tells—Hero prompt + typewriter + orbiting chips + marquee (`T1`), identical six-section chrome + `.spotlight` + hollow numerals (`T2`/`T6`), weak NDA wireframe cards (`T3`), agency-style `Services` + `Process` (`T4`), and the performative `⌘K` palette (`T5`).
+- **Copy & positioning (`C1–C6`):** The earlier §13 review adds an explicit LLM-copy audit (`"X, not Y"` phrasing, stock templates, unverifiable vanity stats) and surfaces the strongest real hook: building and testing production systems _and_ teaching software testing/Scrum at BINUS.
+- **Technical root causes (`F8–F11`):** Added code-level fixes uncovered in the post-merge audit—collapsed NDA `<details>`, missing Lightbox / mismatched `16:9` vs `16:10` crop on screenshots, `#contact` highlighting `Projects` via `useActiveSection`'s `atBottom` branch, and the real CSS Grid `min-w-0` + `whitespace-nowrap` bug behind the 390 px mobile right-edge clip.
