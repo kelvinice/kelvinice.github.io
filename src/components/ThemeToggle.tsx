@@ -4,13 +4,13 @@ import { buttonClass } from '@/lib/button'
 
 export function ThemeToggle() {
   const { theme, toggle } = useTheme()
-  const next = theme === 'light' ? 'dark' : 'light'
+  const next = theme === 'dark' ? 'light' : 'dark'
 
   return (
     <button
       type="button"
       onClick={toggle}
-      className={buttonClass({ variant: 'secondary', size: 'icon' })}
+      className={buttonClass({ variant: 'ghost', size: 'icon' })}
       aria-label={`Switch to ${next} theme`}
       title={`Switch to ${next} theme`}
     >

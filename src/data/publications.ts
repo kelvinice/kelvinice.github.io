@@ -1,7 +1,12 @@
 import buildingBetterOop from '@/assets/books/building-better-oop.jpg?picture'
 import riseOfAgenticIntelligence from '@/assets/books/rise-of-agentic-intelligence.jpg?picture'
 
-/** Books and papers, newest first. Covers go in src/assets/books/ (imported with `?picture`). */
+/**
+ * Books and papers, newest first. Covers go in src/assets/books/ (imported with `?picture`).
+ *
+ * The Books section is hidden for now; flip `showPublications` to bring it (and its nav item) back.
+ */
+export const showPublications = false
 
 export type Publication = {
   title: string

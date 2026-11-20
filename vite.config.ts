@@ -14,13 +14,13 @@ export default defineConfig({
     imagetools({
       // Shorthand query params → responsive, modern-format images at build time.
       //   import shot from './shot.png?picture'  (project screenshots)
-      //   import me from './me.jpg?avatar'       (small square images)
+      //   import me from './me.jpg?avatar'       (square portrait, shown up to ~300px)
       defaultDirectives: (url) => {
         if (url.searchParams.has('picture')) {
           return new URLSearchParams({ w: '480;800', format: 'avif;webp;jpg', as: 'picture' })
         }
         if (url.searchParams.has('avatar')) {
-          return new URLSearchParams({ w: '160;320', format: 'avif;webp;jpg', as: 'picture' })
+          return new URLSearchParams({ w: '240;360;480', format: 'avif;webp;jpg', as: 'picture' })
         }
         return new URLSearchParams()
       },

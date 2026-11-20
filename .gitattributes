@@ -1,0 +1,2 @@
+# Git hooks must keep LF endings or "#!/bin/sh" breaks on Windows checkouts.
+.githooks/* text eol=lf

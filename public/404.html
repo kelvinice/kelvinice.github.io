@@ -4,28 +4,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 · Page not found · Kelvinice</title>
+    <title>Page not found · Kelvin</title>
     <meta name="robots" content="noindex" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <style>
       :root {
-        --bg: #f6f7f9;
-        --surface: #ffffff;
-        --ink: #11161f;
-        --muted: #4b5668;
-        --line: #d6dde6;
-        --accent: #026aa2;
-        --on-accent: #ffffff;
+        --bg: #0e1116;
+        --surface: #171d27;
+        --ink: #edf1f7;
+        --muted: #98a4b8;
+        --line: #263041;
+        --accent: #6bc5ff;
+        --on-accent: #0b111a;
       }
-      @media (prefers-color-scheme: dark) {
+      @media (prefers-color-scheme: light) {
         :root {
-          --bg: #0e1116;
-          --surface: #171d27;
-          --ink: #edf1f7;
-          --muted: #98a4b8;
-          --line: #263041;
-          --accent: #6bc5ff;
-          --on-accent: #0b111a;
+          --bg: #f6f7f9;
+          --surface: #ffffff;
+          --ink: #11161f;
+          --muted: #4b5668;
+          --line: #d6dde6;
+          --accent: #026aa2;
+          --on-accent: #ffffff;
         }
       }
       * {
@@ -36,71 +36,57 @@
         min-height: 100svh;
         display: grid;
         place-items: center;
-        padding: 24px;
+        padding: 16px;
         background: var(--bg);
         color: var(--ink);
-        font-family:
-          system-ui,
-          -apple-system,
-          'Segoe UI',
-          Roboto,
-          sans-serif;
-        -webkit-font-smoothing: antialiased;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        text-align: center;
       }
       main {
-        max-width: 30rem;
+        max-width: 28rem;
         width: 100%;
-        padding: 2.5rem 2rem;
+        padding: 3rem 2rem;
         background: var(--surface);
         border: 1px solid var(--line);
-        border-radius: 4px;
+        border-radius: 1.25rem;
       }
       .code {
         margin: 0;
         color: var(--accent);
         font-family: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
-        font-size: 0.75rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
       }
       h1 {
-        margin: 0.75rem 0 0;
-        font-size: clamp(1.75rem, 6vw, 2.35rem);
+        margin: 0.75rem 0;
+        font-size: 1.9rem;
         letter-spacing: -0.02em;
-        line-height: 1.15;
       }
       p {
-        margin: 0.85rem 0 0;
         color: var(--muted);
-        line-height: 1.65;
-        font-size: 0.95rem;
+        line-height: 1.6;
       }
       a {
         display: inline-block;
-        margin-top: 1.75rem;
-        padding: 0.65rem 1.1rem;
-        background: var(--ink);
-        color: var(--bg);
-        font-size: 0.875rem;
-        font-weight: 500;
-        text-decoration: none;
-        border-radius: 3px;
-        transition:
-          background-color 0.15s,
-          color 0.15s;
-      }
-      a:hover {
+        margin-top: 1.25rem;
+        padding: 0.75rem 1.25rem;
+        border-radius: 0.5rem;
         background: var(--accent);
         color: var(--on-accent);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      a:hover {
+        filter: brightness(1.1);
       }
     </style>
   </head>
   <body>
     <main>
-      <p class="code">Error 404</p>
+      <p class="code">404</p>
       <h1>Page not found</h1>
-      <p>The page or level you requested doesn’t exist or may have moved.</p>
-      <a href="/">Back to portfolio</a>
+      <p>This page doesn’t exist, or it has moved.</p>
+      <a href="/">Back to home</a>
     </main>
   </body>
 </html>

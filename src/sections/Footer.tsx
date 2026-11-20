@@ -1,37 +1,20 @@
-import { useState } from 'react'
-import { PixelSnowflake } from '@/components/PixelSnowflake'
+import { ArrowUp } from 'lucide-react'
+import { LogoMark } from '@/components/Logo'
 import { profile } from '@/data/profile'
+import { commandShortcut } from '@/lib/platform'
 
-export function Footer({ onToggleSnow }: { onToggleSnow?: () => void }) {
-  const [clicks, setClicks] = useState(0)
-
-  const handleMarkClick = () => {
-    if (!onToggleSnow) return
-    const next = clicks + 1
-    if (next >= 5) {
-      setClicks(0)
-      onToggleSnow()
-    } else {
-      setClicks(next)
-    }
-  }
-
+export function Footer() {
   return (
-    <footer className="border-t border-line bg-bg-2/70">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-muted sm:flex-row sm:px-6">
-        <p className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={handleMarkClick}
-            aria-label="Snowflake mark"
-            className="inline-flex cursor-pointer items-center text-accent transition-transform duration-300 hover:rotate-90"
-          >
-            <PixelSnowflake className="size-4" />
-          </button>
-          <span>
-            © {new Date().getFullYear()} {profile.name}
+    <footer className="border-t border-line">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-muted sm:flex-row sm:px-6">
+        <p className="flex items-center gap-2.5">
+          <LogoMark className="size-5" />© {new Date().getFullYear()} {profile.name} ·{' '}
+          {profile.location}
+        </p>
+        <p className="flex items-center gap-4">
+          <span className="hidden font-mono text-xs md:inline">
+            Tip: press <kbd className="rounded border border-line px-1">{commandShortcut}</kbd>
           </span>
-          <span aria-hidden>·</span>
           <a
             href="https://github.com/kelvinice/kelvinice.github.io"
             target="_blank"
@@ -40,10 +23,9 @@ export function Footer({ onToggleSnow }: { onToggleSnow?: () => void }) {
           >
             Source
           </a>
-        </p>
-
-        <p className="font-mono text-xs text-subtle" title="Konami code toggles snow">
-          ↑↑↓↓←→←→BA
+          <a href="#top" className="inline-flex items-center gap-1 hover:text-ink">
+            Back to top <ArrowUp aria-hidden className="size-3.5" />
+          </a>
         </p>
       </div>
     </footer>

@@ -1,5 +1,6 @@
 import { X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { Picture } from './Picture'
 
 export type LightboxItem = {
@@ -39,7 +40,8 @@ export function Lightbox({ item, onClose }: Props) {
 
   if (!item) return null
 
-  return (
+  // Portal to <body> so section overflow/stacking can't clip the overlay.
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -49,7 +51,7 @@ export function Lightbox({ item, onClose }: Props) {
     >
       <div
         onClick={(event) => event.stopPropagation()}
-        className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-sm border border-line bg-surface shadow-2xl"
+        className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl"
       >
         <div className="flex items-center justify-between gap-4 border-b border-line px-4 py-3 sm:px-5">
           <div className="flex min-w-0 items-center gap-2.5">
@@ -57,7 +59,7 @@ export function Lightbox({ item, onClose }: Props) {
               {item.title}
             </h3>
             {item.badge && (
-              <span className="shrink-0 rounded-sm border border-line bg-bg-2 px-2 py-0.5 font-mono text-[0.7rem] text-muted">
+              <span className="shrink-0 rounded-md border border-line bg-bg-2 px-2 py-0.5 font-mono text-[0.7rem] text-muted">
                 {item.badge}
               </span>
             )}
@@ -67,7 +69,7 @@ export function Lightbox({ item, onClose }: Props) {
             type="button"
             onClick={onClose}
             aria-label="Close screenshot preview"
-            className="flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-sm border border-line bg-bg text-muted transition-colors hover:border-line-strong hover:text-ink"
+            className="flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-line bg-bg text-muted transition-colors hover:border-line-strong hover:text-ink"
           >
             <X className="size-4" aria-hidden />
           </button>
@@ -79,7 +81,7 @@ export function Lightbox({ item, onClose }: Props) {
             alt={`Full-size screenshot of ${item.title}`}
             sizes="(min-width: 1024px) 960px, 94vw"
             eager
-            className="max-h-[72vh] w-auto border border-line/80 object-contain"
+            className="max-h-[72vh] w-auto rounded-lg border border-line/80 object-contain"
           />
         </div>
 
@@ -89,6 +91,7 @@ export function Lightbox({ item, onClose }: Props) {
           </p>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }

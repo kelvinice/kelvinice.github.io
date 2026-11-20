@@ -1,31 +1,49 @@
-import { FileDown, Menu, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { profile } from '@/data/profile'
+import { ArrowUpRight, Menu, Search, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { useActiveSection } from '@/hooks/useActiveSection'
+import { buttonClass } from '@/lib/button'
 import { cn } from '@/lib/cn'
-import { ButtonLink } from './Button'
-import { PixelSnowflake } from './PixelSnowflake'
+import { commandShortcut, isMac } from '@/lib/platform'
+import { profile } from '@/data/profile'
+import { LogoMark } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
 
 export type NavItem = { id: string; label: string }
 
-export function Navbar({ items }: { items: NavItem[] }) {
+type Props = { items: NavItem[]; onOpenCommands: () => void }
+
+export function Navbar({ items, onOpenCommands }: Props) {
   const active = useActiveSection(items.map((item) => item.id))
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const progressRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
+    let frame = 0
+    const onScroll = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const max = document.documentElement.scrollHeight - window.innerHeight
+        setScrolled(window.scrollY > 8)
+        progressRef.current?.style.setProperty(
+          'transform',
+          `scaleX(${max > 0 ? window.scrollY / max : 0})`,
+        )
+      })
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   useEffect(() => {
     if (!open) return
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false)
-    }
+    const onKey = (event: KeyboardEvent) => event.key === 'Escape' && setOpen(false)
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
@@ -35,98 +53,98 @@ export function Navbar({ items }: { items: NavItem[] }) {
       className={cn(
         'fixed inset-x-0 top-0 z-40 border-b transition-colors duration-200',
         scrolled || open
-          ? 'border-line bg-bg/92 backdrop-blur-md'
-          : 'border-transparent bg-bg/75 backdrop-blur-sm',
+          ? 'border-line bg-bg/80 backdrop-blur-lg'
+          : 'border-transparent bg-transparent',
       )}
     >
       <nav
         aria-label="Main"
-        className="mx-auto flex h-15 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6"
+        className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-6"
       >
-        <a
-          href="#top"
-          className="group flex items-center gap-2.5 text-ink"
-          onClick={() => setOpen(false)}
-        >
-          <PixelSnowflake className="size-5 text-accent transition-transform duration-300 group-hover:rotate-90" />
-          <span className="font-display text-base font-semibold tracking-tight">kelvinice</span>
+        <a href="#top" className="group flex items-center gap-2.5" onClick={() => setOpen(false)}>
+          <LogoMark className="size-7 transition-transform duration-700 ease-out group-hover:rotate-[180deg]" />
+          <span className="font-semibold tracking-tight text-ink">{profile.name}</span>
+          <span className="hidden font-mono text-xs text-muted sm:inline">/ software engineer</span>
         </a>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-0.5 lg:flex">
           {items.map((item) => (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
                 aria-current={active === item.id ? 'location' : undefined}
                 className={cn(
-                  'relative inline-flex items-center px-3 py-2 text-sm font-medium transition-colors',
-                  active === item.id ? 'text-ink' : 'text-muted hover:text-ink',
+                  'rounded-full px-3.5 py-1.5 text-sm transition-colors',
+                  active === item.id
+                    ? 'bg-surface-2 text-ink'
+                    : 'text-muted hover:bg-surface-2/60 hover:text-ink',
                 )}
               >
                 {item.label}
-                <span
-                  aria-hidden
-                  className={cn(
-                    'absolute inset-x-3 bottom-0.5 h-0.5 rounded-full transition-opacity',
-                    active === item.id ? 'bg-accent opacity-100' : 'opacity-0',
-                  )}
-                />
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-2.5">
-          {profile.resumeUrl && (
-            <ButtonLink
-              href={profile.resumeUrl}
-              variant="secondary"
-              size="sm"
-              download
-              className="hidden sm:inline-flex"
-            >
-              <FileDown aria-hidden />
-              CV
-            </ButtonLink>
-          )}
-          <ThemeToggle />
+        <div className="flex items-center gap-2">
           <button
             type="button"
-            className="flex size-9 cursor-pointer items-center justify-center rounded-sm border border-line bg-surface text-ink transition-colors hover:border-line-strong lg:hidden"
+            onClick={onOpenCommands}
+            aria-label="Open command menu"
+            aria-keyshortcuts={isMac ? 'Meta+K' : 'Control+K'}
+            className={buttonClass({
+              variant: 'ghost',
+              size: 'sm',
+              className: 'border-line px-2.5 text-muted',
+            })}
+          >
+            <Search aria-hidden />
+            <kbd className="hidden font-mono text-[0.7rem] sm:inline">{commandShortcut}</kbd>
+          </button>
+          <ThemeToggle />
+          <a href="#contact" className={buttonClass({ size: 'sm', className: 'max-sm:hidden' })}>
+            Start a project
+            <ArrowUpRight aria-hidden />
+          </a>
+          <button
+            type="button"
+            className={buttonClass({ variant: 'ghost', size: 'icon', className: 'lg:hidden' })}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((value) => !value)}
           >
-            {open ? <X className="size-4" aria-hidden /> : <Menu className="size-4" aria-hidden />}
+            {open ? <X aria-hidden /> : <Menu aria-hidden />}
           </button>
         </div>
       </nav>
 
       {open && (
-        <ul
-          id="mobile-menu"
-          className="divide-y divide-line border-t border-line bg-bg px-4 pb-2 lg:hidden"
-        >
-          {items.map((item) => (
+        <ul id="mobile-menu" className="border-t border-line px-5 pb-4 lg:hidden">
+          {[...items, { id: 'contact', label: 'Start a project' }].map((item) => (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  'flex items-center justify-between py-3.5 text-sm font-medium',
+                  'block border-b border-line py-3.5 text-[0.95rem]',
                   active === item.id ? 'text-accent' : 'text-ink',
                 )}
               >
                 {item.label}
-                {active === item.id && (
-                  <span className="font-mono text-xs text-accent">Active</span>
-                )}
               </a>
             </li>
           ))}
         </ul>
       )}
+
+      {/* Reading progress. */}
+      <div
+        ref={progressRef}
+        aria-hidden
+        className="absolute inset-x-0 -bottom-px h-0.5 origin-left bg-accent"
+        style={{ transform: 'scaleX(0)' }}
+      />
     </header>
   )
 }

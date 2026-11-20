@@ -1,6 +1,10 @@
+import headshot from '@/assets/images/headshot.jpg?avatar'
+
 /**
- * Biographical copy and links rendered across Hero, About, and Contact.
- * Lines marked TODO(kelvin) are drafts — rewrite them in your own voice.
+ * Who you are. The hero, contact and footer read from here.
+ *
+ * Confidential client work is described in src/data/work.ts with codename-safe labels only.
+ * Never put a real client name in this repo (see README → Confidentiality).
  */
 
 export type Social = {
@@ -12,28 +16,20 @@ export type Social = {
 export const profile = {
   name: 'Kelvin',
   handle: 'Kelvinice',
-  role: 'Lecturer & software developer',
+  role: 'Software Engineer · Full-stack Web Developer',
   location: 'Jakarta, Indonesia',
-  tagline: 'I teach, lead academic development at BINUS, and build web apps & browser games.',
-  // First year of public code on GitHub.
-  codingSince: 2018,
   email: 'kelvinices@gmail.com',
-  // Drop a PDF in public/ and point this at it (e.g. '/resume.pdf') to show the CV button.
-  resumeUrl: null as string | null,
+  photo: headshot,
 
-  // TODO(kelvin): draft bio. Each string is one paragraph.
-  bio: [
-    'I’m Kelvin (S.Kom., M.Kom.), Academic Development Section Head and Lecturer at BINUS University, and still a passionate software developer. I started at BINUS in 2018 as a teaching assistant for cyber security, computer science and web development, spent six years in research & development, and have lectured since 2023. Along the way I co-wrote two books with colleagues, on object-oriented design and agentic AI.',
-    'Outside of work I’m always building something: games and apps, mostly with React, TypeScript and Supabase.',
-    'On the full-stack side I build NestJS and Spring Boot systems that take busywork off people’s plates: document automation for BINUS University’s graduation division that OCRs, sorts and files scanned documents by itself, an AI plagiarism checker and a review tool for lab assistants at BINUS SLC, and a hackathon platform for Indonesia’s free school-meals programme. And before all that, canvas games written from scratch.',
-  ],
+  /** Hero headline: "I build <word> that teams rely on." The words cycle with a typing effect. */
+  buildWords: ['web apps', 'business systems', 'dashboards', 'APIs', 'internal tools'],
+  intro:
+    'Web developer and software engineer with 8+ years of experience designing, building and testing production systems, from database schema to deployed UI. I work in sprints, ship in small steps, and make sure things hold up under real use.',
 
   stats: [
-    { label: 'Role', value: 'Section Head & Lecturer' },
-    { label: 'Institution', value: 'BINUS University' },
-    { label: 'Degrees', value: 'S.Kom., M.Kom.' },
-    { label: 'Focus', value: 'Web apps, browser games & automation' },
-    { label: 'Primary stack', value: 'React · TypeScript · NestJS · Supabase' },
+    { value: '8+', label: 'years building software' },
+    { value: '10+', label: 'production systems shipped' },
+    { value: '6', label: 'years in R&D engineering' },
   ],
 
   socials: [

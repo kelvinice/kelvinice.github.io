@@ -1,92 +1,109 @@
-import { ArrowUpRight, Check, Copy, FileDown, Mail } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { Button, ButtonLink } from '@/components/Button'
-import { SectionHeader } from '@/components/SectionHeader'
+import { ArrowUpRight, Check, Copy, Mail } from 'lucide-react'
+import { useState } from 'react'
+import { Reveal } from '@/components/Reveal'
 import { SocialIcon } from '@/components/SocialIcon'
 import { profile } from '@/data/profile'
+import { buttonClass } from '@/lib/button'
+
+const briefChecklist = [
+  'What the system should do, and for whom',
+  'What exists today (spreadsheets, an old app, nothing)',
+  'Your timeline and a rough budget range',
+]
 
 export function Contact() {
   const [copied, setCopied] = useState(false)
-
-  useEffect(() => {
-    if (!copied) return
-    const timer = setTimeout(() => setCopied(false), 2000)
-    return () => clearTimeout(timer)
-  }, [copied])
+  const links = profile.socials.filter((social) => social.icon !== 'email')
 
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(profile.email)
       setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
     } catch {
-      window.location.href = `mailto:${profile.email}`
+      // Clipboard can be blocked; the mailto link still works.
     }
   }
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <SectionHeader index="05" kicker="Contact" title="Get in touch" />
+    <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(to_right,transparent,var(--line)_15%,var(--accent)_50%,var(--line)_85%,transparent)] opacity-70"
+      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-dots" />
+      <div className="relative mx-auto max-w-6xl px-5 py-20 sm:px-6 md:py-28">
+        <Reveal className="relative overflow-hidden rounded-3xl border border-line bg-surface p-8 sm:p-12 md:p-16">
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid opacity-70" />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-24 -bottom-32 size-96 rounded-full bg-accent/10 blur-3xl"
+          />
 
-      <div className="grid items-start gap-10 lg:grid-cols-12">
-        <div className="space-y-6 lg:col-span-7">
-          <p className="max-w-xl font-display text-xl leading-snug font-medium text-ink sm:text-2xl">
-            Have a software problem, research idea, teaching question, or game to talk over?
-          </p>
-          <p className="max-w-lg text-base leading-relaxed text-muted">
-            My inbox is always open. Reach out directly by email or connect on GitHub and LinkedIn.
-          </p>
+          <div className="relative grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+            <div>
+              <p className="mb-3 font-mono text-xs font-medium tracking-[0.18em] text-accent uppercase">
+                Contact
+              </p>
+              <h2
+                id="contact-title"
+                className="text-3xl font-semibold tracking-tight text-balance text-ink md:text-5xl"
+              >
+                Have a project in mind?
+              </h2>
+              <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">
+                From a new business system to rescuing an existing one: tell me what you’re building
+                and I’ll get back to you.
+              </p>
 
-          <div className="flex flex-wrap gap-3 pt-1">
-            <ButtonLink href={`mailto:${profile.email}`} size="lg">
-              <Mail aria-hidden />
-              Say hello
-            </ButtonLink>
-            <Button variant="secondary" size="lg" onClick={copyEmail}>
-              {copied ? <Check aria-hidden /> : <Copy aria-hidden />}
-              <span aria-live="polite">{copied ? 'Copied' : 'Copy email'}</span>
-            </Button>
-            {profile.resumeUrl && (
-              <ButtonLink href={profile.resumeUrl} size="lg" variant="secondary" download>
-                <FileDown aria-hidden />
-                Download CV
-              </ButtonLink>
-            )}
-          </div>
-        </div>
-
-        <ul
-          aria-label="Direct channels"
-          className="divide-y divide-line rounded-sm border border-line bg-surface lg:col-span-5"
-        >
-          {profile.socials.map((social) => {
-            const external = social.href.startsWith('http')
-            const detail =
-              social.icon === 'email'
-                ? profile.email
-                : social.href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
-            return (
-              <li key={social.label}>
-                <a
-                  href={social.href}
-                  {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                  className="group flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-bg-2"
-                >
-                  <span className="flex items-center gap-3 text-sm font-medium text-ink">
-                    <SocialIcon
-                      icon={social.icon}
-                      className="size-4 text-muted group-hover:text-accent"
-                    />
-                    {social.label}
-                  </span>
-                  <span className="flex min-w-0 items-center gap-1.5 font-mono text-xs text-muted group-hover:text-ink">
-                    <span className="truncate">{detail}</span>
-                    <ArrowUpRight className="size-3.5 shrink-0 text-subtle" aria-hidden />
-                  </span>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a href={`mailto:${profile.email}`} className={buttonClass({ size: 'lg' })}>
+                  <Mail aria-hidden />
+                  {profile.email}
                 </a>
-              </li>
-            )
-          })}
-        </ul>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className={buttonClass({ variant: 'secondary', size: 'lg' })}
+                >
+                  {copied ? <Check aria-hidden className="text-ok" /> : <Copy aria-hidden />}
+                  {copied ? 'Copied' : 'Copy email'}
+                </button>
+                <span role="status" className="sr-only">
+                  {copied ? 'Email address copied' : ''}
+                </span>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-5 text-sm">
+                {links.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 font-medium text-muted hover:text-ink"
+                  >
+                    <SocialIcon icon={social.icon} className="size-4.5" />
+                    {social.label}
+                    <ArrowUpRight aria-hidden className="size-3.5" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-line bg-bg-2 p-6">
+              <p className="text-sm font-medium text-ink">A good first message includes</p>
+              <ul className="mt-4 space-y-3 text-sm text-muted">
+                {briefChecklist.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

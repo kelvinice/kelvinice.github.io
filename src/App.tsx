@@ -1,87 +1,73 @@
-import { useCallback, useEffect, useState } from 'react'
-import { Lightbox, type LightboxItem } from '@/components/Lightbox'
+import { useEffect, useState } from 'react'
+import { CommandPalette } from '@/components/CommandPalette'
 import { Navbar, type NavItem } from '@/components/Navbar'
-import { PixelSnow } from '@/components/PixelSnow'
-import { experience } from '@/data/experience'
-import { publications } from '@/data/publications'
-import { useKonamiCode } from '@/hooks/useKonamiCode'
-import { About } from '@/sections/About'
+import { showPublications } from '@/data/publications'
+import { useSpotlight } from '@/hooks/useSpotlight'
 import { Contact } from '@/sections/Contact'
 import { Experience } from '@/sections/Experience'
 import { Footer } from '@/sections/Footer'
 import { Hero } from '@/sections/Hero'
+import { Process } from '@/sections/Process'
 import { Projects } from '@/sections/Projects'
 import { Publications } from '@/sections/Publications'
-import { Skills } from '@/sections/Skills'
+import { Services } from '@/sections/Services'
+import { Stack } from '@/sections/Stack'
+import { Work } from '@/sections/Work'
 
 const navItems: NavItem[] = [
-  { id: 'projects', label: 'Work' },
-  ...(publications.length > 0 ? [{ id: 'books', label: 'Books' }] : []),
-  ...(experience.length > 0 ? [{ id: 'experience', label: 'Experience' }] : []),
-  { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'work', label: 'Work' },
+  { id: 'services', label: 'Services' },
+  { id: 'process', label: 'Process' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'stack', label: 'Stack' },
+  { id: 'projects', label: 'Projects' },
+  ...(showPublications ? [{ id: 'writing', label: 'Writing' }] : []),
 ]
 
 export default function App() {
-  const [snow, setSnow] = useState(false)
-  const [toast, setToast] = useState<string | null>(null)
-  const [lightbox, setLightbox] = useState<LightboxItem | null>(null)
-
-  const toggleSnow = useCallback(() => {
-    setSnow((on) => {
-      const next = !on
-      setToast(next ? 'Snow mode enabled' : 'Snow mode off')
-      return next
-    })
-  }, [])
-
-  useKonamiCode(toggleSnow)
+  const [commandsOpen, setCommandsOpen] = useState(false)
+  useSpotlight()
 
   useEffect(() => {
-    if (!toast) return
-    const timer = setTimeout(() => setToast(null), 2400)
-    return () => clearTimeout(timer)
-  }, [toast])
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        setCommandsOpen((value) => !value)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   return (
     <>
       <a
         href="#main"
-        className="fixed top-3 left-3 z-50 -translate-y-24 rounded-sm bg-accent px-4 py-2 text-xs font-medium text-on-accent focus:translate-y-0"
+        className="fixed top-3 left-3 z-50 -translate-y-24 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-on-accent focus:translate-y-0"
       >
         Skip to content
       </a>
 
-      <Navbar items={navItems} />
+      <Navbar items={navItems} onOpenCommands={() => setCommandsOpen(true)} />
+      <CommandPalette
+        open={commandsOpen}
+        onClose={() => setCommandsOpen(false)}
+        sections={navItems}
+      />
 
       <main id="main">
-        <Hero onInspectImage={setLightbox} />
-        <Projects onInspectImage={setLightbox} />
-        <Publications />
+        <Hero />
+        <Work />
+        <Services />
+        <Process />
         <Experience />
-        <About />
-        <Skills />
+        <Stack />
+        <Projects />
+        {showPublications && <Publications />}
         <Contact />
       </main>
 
-      <Footer onToggleSnow={toggleSnow} />
-
-      <Lightbox item={lightbox} onClose={() => setLightbox(null)} />
-
-      {snow && (
-        <div className="pointer-events-none fixed inset-0 z-30">
-          <PixelSnow density={5} />
-        </div>
-      )}
-
-      {toast && (
-        <div
-          role="status"
-          className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 animate-fade-in rounded-sm border border-line bg-surface px-4 py-2 font-mono text-xs text-ink shadow-lg"
-        >
-          {toast}
-        </div>
-      )}
+      <Footer />
     </>
   )
 }

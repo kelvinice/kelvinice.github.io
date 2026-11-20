@@ -1,150 +1,96 @@
-import { ArrowUpRight } from 'lucide-react'
-import { SectionHeader } from '@/components/SectionHeader'
-import { experience, type Experience as ExperienceEntry } from '@/data/experience'
-import { cn } from '@/lib/cn'
+import { GraduationCap } from 'lucide-react'
+import { Reveal } from '@/components/Reveal'
+import { Section } from '@/components/Section'
+import { Tag } from '@/components/Tag'
+import { education, experience } from '@/data/experience'
 
-type CompanyGroup = {
-  company: string
-  companyUrl?: string
-  location?: string
-  roles: ExperienceEntry[]
-}
-
-function groupByCompany(items: ExperienceEntry[]): CompanyGroup[] {
-  const groups: CompanyGroup[] = []
-  for (const entry of items) {
-    const last = groups[groups.length - 1]
-    if (last && last.company === entry.company) {
-      last.roles.push(entry)
-    } else {
-      groups.push({
-        company: entry.company,
-        companyUrl: entry.companyUrl,
-        location: entry.location,
-        roles: [entry],
-      })
-    }
-  }
-  return groups
-}
-
-function formatGroupSpan(roles: ExperienceEntry[]) {
-  const earliest = roles[roles.length - 1]?.start
-  const latestEnd = roles.some((role) => role.start && !role.end)
-    ? 'Present'
-    : (roles[0]?.end ?? roles[0]?.start)
-  if (!earliest) return null
-  return latestEnd && latestEnd !== earliest ? `${earliest} — ${latestEnd}` : earliest
+function dateRange(start?: string, end?: string) {
+  if (!start) return null
+  return `${start} – ${end ?? 'Present'}`
 }
 
 export function Experience() {
-  if (experience.length === 0) return null
-  const groups = groupByCompany(experience)
-
   return (
-    <section id="experience" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <SectionHeader index="03" kicker="Career" title="Experience">
-        Teaching, research &amp; development, and academic leadership.
-      </SectionHeader>
-
-      <div className="divide-y divide-line">
-        {groups.map((group, groupIndex) => {
-          const span = formatGroupSpan(group.roles)
+    <Section
+      id="experience"
+      index={4}
+      backdrop="grid"
+      glow="left"
+      eyebrow="Experience"
+      title="Eight years of shipping software"
+      intro="A long run at BINUS University, from teaching assistant to Section Head, alongside the client work above."
+      tinted
+    >
+      <ol className="relative space-y-10 border-l border-line pl-8 md:pl-10">
+        {experience.map((job, index) => {
+          const dates = dateRange(job.start, job.end)
           return (
-            <div
-              key={`${group.company}-${groupIndex}`}
-              className={cn(
-                'grid gap-8 lg:grid-cols-12 lg:gap-10',
-                groupIndex > 0 && 'pt-12',
-                groupIndex < groups.length - 1 && 'pb-12',
-              )}
-            >
-              <div className="space-y-2 lg:col-span-4">
-                <h3 className="font-display text-2xl font-semibold text-ink">
-                  {group.companyUrl ? (
+            <Reveal as="li" key={`${job.role}-${job.company}`} className="relative">
+              <span
+                aria-hidden
+                className={
+                  index === 0
+                    ? 'absolute top-1.5 -left-[2.3rem] size-3 rounded-full bg-accent ring-4 ring-bg-2 md:-left-[2.8rem]'
+                    : 'absolute top-1.5 -left-[2.3rem] size-3 rounded-full border-2 border-line bg-bg-2 md:-left-[2.8rem]'
+                }
+              />
+              <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between md:gap-6">
+                <h3 className="font-semibold text-ink">
+                  {job.role}
+                  <span className="font-normal text-muted"> · </span>
+                  {job.companyUrl ? (
                     <a
-                      href={group.companyUrl}
+                      href={job.companyUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 transition-colors hover:text-accent"
+                      className="font-normal text-muted underline-offset-4 hover:text-accent hover:underline"
                     >
-                      {group.company}
-                      <ArrowUpRight className="size-4 text-subtle" aria-hidden />
+                      {job.company}
                     </a>
                   ) : (
-                    group.company
+                    <span className="font-normal text-muted">{job.company}</span>
                   )}
                 </h3>
-
-                {span && <p className="font-mono text-xs text-muted">{span}</p>}
-                {group.location && <p className="text-sm text-subtle">{group.location}</p>}
-                <p className="pt-1 font-mono text-xs text-subtle">
-                  {group.roles.length} {group.roles.length === 1 ? 'role' : 'roles'}
-                </p>
+                {(dates || job.location) && (
+                  <p className="shrink-0 font-mono text-xs text-muted">
+                    {[dates, job.location].filter(Boolean).join(' · ')}
+                  </p>
+                )}
               </div>
-
-              <ol className="space-y-8 border-l border-line pl-6 sm:pl-8 lg:col-span-8">
-                {group.roles.map((job) => {
-                  const isCurrent = Boolean(job.start && !job.end)
-                  return (
-                    <li key={`${job.role}-${job.start ?? ''}`} className="relative">
-                      <span
-                        aria-hidden
-                        className={cn(
-                          'absolute top-1.5 -left-[calc(1.5rem+5px)] size-2.5 rounded-full border sm:-left-[calc(2rem+5px)]',
-                          isCurrent ? 'border-accent bg-accent' : 'border-line-strong bg-bg',
-                        )}
-                      />
-
-                      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                        <h4 className="font-display text-lg font-semibold text-ink">{job.role}</h4>
-
-                        {job.start && (
-                          <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted">
-                            <span>
-                              {job.start} — {job.end ?? 'Present'}
-                            </span>
-                            {isCurrent && (
-                              <span className="rounded-sm bg-accent-soft px-2 py-0.5 font-medium text-accent">
-                                Current
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </div>
-
-                      {job.placeholder && (
-                        <p className="mt-2 inline-block rounded-sm bg-signal-soft px-2 py-0.5 font-mono text-[0.7rem] text-signal">
-                          PLACEHOLDER · hidden in production
-                        </p>
-                      )}
-
-                      <ul className="mt-3 space-y-1.5 text-sm leading-relaxed text-muted">
-                        {job.highlights.map((line) => (
-                          <li key={line}>{line}</li>
-                        ))}
-                      </ul>
-
-                      {job.tech && (
-                        <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Tech used">
-                          {job.tech.map((tech) => (
-                            <li
-                              key={tech}
-                              className="rounded-sm border border-line bg-bg-2 px-2 py-0.5 font-mono text-xs text-muted"
-                            >
-                              {tech}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  )
-                })}
-              </ol>
-            </div>
+              <ul className="mt-3 max-w-3xl space-y-1.5 text-sm leading-relaxed text-muted">
+                {job.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+              {job.tech && (
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {job.tech.map((tech) => (
+                    <Tag key={tech}>{tech}</Tag>
+                  ))}
+                </div>
+              )}
+            </Reveal>
           )
         })}
-      </div>
-    </section>
+      </ol>
+
+      <Reveal className="mt-14 grid gap-4 sm:grid-cols-2">
+        {education.map((item) => (
+          <div
+            key={item.degree}
+            className="flex gap-4 rounded-2xl border border-line bg-surface p-5"
+          >
+            <GraduationCap aria-hidden className="mt-0.5 size-5 shrink-0 text-accent" />
+            <div>
+              <p className="font-medium text-ink">{item.degree}</p>
+              <p className="mt-0.5 text-sm text-muted">
+                {item.school} · {item.years}
+              </p>
+              {item.note && <p className="mt-2 text-sm text-muted">{item.note}</p>}
+            </div>
+          </div>
+        ))}
+      </Reveal>
+    </Section>
   )
 }

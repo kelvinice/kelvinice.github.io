@@ -1,30 +1,30 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Kelvinice · Kelvin's portfolio: web apps & browser games</title>
+    <title>Kelvin · Software Engineer & Full-stack Web Developer, Jakarta</title>
     <meta
       name="description"
-      content="Kelvin (Kelvinice), Academic Development Section Head & Lecturer at BINUS University and software developer. Web apps, browser games and automation tools like Wyndoku, Wyn State, Plagion and DocFlow."
+      content="Kelvin is a web developer and software engineer in Jakarta with 8+ years of experience designing, building and testing production web systems."
     />
     <meta name="author" content="Kelvin" />
     <link rel="canonical" href="https://kelvinice.github.io/" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#f6f7f9" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#0e1116" />
+    <meta name="color-scheme" content="dark light" />
 
     <!-- Open Graph / social previews -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Kelvinice" />
+    <meta property="og:site_name" content="Kelvin · Software Engineer" />
     <meta property="og:url" content="https://kelvinice.github.io/" />
-    <meta property="og:title" content="Kelvinice · web apps & browser games" />
+    <meta property="og:title" content="Kelvin · Software Engineer & Full-stack Web Developer" />
     <meta
       property="og:description"
-      content="Academic Development Section Head & Lecturer at BINUS University, co-author, and software developer building web apps, campus automation tools, and browser games."
+      content="Web developer and software engineer with 8+ years of experience designing, building and testing production systems."
     />
     <meta property="og:image" content="https://kelvinice.github.io/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -37,25 +37,44 @@
         "@type": "Person",
         "name": "Kelvin",
         "alternateName": "Kelvinice",
-        "jobTitle": "Academic Development Section Head & Lecturer",
-        "worksFor": { "@type": "CollegeOrUniversity", "name": "Bina Nusantara University" },
-        "knowsAbout": [
-          "Software Engineering",
-          "Web Development",
-          "Agentic AI",
-          "Object-Oriented Design",
-          "Browser Games"
-        ],
+        "jobTitle": "Software Engineer",
+        "description": "Web developer and software engineer with 8+ years of experience.",
         "url": "https://kelvinice.github.io/",
+        "email": "mailto:kelvinices@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Jakarta",
+          "addressCountry": "ID"
+        },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Bina Nusantara University" },
+        "knowsAbout": [
+          "Web development",
+          "Software engineering",
+          "Scrum",
+          "Laravel",
+          "NestJS",
+          "React",
+          "Next.js",
+          "Test automation"
+        ],
         "sameAs": ["https://github.com/kelvinice", "https://www.linkedin.com/in/kelvin-007-/"]
       }
     </script>
 
-    <!-- Default to Frost Paper (light) unless the visitor saved dark mode. -->
+    <!-- Apply the saved / system theme before first paint to avoid a flash. -->
     <script>
       try {
-        const saved = localStorage.getItem('kelvinice-theme')
-        document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light'
+        const saved = localStorage.getItem('theme')
+        const theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark'
+        document.documentElement.dataset.theme = theme
+        if (theme === 'light') {
+          document.querySelector('meta[name="theme-color"]').content = '#f6f7f9'
+        }
       } catch {}
     </script>
   </head>
@@ -63,8 +82,8 @@
     <div id="root"></div>
     <noscript>
       <p style="padding: 2rem; font-family: sans-serif">
-        This site needs JavaScript. You can still find me on
-        <a href="https://github.com/kelvinice">GitHub</a>.
+        Kelvin, Software Engineer. This site needs JavaScript; you can reach me at
+        <a href="mailto:kelvinices@gmail.com">kelvinices@gmail.com</a>.
       </p>
     </noscript>
     <script type="module" src="/src/main.tsx"></script>

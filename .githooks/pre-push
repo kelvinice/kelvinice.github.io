@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blocks a push if a confidential client name would be published. See scripts/check-confidential.mjs.
+# Enabled by `pnpm install` (the "prepare" script sets core.hooksPath to .githooks).
+exec node scripts/check-confidential.mjs --push
