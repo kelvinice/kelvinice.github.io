@@ -55,7 +55,7 @@ export function Process() {
           <GraduationCap aria-hidden className="mt-0.5 size-5 shrink-0 text-accent" />
           <span>
             I also <span className="text-ink">teach Scrum and software testing</span> at BINUS
-            University, so the process isn’t a buzzword here.
+            University, and I run client projects the same way.
           </span>
         </p>
       </Reveal>

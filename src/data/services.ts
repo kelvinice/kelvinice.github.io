@@ -15,7 +15,7 @@ export const services: Service[] = [
   {
     title: 'Business systems',
     description:
-      'ERP, HRIS, procurement and e-tender platforms: the internal tools a company actually runs on.',
+      'ERP, HRIS, procurement and e-tender platforms, with role-based access for each kind of user.',
     icon: Boxes,
   },
   {
@@ -26,8 +26,7 @@ export const services: Service[] = [
   },
   {
     title: 'Dashboards & reporting',
-    description:
-      'KPI and operational dashboards that turn raw data into numbers management can act on.',
+    description: 'KPI and operational dashboards built on the data your systems already hold.',
     icon: ChartNoAxesCombined,
   },
   {
@@ -39,13 +38,13 @@ export const services: Service[] = [
   {
     title: 'Maintenance & takeover',
     description:
-      'Inherited a system nobody wants to touch? I stabilise it, document it and keep shipping features.',
+      'I take over existing systems, including older Laravel and CodeIgniter code, document them and keep adding features.',
     icon: Wrench,
   },
   {
     title: 'Testing & QA',
     description:
-      'Automated regression suites, end-to-end tests and load testing before launch day, not after.',
+      'Automated regression suites, Selenium end-to-end tests, and JMeter load tests that run before launch.',
     icon: FlaskConical,
   },
 ]

@@ -8,7 +8,7 @@ export function Services() {
       id="services"
       eyebrow="Services"
       title="What I can build for you"
-      intro="Full-stack, from database schema to deployed UI, or just the part you need."
+      intro="A whole system, or just the part you need."
       tinted
     >
       <ul className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">

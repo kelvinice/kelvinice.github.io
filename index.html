@@ -34,30 +34,61 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Kelvin",
-        "alternateName": "Kelvinice",
-        "jobTitle": "Software Engineer",
-        "description": "Web developer and software engineer with 8+ years of experience.",
-        "url": "https://kelvinice.github.io/",
-        "email": "mailto:kelvinices@gmail.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Jakarta",
-          "addressCountry": "ID"
-        },
-        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Bina Nusantara University" },
-        "knowsAbout": [
-          "Web development",
-          "Software engineering",
-          "Scrum",
-          "Laravel",
-          "NestJS",
-          "React",
-          "Next.js",
-          "Test automation"
-        ],
-        "sameAs": ["https://github.com/kelvinice", "https://www.linkedin.com/in/kelvin-007-/"]
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://kelvinice.github.io/#person",
+            "name": "Kelvin",
+            "alternateName": "Kelvinice",
+            "jobTitle": "Software Engineer",
+            "description": "Web developer and software engineer with 8+ years of experience.",
+            "url": "https://kelvinice.github.io/",
+            "email": "mailto:kelvinices@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Jakarta",
+              "addressCountry": "ID"
+            },
+            "alumniOf": { "@type": "CollegeOrUniversity", "name": "Bina Nusantara University" },
+            "knowsAbout": [
+              "Web development",
+              "Software engineering",
+              "Scrum",
+              "Laravel",
+              "NestJS",
+              "React",
+              "Next.js",
+              "Test automation"
+            ],
+            "sameAs": ["https://github.com/kelvinice", "https://www.linkedin.com/in/kelvin-007-/"]
+          },
+          {
+            "@type": "Book",
+            "name": "The Rise of Agentic Intelligence",
+            "alternativeHeadline": "Transformasi Menuju Kecerdasan Otonom di Era Kecerdasan Buatan Modern",
+            "author": [
+              { "@type": "Person", "name": "Marvin Luckianto" },
+              { "@id": "https://kelvinice.github.io/#person" },
+              { "@type": "Person", "name": "Yesun Utomo" }
+            ],
+            "datePublished": "2026-06",
+            "inLanguage": "id",
+            "isbn": "9786347017376",
+            "url": "https://play.google.com/store/books/details?id=FsLvEQAAQBAJ"
+          },
+          {
+            "@type": "Book",
+            "name": "Building Better Object-Oriented Software",
+            "author": [
+              { "@id": "https://kelvinice.github.io/#person" },
+              { "@type": "Person", "name": "Yesun Utomo" }
+            ],
+            "datePublished": "2026-05",
+            "inLanguage": "en",
+            "isbn": "9786347017307",
+            "url": "https://play.google.com/store/books/details?id=rMPvEQAAQBAJ"
+          }
+        ]
       }
     </script>
 

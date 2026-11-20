@@ -31,13 +31,13 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <a href="#contact" className={buttonClass({ size: 'lg' })}>
-              Start a project
-              <ArrowUpRight aria-hidden />
-            </a>
-            <a href="#work" className={buttonClass({ variant: 'secondary', size: 'lg' })}>
+            <a href="#work" className={buttonClass({ size: 'lg' })}>
               View selected work
               <ArrowDown aria-hidden />
+            </a>
+            <a href="#contact" className={buttonClass({ variant: 'secondary', size: 'lg' })}>
+              Start a project
+              <ArrowUpRight aria-hidden />
             </a>
             <div className="flex items-center gap-1 sm:ml-2">
               {links.map((social) => (
@@ -59,17 +59,6 @@ export function Hero() {
               ))}
             </div>
           </div>
-
-          <dl className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-line pt-8">
-            {profile.stats.map((stat) => (
-              <div key={stat.label} className="flex flex-col-reverse justify-end">
-                <dt className="mt-1 text-sm leading-snug text-muted">{stat.label}</dt>
-                <dd className="font-display text-3xl font-semibold tracking-tight text-ink">
-                  {stat.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
         <figure className="relative mx-auto w-56 sm:w-64 lg:mx-0 lg:w-72">

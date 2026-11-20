@@ -22,15 +22,10 @@ export const profile = {
   photo: headshot,
 
   /** The one fixed hero headline. */
-  headline: 'I build business systems that teams rely on.',
+  headline: 'I build and test business software.',
+  /** The only figure in the hero is one a reader can check against Experience. */
   intro:
-    'Web developer and software engineer with 8+ years of experience designing, building and testing production systems, from database schema to deployed UI. I work in sprints, ship in small steps, and make sure things hold up under real use.',
-
-  stats: [
-    { value: '8+', label: 'years building software' },
-    { value: '10+', label: 'production systems shipped' },
-    { value: '6', label: 'years in R&D engineering' },
-  ],
+    'I’m a full-stack developer in Jakarta with 8+ years of shipping production web systems, tests included. I also teach software testing and Scrum at BINUS University.',
 
   socials: [
     { label: 'GitHub', href: 'https://github.com/kelvinice', icon: 'github' },
