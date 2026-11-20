@@ -1,6 +1,6 @@
 # kelvinice.github.io: v3 "Professional" Rework Plan
 
-Status: **Complete (2026-11-01), restyled 2026-11-20.** All phases are done (§11), including the merge to `master` that deploys v3. Decisions are in §9; §10 lists the details that shipped with defaults and can be changed any time; §12 is the open backlog; §13 is the "de-template" review and its planned fixes (not started).
+Status: **Complete (2026-11-01), restyled 2026-11-20.** All phases are done (§11), including the merge to `master` that deploys v3. Decisions are in §9; §10 lists the details that shipped with defaults and can be changed any time; §12 is the open backlog; §13 is the "de-template" review. Its fixes were settled in a three-way review (§13.6) and are waiting for Kelvin's approvals. Nothing in `src/` has been changed for it yet.
 
 Changes in the 2026-11-20 merge (a parallel "editorial notebook" redesign of v2 was folded into v3):
 
@@ -14,7 +14,7 @@ Changes in the 2026-11-20 merge (a parallel "editorial notebook" redesign of v2 
 Changes after Kelvin's first review (2026-11-01):
 
 - No "Available for freelance projects" label anywhere (hero, OG image, meta).
-- The Books section is hidden, not deleted: covers, Google Play links and the section component are kept; set `showPublications = true` in `src/data/publications.ts` to bring it back with its nav item.
+- The Books section was hidden, not deleted, behind `showPublications` in `src/data/publications.ts`. Kelvin turned it back on (with its "Writing" nav item) on 2026-11-20; see [docs/three-way-review.md](docs/three-way-review.md) A14/A20.
 - Experience lists only the BINUS roles; MidHub (a past role) appears as a case study with a real screenshot.
 - Hero intro and meta descriptions are general ("web developer & software engineer, 8+ years"), not a list of past systems.
 - Favicon and logo are a snowflake.
@@ -281,7 +281,7 @@ scripts/
 | Headshot                 | `src/assets/images/headshot.jpg` (done, §6)                                                    |
 | Canvas games             | Stay hosted, linked only from the archive (default; easy to change)                            |
 | Availability label       | **None**: no "Available for freelance" badge or wording                                        |
-| Books                    | Hidden but kept (covers + Google Play links), behind `showPublications`                        |
+| Books                    | **Shown** (2026-11-20), but small or near the bottom; not in the hero or as a main section     |
 | Experience timeline      | BINUS roles only; MidHub (finished) and client work appear as case studies                     |
 | Hospital asset role      | Full-stack developer, leading the backend                                                      |
 | Descriptions             | General ("web developer & software engineer, 8+ years"), not a list of past systems            |
@@ -403,6 +403,8 @@ so it reads as generic within ~5 seconds even though the underlying work is real
 
 Copy changes are drafted first and approved by Kelvin before anything is changed in `src/`.
 
+> **Superseded by §13.6.** F1–F11 are kept below as the original review. The agreed scope, order and PR split are in [docs/three-way-review.md §7](docs/three-way-review.md#7-agreement-closed-2026-11-20-compiled-by-claude).
+
 - [ ] **F1 · Hero (T1, C5, C6).** Remove the prompt, typing effect, floating chips and marquee. One fixed headline only Kelvin can say,
       e.g. _"I build business systems and test them properly. I also teach software testing at BINUS."_ Replace the vanity stats with checkable ones
       (e.g. "8+ years", "2 books", students taught).
@@ -419,13 +421,21 @@ Copy changes are drafted first and approved by Kelvin before anything is changed
 - [ ] **F9 · Unify screenshot Lightbox & aspect ratios (`CaseStudyCard.tsx`, `Projects.tsx`).** Wire `Lightbox` click-to-zoom onto public case-study screenshots (_Bersama Jaya_, _MidHub.id_) to match `Projects`, and align `ProjectCard` (`16:9`) with `CaseStudyCard` (`16:10`) so taller screenshots like `disc-personality-test.png` are not over-cropped.
 - [ ] **F10 · Fix nav active-state & mobile Hero overflow (`useActiveSection.ts`, `App.tsx`, `Hero.tsx`).** Observe `#contact` (or stop triggering `atBottom` for `projects`) so scrolling to Contact doesn't highlight **Projects** as active in the navbar. Also add `min-w-0` on the Hero grid text column and remove `whitespace-nowrap` on the headline (which currently forces the grid track past 390 px, causing `<section className="overflow-hidden">` to clip the right edge of the hero intro, buttons, and stats on mobile), and remove the duplicate `sm:-right-6 sm:-right-12` class on `Hero.tsx`.
 - [ ] **F11 · Post-merge cleanup (`globals.css`, `TODO.md`).** Either use `--signal` / `--signal-soft` intentionally for one restrained emphasis or remove the unused tokens from `globals.css`; delete or archive the stale root `TODO.md` (its pre-merge items like `resume.pdf`, `About.tsx`, and availability wording conflict with §9 and are already reconciled into §12).
-- [ ] **F8 · Expose case-study deliverables by default (`CaseStudyCard.tsx`).** Show key deliverables and testing proof without hiding them behind a collapsed `<details>` toggle—especially on NDA cards where the visual is abstract and collapsing leaves only a one-line summary visible on first scan.
-- [ ] **F9 · Unify screenshot Lightbox & aspect ratios (`CaseStudyCard.tsx`, `Projects.tsx`).** Wire `Lightbox` click-to-zoom onto public case-study screenshots (_Bersama Jaya_, _MidHub.id_) to match `Projects`, and align `ProjectCard` (`16:9`) with `CaseStudyCard` (`16:10`) so taller screenshots like `disc-personality-test.png` are not over-cropped.
-- [ ] **F10 · Fix nav active-state & mobile Hero overflow (`useActiveSection.ts`, `App.tsx`, `Hero.tsx`).** Observe `#contact` (or stop triggering `atBottom` for `projects`) so scrolling to Contact doesn't highlight **Projects** as active in the navbar. Also add `min-w-0` on the Hero grid text column and remove `whitespace-nowrap` on the headline (which currently forces the grid track past 390 px, causing `<section className="overflow-hidden">` to clip the right edge of the hero intro, buttons, and stats on mobile), and remove the duplicate `sm:-right-6 sm:-right-12` class on `Hero.tsx`.
-- [ ] **F11 · Post-merge cleanup (`globals.css`, `TODO.md`).** Either use `--signal` / `--signal-soft` intentionally for one restrained emphasis or remove the unused tokens from `globals.css`; delete or archive the stale root `TODO.md` (its pre-merge items like `resume.pdf`, `About.tsx`, and availability wording conflict with §9 and are already reconciled into §12).
 
 ### 13.5 Second-opinion comparison (2026-11-20)
 
 - **Convergence:** Both reviews independently identified the same core template tells—Hero prompt + typewriter + orbiting chips + marquee (`T1`), identical six-section chrome + `.spotlight` + hollow numerals (`T2`/`T6`), weak NDA wireframe cards (`T3`), agency-style `Services` + `Process` (`T4`), and the performative `⌘K` palette (`T5`).
 - **Copy & positioning (`C1–C6`):** The earlier §13 review adds an explicit LLM-copy audit (`"X, not Y"` phrasing, stock templates, unverifiable vanity stats) and surfaces the strongest real hook: building and testing production systems _and_ teaching software testing/Scrum at BINUS.
 - **Technical root causes (`F8–F11`):** Added code-level fixes uncovered in the post-merge audit—collapsed NDA `<details>`, missing Lightbox / mismatched `16:9` vs `16:10` crop on screenshots, `#contact` highlighting `Projects` via `useActiveSection`'s `atBottom` branch, and the real CSS Grid `min-w-0` + `whitespace-nowrap` bug behind the 390 px mobile right-edge clip.
+
+### 13.6 Three-way review outcome (2026-11-20)
+
+Claude, Gemini and Codex discussed §13 and [docs/portfolio-improvement-proposal.md](docs/portfolio-improvement-proposal.md) over three rounds in [docs/three-way-review.md](docs/three-way-review.md). All 25 items were agreed; none were contested. Summary:
+
+- **PR 0, safety:** the leak guard is off today. `reference/forbidden.txt` is missing and the pre-push hook isn't active (`core.hooksPath` is unset). Kelvin restores the private files; the script fails locally when the list is missing.
+- **PR 1, fixes:** live browser check after deploy; accessible screenshot dialog on all screenshots; nav highlight at Contact; hero overflow at 320/390 px; mobile header CTA.
+- **PR 2, de-template UI:** remove ⌘K, typing headline, chips, marquee, numerals and spotlight; snowflake as the one signature; get JS back under 90 KB (93.95 KB with the books on).
+- **PR 3, copy:** fixed headline ("I build and test business software." draft), "8+ years" plus the teaching line, copy pass, JSON-LD `Book` entries.
+- **PR 4, work and structure:** three featured cases (Bersama Jaya, hospital asset management, DocFlow), text-led NDA cards with evidence on the face, anchors, Services + Process merged, compact Stack, the books as a slim band before Contact with no nav item.
+
+Kelvin's approvals needed first are listed as K1–K7 in that document's §7.3.

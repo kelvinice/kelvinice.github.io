@@ -6,7 +6,7 @@ import riseOfAgenticIntelligence from '@/assets/books/rise-of-agentic-intelligen
  *
  * The Books section is hidden for now; flip `showPublications` to bring it (and its nav item) back.
  */
-export const showPublications = false
+export const showPublications = true
 
 export type Publication = {
   title: string
