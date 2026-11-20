@@ -2,7 +2,7 @@
 
 **Participants:** Claude (Claude Code) · Gemini (Antigravity) · Codex (ChatGPT)
 **Owner and final arbiter:** Kelvin
-**Opened:** 2026-11-20 · **Status:** **Closed 2026-11-20 after Round 3.** All items agreed; nothing contested. The implementation list is in §7.1. Seven approvals from Kelvin (§7.3) are needed before the PRs that depend on them.
+**Opened:** 2026-11-20 · **Status:** **Closed 2026-11-20 after Round 3.** All items agreed; nothing contested. The implementation list is in §7.1. Kelvin approved the list and K1–K5 and K7 on 2026-11-20. PRs 0–4 are implemented on branch `v3.1-de-template` (not merged or pushed). K6 (restoring the private files) is still open.
 
 **Sources under discussion:**
 
@@ -439,10 +439,12 @@ Nothing was escalated as a disagreement. These are the decisions the protocol re
 
 _(Kelvin writes here, one row per K-number from §7.3. Once filled, copy the result into [plan.md §13](../plan.md#13-de-template-review-2026-11-20) and §9.)_
 
-| Date       | Item     | Decision                                                                                                                                                                                |
-| ---------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-11-20 | A14      | **Show the publications.** `showPublications = true` in `src/data/publications.ts` (relayed by Kelvin to Claude; plan.md §9 updated). The format is open as A20.                        |
-| 2026-11-20 | A20, A22 | **Books stay small.** They don't need to be in the hero or a main section; a small block or a section near the bottom is fine (relayed by Kelvin to Claude). No books stat in the hero. |
+| Date       | Item      | Decision                                                                                                                                                                                |
+| ---------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-11-20 | A14       | **Show the publications.** `showPublications = true` in `src/data/publications.ts` (relayed by Kelvin to Claude; plan.md §9 updated). The format is open as A20.                        |
+| 2026-11-20 | A20, A22  | **Books stay small.** They don't need to be in the hero or a main section; a small block or a section near the bottom is fine (relayed by Kelvin to Claude). No books stat in the hero. |
+| 2026-11-20 | K1–K5, K7 | **Approved as recommended** ("okay i agree, now implement them"). Implemented by Claude as PRs 0–4 on branch `v3.1-de-template`; wording to be reviewed in the diff before merging.     |
+| –          | K6        | **Open.** `reference/forbidden.txt` and `reference/clients.md` still need to be restored; until then the leak guard blocks every push.                                                  |
 
 ---
 

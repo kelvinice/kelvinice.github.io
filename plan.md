@@ -1,6 +1,6 @@
 # kelvinice.github.io: v3 "Professional" Rework Plan
 
-Status: **Complete (2026-11-01), restyled 2026-11-20.** All phases are done (§11), including the merge to `master` that deploys v3. Decisions are in §9; §10 lists the details that shipped with defaults and can be changed any time; §12 is the open backlog; §13 is the "de-template" review. Its fixes were settled in a three-way review (§13.6) and are waiting for Kelvin's approvals. Nothing in `src/` has been changed for it yet.
+Status: **Complete (2026-11-01), restyled 2026-11-20.** All phases are done (§11), including the merge to `master` that deploys v3. Decisions are in §9; §10 lists the details that shipped with defaults and can be changed any time; §12 is the open backlog; §13 is the "de-template" review. Its fixes were settled in a three-way review (§13.6), approved by Kelvin, and implemented on branch `v3.1-de-template` (not merged yet).
 
 Changes in the 2026-11-20 merge (a parallel "editorial notebook" redesign of v2 was folded into v3):
 
@@ -438,4 +438,4 @@ Claude, Gemini and Codex discussed §13 and [docs/portfolio-improvement-proposal
 - **PR 3, copy:** fixed headline ("I build and test business software." draft), "8+ years" plus the teaching line, copy pass, JSON-LD `Book` entries.
 - **PR 4, work and structure:** three featured cases (Bersama Jaya, hospital asset management, DocFlow), text-led NDA cards with evidence on the face, anchors, Services + Process merged, compact Stack, the books as a slim band before Contact with no nav item.
 
-Kelvin's approvals needed first are listed as K1–K7 in that document's §7.3.
+Kelvin approved K1–K5 and K7 on 2026-11-20. All five PRs are implemented as separate commits on branch `v3.1-de-template`. Initial JS went from 94.10 KB to 87.72 KB gzipped. Still open: K6, restoring `reference/forbidden.txt` and `reference/clients.md`. The leak guard now refuses to pass without them, so nothing can be pushed until they're back.
