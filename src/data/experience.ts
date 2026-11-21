@@ -62,7 +62,7 @@ export const experience: Experience[] = [
     end: 'Apr 2022',
     location: 'Jakarta',
     highlights: [
-      'Built encrypted data transfer and a monitoring dashboard for a national pandemic hospital.',
+      'Built the PHP backend and API management connecting a national pandemic hospital with other government medical services.',
       'Built and stress-tested a national competition website and a DISC personality assessment platform.',
     ],
   },

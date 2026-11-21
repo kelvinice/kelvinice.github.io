@@ -176,10 +176,10 @@ export const moreWork: MoreWork[] = [
     slug: 'pandemic-data-platform',
     title: 'Pandemic hospital data platform',
     context: 'BINUS R&D',
-    role: 'Developer',
+    role: 'Backend developer',
     description:
-      'Encrypted data transfer and a monitoring dashboard for a national pandemic hospital, load-tested for peak reporting windows.',
-    stack: ['JMeter'],
+      'Built the PHP backend and managed the APIs that connect a national pandemic hospital with other government medical services.',
+    stack: ['PHP', 'API management'],
   },
   {
     slug: 'competition-platform',
