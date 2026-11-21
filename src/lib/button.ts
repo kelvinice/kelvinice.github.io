@@ -4,8 +4,10 @@ type Variant = 'primary' | 'secondary' | 'ghost'
 type Size = 'icon' | 'sm' | 'md' | 'lg'
 
 const variants: Record<Variant, string> = {
-  primary: 'border-transparent bg-accent text-on-accent hover:bg-accent-strong',
-  secondary: 'border-line bg-surface text-ink hover:border-muted/60 hover:bg-surface-2',
+  primary:
+    'border-transparent bg-accent text-on-accent shadow-sm shadow-accent/25 hover:-translate-y-px hover:bg-accent-strong hover:shadow-md hover:shadow-accent/30 active:translate-y-0 active:shadow-sm',
+  secondary:
+    'border-line bg-surface text-ink shadow-sm shadow-black/5 hover:-translate-y-px hover:border-accent/50 hover:bg-accent-soft hover:text-accent-strong hover:shadow-md hover:shadow-accent/10 active:translate-y-0 active:shadow-sm',
   ghost: 'border-transparent bg-transparent text-muted hover:bg-surface-2 hover:text-ink',
 }
 
@@ -26,7 +28,7 @@ export function buttonClass({
 }: ButtonStyleProps = {}) {
   return cn(
     'inline-flex shrink-0 cursor-pointer items-center justify-center rounded-lg border font-medium whitespace-nowrap select-none',
-    'transition-colors duration-150',
+    'transition duration-150 ease-out',
     variants[variant],
     sizes[size],
     className,

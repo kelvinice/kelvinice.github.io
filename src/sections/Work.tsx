@@ -6,6 +6,7 @@ import { Reveal } from '@/components/Reveal'
 import { Screenshot } from '@/components/Screenshot'
 import { Section } from '@/components/Section'
 import { Tag } from '@/components/Tag'
+import { cn } from '@/lib/cn'
 import { caseStudies, moreWork } from '@/data/work'
 
 export function Work() {
@@ -31,12 +32,15 @@ export function Work() {
 
       <Reveal className="mt-20">
         <h3 className="text-xl font-semibold tracking-tight text-ink">More work</h3>
-        <ul className="mt-6 grid gap-x-10 gap-y-10 border-t border-line pt-8 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {moreWork.map((item) => (
             <li
               key={item.slug}
               id={`work-${item.slug}`}
-              className={item.shot ? 'md:col-span-2 lg:col-span-1 lg:row-span-2' : undefined}
+              className={cn(
+                'flex flex-col rounded-2xl border border-line bg-surface p-5 shadow-sm shadow-black/5 transition-colors duration-150 hover:border-accent/40 sm:p-6',
+                item.shot && 'md:col-span-2 lg:col-span-1 lg:row-span-2',
+              )}
             >
               {item.shot && (
                 <Screenshot
@@ -64,7 +68,7 @@ export function Work() {
               <p className="text-sm text-muted">{item.role}</p>
               <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
               {(item.stack || item.link) && (
-                <div className="mt-3 flex flex-wrap items-center gap-1.5">
+                <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-4">
                   {item.stack?.map((tech) => (
                     <Tag key={tech}>{tech}</Tag>
                   ))}
