@@ -62,17 +62,26 @@ export function Hero() {
         </div>
 
         <figure className="relative mx-auto w-56 sm:w-64 lg:mx-0 lg:w-72">
-          {/* Signature: a large, slow snowflake behind the portrait. */}
-          <Snowflake
-            strokeWidth={1.25}
-            className="pointer-events-none absolute -inset-[22%] size-[144%] animate-spin-slow text-accent/25"
+          {/* A soft accent halo lifts the portrait off the grid. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-[8%] rounded-full bg-accent-soft"
           />
+          {/* Signature: the snowflake as a badge on a slow orbit around the portrait. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-[14%] animate-spin-slow rounded-full border border-dashed border-accent/35"
+          >
+            <span className="absolute top-[14.64%] left-[85.36%] grid size-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-line bg-surface text-accent shadow-md sm:size-11">
+              <Snowflake className="size-5 sm:size-6" />
+            </span>
+          </div>
           <Picture
             picture={profile.photo}
             alt={`Portrait of ${profile.name}`}
             sizes="(min-width: 1024px) 288px, 256px"
             eager
-            className="relative aspect-square w-full rounded-full border border-line object-cover shadow-xl shadow-black/10"
+            className="relative aspect-square w-full rounded-full object-cover shadow-xl ring-4 shadow-black/10 ring-surface"
           />
           <figcaption className="absolute -bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-xs whitespace-nowrap text-muted shadow-sm">
             <MapPin aria-hidden className="size-3.5 text-accent" />

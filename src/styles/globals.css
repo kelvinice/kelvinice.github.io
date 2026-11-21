@@ -173,8 +173,8 @@
 /* ------------------------------------------------------------------ */
 @theme {
   --animate-fade-in: fade-in 0.16s ease-out;
-  /* The hero snowflake: one turn every two minutes. */
-  --animate-spin-slow: spin 120s linear infinite;
+  /* The hero snowflake's orbit: one lap every 90 seconds. */
+  --animate-spin-slow: spin 90s linear infinite;
 
   @keyframes fade-in {
     from {
